@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<!-- FYZEN STYLE NOTE: preserve the restored Fyzen Lab scientific-corporate visual language — navy/cobalt accents, clean laboratory surfaces, readable sans-serif type, practical catalog-first interactions. -->
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FYZEN-LAB - Biz Haqimizda</title>
+    <link rel="icon" href="/manus-storage/fyzen-cube-final_9ae90e1b.png?v=2.0" type="image/png">
+    <link rel="stylesheet" href="assets/css/styles.css?v=29.0">
+    
+    
+<script>
+        // Early language initialization to prevent flicker
+        (function() {
+            const lang = localStorage.getItem('fyzen_lang') || 'ru';
+            document.documentElement.lang = lang;
+            setTimeout(() => document.body.classList.add('lang-ready'), 1500);
+        })();
+    </script>
+    <style>
+        /* Company Info Block */
+        .company-block {
+            background: radial-gradient(circle at 10% 20%, rgba(0, 168, 225, 0.03) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(43, 53, 142, 0.03) 0%, transparent 40%);
+            padding: 140px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        .company-block::before {
+            content: '';
+            position: absolute;
+            top: 10%; right: -5%;
+            width: 400px; height: 400px;
+            background: rgba(0, 168, 225, 0.05);
+            filter: blur(100px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .hero-glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 40px;
+            padding: 60px;
+            box-shadow: 0 40px 100px rgba(1, 11, 26, 0.05);
+            display: flex;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .company-text h1 {
+            font-size: 3.2rem !important;
+            font-weight: 900 !important;
+            color: #010b1a;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -1.5px;
+        }
+        
+        .advantage-item {
+            background: white;
+            padding: 24px;
+            border-radius: 24px;
+            border: 1px solid #f1f5f9;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .advantage-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 168, 225, 0.08);
+            border-color: rgba(0, 168, 225, 0.2);
+        }
+
+        .quote-card-modern {
+            position: relative;
+            padding: 40px;
+            background: linear-gradient(135deg, #010b1a, #002b5c);
+            border-radius: 30px;
+            color: white;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 43, 92, 0.2);
+        }
+        .quote-card-modern::after {
+            content: '"';
+            position: absolute;
+            top: -20px; right: 20px;
+            font-size: 15rem;
+            opacity: 0.05;
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        @keyframes float-subtle {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+        .floating-logo {
+            animation: float-subtle 6s ease-in-out infinite;
+            filter: drop-shadow(0 40px 60px rgba(0, 168, 225, 0.3));
+        }
+
+        /* Clients Section */
+        .clients-section {
+            background: #f8fafc;
+            padding: 4rem 0;
+            border-top: 1px solid #e2e8f0;
+        }
+        .clients-section h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 2.5rem;
+        }
+        .clients-track-wrap {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+        .clients-track-wrap::before,
+        .clients-track-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 80px;
+            z-index: 2;
+        }
+        .clients-track-wrap::before { left: 0; background: linear-gradient(to right, #f8fafc, transparent); }
+        .clients-track-wrap::after  { right: 0; background: linear-gradient(to left, #f8fafc, transparent); }
+        .clients-track {
+            display: flex;
+            gap: 2rem;
+            animation: scrollClients 28s linear infinite;
+            width: max-content;
+        }
+        .clients-track:hover { animation-play-state: paused; }
+        @keyframes scrollClients {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .client-logo {
+            background: transparent;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 2rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 320px;
+            height: 160px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .client-logo:hover { 
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+            border-color: #cbd5e1;
+            transform: translateY(-5px);
+        }
+        .client-logo img { 
+            max-width: 280px; 
+            max-height: 120px; 
+            object-fit: contain; 
+            transition: transform 0.3s ease;
+        }
+        .client-logo:hover img { transform: scale(1.05); }
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        /* Navbar lang switcher */
+        .nav-lang-switcher { display: flex; gap: 2px; align-items: center; background: rgba(0,168,225,0.06); border: 1px solid rgba(0,168,225,0.15); border-radius: 50px; padding: 4px 6px; }
+        .nav-lang-switcher button { background: none; border: none; cursor: pointer; font-size: 0.72rem; font-weight: 800; color: #64748b; padding: 4px 10px; border-radius: 50px; transition: all 0.2s ease; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1; }
+        .nav-lang-switcher button:hover, .nav-lang-switcher button.active-lang { background: linear-gradient(135deg,#00A8E1,#2B358E); color: white; }
+    
+        /* Mobile Responsiveness for About Page */
+        @media (max-width: 992px) {
+            .hero-glass-card {
+                flex-direction: column-reverse;
+                padding: 30px;
+                gap: 40px;
+            }
+            .company-right {
+                flex: 1 !important;
+                width: 100%;
+            }
+            .company-right img.floating-logo {
+                width: 100% !important;
+                max-width: 280px;
+            }
+            .advantage-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .company-text h1 {
+                font-size: 2rem !important;
+            }
+            .about-bottom-grid {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+            .values-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+</style>
+</head>
+<body class="about-page">
+
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <a href="index.html?v=11" class="nav-brand" id="mainLogo">
+                <div class="logo-box">
+                    <img src="/manus-storage/fyzen-cube-final_9ae90e1b.png" alt="FYZEN-LAB">
+                </div>
+                <div class="nav-brand-text">
+                    <span class="nav-brand-name">FYZEN-LAB</span>
+                    <span class="nav-brand-slogan" data-i18n="slogan">Science Without Limits</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="catalog.html?v=11" data-i18n="nav_catalog">Catalog</a></li>
+                <li class="nav-dropdown">
+                    <a href="products.html?v=11" class="nav-dropdown-toggle"><span data-i18n="nav_products">Products</span> <span class="nav-arrow">&#9662;</span></a>
+                    <div class="nav-dropdown-menu">
+                        <a href="products.html?cat=analytical" data-i18n="cat_analytical">Analytical Instruments</a>
+                        <a href="products.html?cat=medical" data-i18n="cat_medical">Medical & Clinical Laboratory</a>
+                        <a href="products.html?cat=chemistry" data-i18n="cat_chemistry">Chemistry Laboratory</a>
+                        <a href="products.html?cat=physics" data-i18n="cat_physics">Physics Laboratory</a>
+                        <a href="products.html?cat=biology" data-i18n="cat_biology">Biology & Microbiology</a>
+                        <a href="products.html?cat=environmental" data-i18n="cat_environmental">Environmental Testing</a>
+                        <a href="products.html?cat=agriculture" data-i18n="cat_agriculture">Agriculture & Soil Testing</a>
+                        <a href="products.html?cat=industrial" data-i18n="cat_industrial">Industrial & Material Testing</a>
+                        <a href="products.html?cat=petroleum" data-i18n="cat_petroleum">Petroleum & Mining Labs</a>
+                        <a href="products.html?cat=educational" data-i18n="cat_educational">Educational Laboratory</a>
+                        <a href="products.html?cat=furniture" data-i18n="cat_furniture">Laboratory Furniture & Safety</a>
+                        <a href="products.html?cat=consumables" data-i18n="cat_consumables">Consumables & Accessories</a>
+                    </div>
+                </li>
+                <li><a href="brands.html?v=11" data-i18n="nav_brands">Brands</a></li>
+                <li><a href="about.html?v=11" data-i18n="nav_about">About</a></li>
+                <li><a href="blog.html?v=11" data-i18n="nav_news">News</a></li>
+                <li><a href="contact.html?v=11" data-i18n="nav_contact">Contacts</a></li>
+            </ul>
+            <div class="nav-actions"></div>
+        </div>
+    </nav>
+    
+    
+                
+
+    <!-- Company Info Block (Premium Modern Glass Style) -->
+    <section class="company-block">
+        <div class="container">
+            <div class="hero-glass-card">
+                <div class="company-text" style="flex: 1;">
+                    <div style="display: inline-flex; align-items: center; gap: 10px; background: white; color: #00A8E1; padding: 10px 24px; border-radius: 50px; font-weight: 900; font-size: 0.75rem; margin-bottom: 30px; border: 1px solid #e2e8f0; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 4px 15px rgba(0,0,0,0.03);" data-i18n="nav_about">
+                        BIZ HAQIMIZDA
+                    </div>
+                    <h1 data-i18n="about_title_new">FYZEN-LAB — O'zbekistonda <span style="background: linear-gradient(135deg, #00A8E1, #2B358E); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">yuqori texnologiyali</span> yechimlar.</h1>
+                    <p data-i18n="about_desc_long" style="font-size: 1.15rem; line-height: 1.8; color: #64748b; margin-bottom: 3rem; max-width: 600px;">
+                        Biz shunchaki uskuna yetkazib beruvchi emasmiz. Biz O'zbekistonning ilm-fan va tibbiyot sohalarini jahon standartlari darajasiga ko'tarishni maqsad qilgan professional jamoamiz.
+                    </p>
+
+                    <div class="advantage-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                        <div class="advantage-item">
+                            <div style="width: 52px; height: 52px; background: rgba(0, 168, 225, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="#00A8E1" stroke-width="2" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            </div>
+                            <h4 data-i18n="our_mission" style="margin-bottom: 8px; font-size: 1.1rem; color: #010b1a; font-weight: 900;">Missiyamiz</h4>
+                            <p data-i18n="our_mission_desc" style="font-size: 0.9rem; color: #64748b; line-height: 1.6;">Har bir tadqiqot natijasi 100% aniq bo'lishi uchun ishonchli uskunalar.</p>
+                        </div>
+                        <div class="advantage-item">
+                            <div style="width: 52px; height: 52px; background: rgba(43, 53, 142, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="#2B358E" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+                            </div>
+                            <h4 data-i18n="global_collab" style="margin-bottom: 8px; font-size: 1.1rem; color: #010b1a; font-weight: 900;">Global Hamkorlik</h4>
+                            <p data-i18n="global_collab_desc" style="font-size: 0.9rem; color: #64748b; line-height: 1.6;">Mindray, Siemens kabi dunyoning 40 dan ortiq gigantlari bilan hamkorlik.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="company-right" style="flex: 0 0 420px; display: flex; flex-direction: column; align-items: center; gap: 40px;">
+                    <div style="position: relative;">
+                        <div style="position: absolute; inset: -30px; background: radial-gradient(circle, rgba(0,168,225,0.2) 0%, transparent 70%); z-index: -1;"></div>
+                        <img src="/manus-storage/fyzen-cube-final_9ae90e1b.png" alt="FYZEN" class="floating-logo" style="width: 320px; height: auto;">
+                    </div>
+                    <div style="text-align: center;">
+                        <h2 style="font-size: 2.8rem; font-weight: 900; color: #010b1a; letter-spacing: 2px; line-height: 1;">FYZEN-LAB</h2>
+                        <div style="width: 60px; height: 4px; background: #00A8E1; margin: 15px auto; border-radius: 2px;"></div>
+                        <p style="color: #64748b; font-weight: 800; letter-spacing: 5px; font-size: 0.8rem; text-transform: uppercase;">Science Without Limits</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-bottom-grid" style="margin-top: 60px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px;">
+                <div class="quote-card-modern">
+                    <p data-i18n="about_quote" style="font-size: 1.4rem; line-height: 1.6; font-weight: 600; font-style: italic; position: relative; z-index: 1;">
+                        "Bizning maqsadimiz — O'zbekistonning har bir nuqtasida aniq diagnostika imkoniyatini yaratishdir. Sifat va ishonch bizning asosiy tamoyilimizdir."
+                    </p>
+                </div>
+                <div style="background: white; border-radius: 30px; padding: 40px; border: 1px solid #f1f5f9; display: flex; align-items: center; gap: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
+                    <div style="width: 60px; height: 60px; background: #f0fdf4; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <svg viewBox="0 0 24 24" width="30" height="30" stroke="#22c55e" stroke-width="2.5" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <div>
+                        <h4 style="font-weight: 900; color: #010b1a; margin-bottom: 5px;">Sifat Kafolati</h4>
+                        <p style="color: #64748b; font-size: 0.9rem;">Barcha uskunalarimiz xalqaro sertifikatlarga ega.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values -->
+    <section class="section" style="background:#f8fafc;">
+        <div class="container">
+            <h2 class="section-title" data-i18n="about_values">Bizning qadriyatlarimiz</h2>
+            <div class="values-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;">
+                <div style="background:transparent;padding:2.5rem;border-radius:24px;border:1px solid #e2e8f0;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.02);transition:0.3s;">
+                    <div style="width:80px;height:80px;background:#f0f9ff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;">
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="#00A8E1"><path d="M12 1L8 5h3v9h2V5h3L12 1zm-4 15v2h8v-2H8zm-2 4v2h12v-2H6z"/></svg>
+                    </div>
+                    <h3 style="color:#1e293b;margin-bottom:0.8rem;font-weight:800;font-size:1.2rem;" data-i18n="about_precision">Aniqlik</h3>
+                    <p style="color:#64748b;font-size:0.9rem;line-height:1.7;" data-i18n="about_precision_p">Har bir qurilmada murosasiz aniqlik, ishonchli natijalarni ta'minlaydi.</p>
+                </div>
+                <div style="background:transparent;padding:2.5rem;border-radius:24px;border:1px solid #e2e8f0;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.02);transition:0.3s;">
+                    <div style="width:80px;height:80px;background:#f0f9ff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;">
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="#00A8E1"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                    </div>
+                    <h3 style="color:#1e293b;margin-bottom:0.8rem;font-weight:800;font-size:1.2rem;" data-i18n="about_innovation">Innovatsiya</h3>
+                    <p style="color:#64748b;font-size:0.9rem;line-height:1.7;" data-i18n="about_innovation_p">Tibbiyot texnologiyalari sohasida mumkin bo'lgan chegaralarni kengaytirish.</p>
+                </div>
+                <div style="background:transparent;padding:2.5rem;border-radius:24px;border:1px solid #e2e8f0;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.02);transition:0.3s;">
+                    <div style="width:80px;height:80px;background:#f0f9ff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;">
+                        <svg viewBox="0 0 24 24" width="40" height="40" fill="#00A8E1"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                    </div>
+                    <h3 style="color:#1e293b;margin-bottom:0.8rem;font-weight:800;font-size:1.2rem;" data-i18n="about_reliability">Ishonchlilik</h3>
+                    <p style="color:#64748b;font-size:0.9rem;line-height:1.7;" data-i18n="about_reliability_p">Zamonaviy klinik muhitlarning qattiq talablariga dosh bera oladigan uskunalar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Clients -->
+    <section class="clients-section">
+        <div class="container">
+            <h2 data-i18n="about_clients">Bizning mijozlar</h2>
+        </div>
+        <div class="clients-track-wrap">
+            <div class="clients-track" id="clientsTrack">
+                <!-- Logos set 1 -->
+                <div class="client-logo">
+                    <img src="/manus-storage/semurg_8f2c1c7b.svg" alt="Semurg">
+                </div>
+                <div class="client-logo">
+                    <img src="/manus-storage/ssv_bec5777f.svg" alt="SSV">
+                </div>
+                <div class="client-logo">
+                    <img src="/manus-storage/nuuz_08d349c0.svg" alt="NUUZ">
+                </div>
+                <div class="client-logo">
+                    <img src="/manus-storage/akfa_f33124f5.svg" alt="Akfa">
+                </div>
+                <div class="client-logo">
+                    <img src="/manus-storage/toshmi_d01f275c.png" alt="Toshkent Tibbiyot Akademiyasi">
+                </div>
+                <div class="client-logo">
+                    <img src="/manus-storage/biolab_0970c6c5.svg" alt="BioLab">
+                </div>
+                <div class="client-logo">
+                    <img src="/manus-storage/pharmco_c1d6ff8d.svg" alt="PharmCo">
+                </div>
+                
+                <!-- Logos set 2 (duplicate for infinite scroll) -->
+                <div class="client-logo">
+                    <img src="/manus-storage/semurg_8f2c1c7b.svg" alt="Semurg">
+                </div>
+                <div class="client-logo">
+                    <img src="/manus-storage/ssv_bec5777f.svg" alt="SSV">
+                </div>
+                <div class="client-logo">
+                    <img src="/manus-storage/nuuz_08d349c0.svg" alt="NUUZ">
+                </div>
+                <div class="client-logo">
+                    <img src="/manus-storage/akfa_f33124f5.svg" alt="Akfa">
+                </div>
+                <div class="client-logo">
+                    <img src="/manus-storage/toshmi_d01f275c.png" alt="Toshkent Tibbiyot Akademiyasi">
+                </div>
+                <div class="client-logo">
+                    <img src="/manus-storage/biolab_0970c6c5.svg" alt="BioLab">
+                </div>
+                <div class="client-logo">
+                    <img src="/manus-storage/pharmco_c1d6ff8d.svg" alt="PharmCo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    
+
+    <script src="assets/js/lang.js?v=15.0"></script>
+    <script src="assets/js/main.js?v=12.0"></script>
+
+
+
+<footer class="fyz-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-about-logo">
+                    <img src="/manus-storage/fyzen-cube-final_9ae90e1b.png" alt="FYZEN">
+                    <span>FYZEN LAB</span>
+                </div>
+                <p class="footer-desc-p" data-i18n="footer_about_text">O'zbekistonda yuqori sifatli tibbiy va laboratoriya uskunalari bo'yicha ishonchli hamkoringiz. Chegarasiz ilm-fan.</p>
+                <p class="footer-desc-p" style="margin-top: 15px; font-size: 0.95rem; opacity: 0.85;" data-i18n="footer_extra_info">Barcha turdagi laboratoriya jihozlarini O'zbekiston bo'ylab tez va ishonchli yetkazib beramiz. 24/7 texnik yordam mavjud.</p>
+                <div class="footer-socials">
+                    <a href="https://t.me/fyzen_lab" class="footer-social-btn" target="_blank" title="Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></a>
+                    <a href="https://www.instagram.com/fyzen_lab?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==" class="footer-social-btn" target="_blank" title="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="#" class="footer-social-btn" title="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_quick_links">Tezkor havolalar</h4>
+                <ul class="footer-links">
+                    <li><a href="catalog.html?v=11" data-i18n="katalog">Katalog</a></li>
+                    <li><a href="brands.html?v=11" data-i18n="nav_brands">Brendlar</a></li>
+                    <li><a href="about.html?v=11" data-i18n="nav_about">Biz haqimizda</a></li>
+                    <li><a href="blog.html?v=11" data-i18n="nav_news">Yangiliklar</a></li>
+                    <li><a href="contact.html?v=11" data-i18n="nav_contact">Aloqa</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_categories_title">Asosiy kategoriyalar</h4>
+                <ul class="footer-links">
+                    <li><a href="products.html?cat=analytical" data-i18n="cat_analytical">Analitik uskunalar</a></li>
+                    <li><a href="products.html?cat=medical" data-i18n="cat_medical">Tibbiy va klinik laboratoriya</a></li>
+                    <li><a href="products.html?cat=chemistry" data-i18n="cat_chemistry">Kimyo laboratoriyasi</a></li>
+                    <li><a href="products.html?cat=physics" data-i18n="cat_physics">Fizika laboratoriyasi</a></li>
+                    <li><a href="products.html?cat=biology" data-i18n="cat_biology">Biologiya va mikrobiologiya</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_contact">Aloqa</h4>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+                    <div class="footer-contact-info">
+                        <span data-i18n="address">Manzil</span>
+                        <strong data-i18n="footer_address">Toshkent, Yunusobod tumani</strong>
+                    </div>
+                </div>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
+                    <div class="footer-contact-info">
+                        <span data-i18n="phone">Telefon</span>
+                        <strong data-i18n="footer_phone">+998 99 034 20 02</strong>
+                    </div>
+                </div>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+                    <div class="footer-contact-info">
+                        <span>Email</span>
+                        <strong data-i18n="footer_email">info@fyzen-lab.uz</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 FYZEN-LAB. <span data-i18n="all_rights_reserved">Barcha huquqlar himoyalangan.</span></p>
+            <p data-i18n="footer_working_hours">Dush - Shan: 09:00 - 18:00</p>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Fyzen Contact FAB -->
+<div class="fyzen-contact-wrapper" id="fyzenContactWrapper">
+    <div class="fyzen-contact-menu" id="fyzenContactMenu">
+        <a href="tel:+998990342002" class="contact-item">
+            <span class="contact-label">Qo'ng'iroq</span>
+            <div class="contact-icon icon-phone"><svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-2.18 2.18c-2.83-1.44-5.15-3.76-6.59-6.59l2.18-2.18c.28-.27.36-.66.24-1.01-.36-1.11-.56-2.3-.56-3.53 0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.58c0-.55-.45-1-1-1z"/></svg></div>
+        </a>
+        <a href="https://t.me/fyzen_lab" target="_blank" class="contact-item">
+            <span class="contact-label">Telegram</span>
+            <div class="contact-icon icon-telegram"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.891 8.11l-1.92 9.063c-.145.638-.523.795-1.057.495l-2.924-2.154-1.41 1.358c-.156.156-.287.287-.588.287l.209-2.969L15.59 9.948c.234-.208-.052-.323-.364-.115l-6.656 4.19-2.876-.898c-.625-.195-.638-.625.13-.923L16.94 8.012c.513-.188.962.117.848.71z"/></svg></div>
+        </a>
+        <a href="https://www.instagram.com/fyzen_lab?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==" target="_blank" class="contact-item">
+            <span class="contact-label">Instagram</span>
+            <div class="contact-icon icon-instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.412.558.217.957.477 1.377.896.42.42.68.818.896 1.377.163.422.358 1.057.412 2.227.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.249 1.805-.412 2.227-.217.558-.477.957-.896 1.377-.42.42-.818.68-1.377.896-.422.163-1.057.358-2.227.412-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.805-.249-2.227-.412-.558-.217-.957-.477-1.377-.896-.42-.42-.68-.818-.896-1.377-.163-.422-.358-1.057-.412-2.227-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.054-1.17.249-1.805.412-2.227.217-.558.477-.957.896-1.377.42-.42.818-.68 1.377-.896.422-.163 1.057-.358 2.227-.412 1.266-.058 1.646-.07 4.85-.07M12 0C8.741 0 8.333.014 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.741 0 12s.014 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126s1.337 1.079 2.126 1.384c.766.296 1.636.499 2.913.558C8.333 23.986 8.741 24 12 24s3.667-.014 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384s1.079-1.338 1.384-2.126c.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126s-1.338-1.079-2.126-1.384c-.765-.296-1.636-.499-2.913-.558C15.667.012 15.259 0 12 0m0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324M12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8m6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881"/></svg></div>
+        </a>
+        <a href="https://wa.me/998990342002" target="_blank" class="contact-item">
+            <span class="contact-label">WhatsApp</span>
+            <div class="contact-icon icon-whatsapp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+        </a>
+        <a href="mailto:info@fyzen-lab.uz" class="contact-item">
+            <span class="contact-label">Email</span>
+            <div class="contact-icon icon-email"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+        </a>
+    </div>
+    <button class="fyzen-fab-main" id="fyzenFabMain">
+        <span class="fyzen-fab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="fyzen-fab-ripple"></div>
+    </button>
+</div>
+
+
+<script>
+    (function() {
+        const wrapper = document.getElementById('fyzenContactWrapper');
+        const btn = document.getElementById('fyzenFabMain');
+        const menu = document.getElementById('fyzenContactMenu');
+        if (!wrapper || !btn || !menu) return;
+        const iconContainer = btn.querySelector('.fyzen-fab-icon');
+        let isForcedClosed = false;
+        function openMenu() { if (isForcedClosed) return; btn.classList.add('open'); menu.classList.add('open'); iconContainer.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 12L7 7m5 5l5 5m-5-5l5-5m-5 5l-5 5" stroke-width="2.5" stroke-linecap="round"/></svg>`; }
+        function closeMenu(forced = false) { btn.classList.remove('open'); menu.classList.remove('open'); iconContainer.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`; if (forced) isForcedClosed = true; }
+        
+        // Only open when mouse hits the CHAT button specifically
+        btn.addEventListener('mouseenter', openMenu);
+        
+        // Stay open while inside the wrapper, close only when leaving the whole area
+        wrapper.addEventListener('mouseleave', () => { closeMenu(); isForcedClosed = false; });
+        
+        btn.addEventListener('click', (e) => { e.stopPropagation(); if (btn.classList.contains('open')) { closeMenu(true); } else { isForcedClosed = false; openMenu(); } });
+        document.addEventListener('click', (e) => { if (!wrapper.contains(e.target)) { closeMenu(); isForcedClosed = false; } });
+    })();
+</script>
+
+</body>
+</html>
