@@ -42,12 +42,12 @@ describe("Telegram admin webhook flow", () => {
   it("walks an authorized order wizard and persists the order", async () => {
     const { handleTelegramAdminUpdate } = await import("./telegramAdmin");
     const chat = { id: 77 };
-    await handleTelegramAdminUpdate({ update_id: 1, callback_query: { id: "c1", from: { id: 8548524660 }, data: "order:add", message: { chat } } });
-    await handleTelegramAdminUpdate({ update_id: 2, message: { from: { id: 8548524660 }, chat, text: "Test Client" } });
-    await handleTelegramAdminUpdate({ update_id: 3, message: { from: { id: 8548524660 }, chat, text: "+998901234567" } });
-    await handleTelegramAdminUpdate({ update_id: 4, message: { from: { id: 8548524660 }, chat, text: "Fyzen Lab" } });
-    await handleTelegramAdminUpdate({ update_id: 5, message: { from: { id: 8548524660 }, chat, text: "Mindray BC-5000 x1" } });
-    await handleTelegramAdminUpdate({ update_id: 6, callback_query: { id: "c2", from: { id: 8548524660 }, data: "order:save", message: { chat } } });
+    await handleTelegramAdminUpdate({ update_id: 1, callback_query: { id: "c1", from: { id: 7812685703 }, data: "order:add", message: { chat } } });
+    await handleTelegramAdminUpdate({ update_id: 2, message: { from: { id: 7812685703 }, chat, text: "Test Client" } });
+    await handleTelegramAdminUpdate({ update_id: 3, message: { from: { id: 7812685703 }, chat, text: "+998901234567" } });
+    await handleTelegramAdminUpdate({ update_id: 4, message: { from: { id: 7812685703 }, chat, text: "Fyzen Lab" } });
+    await handleTelegramAdminUpdate({ update_id: 5, message: { from: { id: 7812685703 }, chat, text: "Mindray BC-5000 x1" } });
+    await handleTelegramAdminUpdate({ update_id: 6, callback_query: { id: "c2", from: { id: 7812685703 }, data: "order:save", message: { chat } } });
     expect(insertSpy).toHaveBeenCalled();
     expect(sendSpy).toHaveBeenCalled();
   });
@@ -55,10 +55,10 @@ describe("Telegram admin webhook flow", () => {
   it("does not accept an oversized product photo", async () => {
     const { handleTelegramAdminUpdate } = await import("./telegramAdmin");
     const chat = { id: 77 };
-    await handleTelegramAdminUpdate({ update_id: 1, callback_query: { id: "c1", from: { id: 8548524660 }, data: "product:add", message: { chat } } });
+    await handleTelegramAdminUpdate({ update_id: 1, callback_query: { id: "c1", from: { id: 7812685703 }, data: "product:add", message: { chat } } });
     // Move the mocked wizard directly to photo input for a focused size guardrail.
     state.set("77", { chatId: "77", step: "photo", payloadJson: JSON.stringify({ name: "Test", brand: "FYZEN", category: "medical", price: "Request", description: "Test" }), lastUpdateId: 1 });
-    await handleTelegramAdminUpdate({ update_id: 2, message: { from: { id: 8548524660 }, chat, photo: [{ file_id: "large", file_size: 9 * 1024 * 1024 }] } });
+    await handleTelegramAdminUpdate({ update_id: 2, message: { from: { id: 7812685703 }, chat, photo: [{ file_id: "large", file_size: 9 * 1024 * 1024 }] } });
     expect(sendSpy).toHaveBeenCalled();
   });
 });

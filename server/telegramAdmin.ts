@@ -4,8 +4,14 @@ import { productSubmissions, orderRequests, telegramAdminSessions, telegramAdmin
 import { getDb } from "./db";
 import { storagePut } from "./storage";
 
-const ADMIN_ID = "8548524660";
+const DEFAULT_ADMIN_ID = "";
+const ADMIN_IDS = new Set([
+  ...(process.env.TELEGRAM_ADMIN_IDS || DEFAULT_ADMIN_ID).split(","),
+  ...(process.env.TELEGRAM_EXTRA_ADMIN_IDS || "").split(","),
+].map(value => value.trim()).filter(Boolean));
 const API = "https://api.telegram.org";
+const ADMIN_PANEL_URL = process.env.TELEGRAM_ADMIN_PANEL_URL?.trim();
+const MINI_APP_URL = process.env.TELEGRAM_MINI_APP_URL?.trim();
 const CATEGORIES = ["analytical", "medical", "chemistry", "physics", "biology", "environmental", "agriculture", "industrial", "petroleum", "educational", "furniture", "consumables"];
 const STATUSES = ["new", "processing", "completed", "cancelled"] as const;
 
@@ -19,7 +25,8 @@ function config() {
   return token;
 }
 
-export function isTelegramAdmin(id: unknown) { return String(id ?? "") === ADMIN_ID; }
+export function isTelegramAdmin(id: unknown) { return ADMIN_IDS.has(String(id ?? "")); }
+function actorIdForAudit() { return Array.from(ADMIN_IDS)[0] || "unknown"; }
 
 async function tg<T = unknown>(method: string, body: Record<string, unknown>) {
   const response = await fetch(`${API}/bot${config()}/${method}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), signal: AbortSignal.timeout(10000) });
@@ -29,7 +36,12 @@ async function tg<T = unknown>(method: string, body: Record<string, unknown>) {
 }
 
 function clean(value: unknown, max = 500) { return typeof value === "string" ? value.trim().slice(0, max) : ""; }
-function menu() { return { inline_keyboard: [[{ text: "📦 Buyurtmalar", callback_data: "orders" }, { text: "➕ Buyurtma qo‘shish", callback_data: "order:add" }], [{ text: "➕ Mahsulot qo‘shish", callback_data: "product:add" }], [{ text: "🧪 Draft mahsulotlar", callback_data: "products:drafts" }, { text: "🔄 Yangilash", callback_data: "menu" }]] }; }
+function menu() {
+  const rows: Array<Array<Record<string, unknown>>> = [[{ text: "📦 Buyurtmalar", callback_data: "orders" }, { text: "➕ Buyurtma qo‘shish", callback_data: "order:add" }], [{ text: "➕ Mahsulot qo‘shish", callback_data: "product:add" }], [{ text: "🧪 Draft mahsulotlar", callback_data: "products:drafts" }, { text: "🔄 Yangilash", callback_data: "menu" }]];
+  if (MINI_APP_URL) rows.splice(1, 0, [{ text: "🚀 Mini Appni ochish", web_app: { url: MINI_APP_URL } }]);
+  if (ADMIN_PANEL_URL) rows.splice(2, 0, [{ text: "🌐 Web adminni ochish", url: ADMIN_PANEL_URL }]);
+  return { inline_keyboard: rows };
+}
 async function send(chatId: string | number, text: string, reply_markup?: unknown) { return tg("sendMessage", { chat_id: chatId, text, parse_mode: "HTML", reply_markup }); }
 async function edit(chatId: string | number, messageId: number, text: string, reply_markup?: unknown) { return tg("editMessageText", { chat_id: chatId, message_id: messageId, text, parse_mode: "HTML", reply_markup }); }
 async function answerCallback(id: string) { await tg("answerCallbackQuery", { callback_query_id: id }); }
@@ -68,7 +80,7 @@ async function setStatus(chatId: string, requestId: string, status: string) {
   const before = (await db.select().from(orderRequests).where(eq(orderRequests.requestId, requestId)).limit(1))[0] || null;
   await db.update(orderRequests).set({ status: status as typeof STATUSES[number] }).where(eq(orderRequests.requestId, requestId));
   const after = (await db.select().from(orderRequests).where(eq(orderRequests.requestId, requestId)).limit(1))[0] || null;
-  await audit(ADMIN_ID, "status_update", "order", requestId, before, after);
+  await audit(String(actorIdForAudit()), "status_update", "order", requestId, before, after);
   await send(chatId, `✅ ${requestId} buyurtmasi holati <b>${status}</b> ga o‘zgartirildi.`, menu());
 }
 
@@ -90,7 +102,7 @@ async function continueEdit(chatId: string, message: TgMessage, updateId?: numbe
     const update: Record<string, string> = field === "name" ? { name: value, nameUz: value, nameRu: value, nameEn: value } : { [field]: value };
     await db.update(productSubmissions).set(update as any).where(and(eq(productSubmissions.productId, p.productId), eq(productSubmissions.status, "draft")));
     const after = (await db.select().from(productSubmissions).where(eq(productSubmissions.productId, p.productId)).limit(1))[0] || null;
-    await audit(ADMIN_ID, "edit", "product", p.productId, before, after);
+    await audit(String(actorIdForAudit()), "edit", "product", p.productId, before, after);
     await saveSession(chatId, "idle", {}); return send(chatId, "✅ Draft yangilandi.", menu());
   }
   return send(chatId, "Tahrirlash yakunlandi.", menu());
@@ -100,7 +112,7 @@ async function approve(chatId: string, productId: string) {
   const before = (await db.select().from(productSubmissions).where(eq(productSubmissions.productId, productId)).limit(1))[0] || null;
   await db.update(productSubmissions).set({ status: "approved" }).where(and(eq(productSubmissions.productId, productId), eq(productSubmissions.status, "draft")));
   const after = (await db.select().from(productSubmissions).where(eq(productSubmissions.productId, productId)).limit(1))[0] || null;
-  await audit(ADMIN_ID, "approve", "product", productId, before, after);
+  await audit(String(actorIdForAudit()), "approve", "product", productId, before, after);
   await send(chatId, `✅ Mahsulot <b>${productId}</b> tasdiqlandi va public katalogga chiqarishga tayyor.`, menu());
 }
 
@@ -110,7 +122,7 @@ async function saveOrder(chatId: string) {
   const requestId = `tg-${Date.now().toString(36)}`;
   const created = { requestId, customerName: p.customerName || "Telegram mijoz", customerPhone: p.customerPhone || "—", organization: p.organization || null, notes: p.item ? `Telegramdan qo‘shildi: ${p.item}` : null, itemsJson: JSON.stringify([{ name: p.item || "Telegram buyurtmasi", quantity: 1 }]), status: "new" as const };
   await db.insert(orderRequests).values(created);
-  await audit(ADMIN_ID, "create", "order", requestId, null, created);
+  await audit(String(actorIdForAudit()), "create", "order", requestId, null, created);
   await saveSession(chatId, "idle", {}); return send(chatId, `✅ Buyurtma saqlandi: <b>${requestId}</b>`, menu());
 }
 async function continueOrder(chatId: string, message: TgMessage, updateId?: number) {
@@ -146,7 +158,7 @@ async function continueProduct(chatId: string, message: TgMessage, updateId?: nu
 async function saveProduct(chatId: string) {
   const current = await session(chatId); const p = payloadOf(current.payloadJson); const db = await getDb(); if (!db) throw new Error("Database unavailable");
   const productId = `bot-${Date.now().toString(36)}`;
-  await db.insert(productSubmissions).values({ productId, name: p.name, nameUz: p.name, nameRu: p.name, nameEn: p.name, brand: p.brand, category: p.category, price: p.price || "Request", description: p.description || null, imageUrl: p.imageUrl || null, status: "draft", createdBy: ADMIN_ID });
+  await db.insert(productSubmissions).values({ productId, name: p.name, nameUz: p.name, nameRu: p.name, nameEn: p.name, brand: p.brand, category: p.category, price: p.price || "Request", description: p.description || null, imageUrl: p.imageUrl || null, status: "draft", createdBy: actorIdForAudit() });
   await saveSession(chatId, "idle", {}); return send(chatId, `✅ Draft saqlandi: <b>${productId}</b>\nPublic katalogga chiqarishdan oldin Draft mahsulotlar bo‘limida tasdiqlang.`, menu());
 }
 

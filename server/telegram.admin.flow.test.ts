@@ -9,7 +9,7 @@ describe("Telegram-only admin flow guardrails", () => {
   const clientSource = readFileSync(join(root, "client/assets/js/main.js"), "utf8");
 
   it("keeps authorization tied to the requested Telegram numeric ID", () => {
-    expect(adminSource).toContain('const ADMIN_ID = "8548524660"');
+    expect(adminSource).toContain("process.env.TELEGRAM_ADMIN_IDS");
     expect(adminSource).toContain("isTelegramAdmin");
   });
 

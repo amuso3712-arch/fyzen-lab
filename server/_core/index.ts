@@ -10,6 +10,7 @@ import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { registerTelegramRoutes } from "../telegram";
 import { registerOrderRoutes } from "../orders";
+import { registerTelegramMiniAppRoutes } from "../telegramMiniApp";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -40,6 +41,7 @@ async function startServer() {
   registerOAuthRoutes(app);
   registerTelegramRoutes(app);
   registerOrderRoutes(app);
+  registerTelegramMiniAppRoutes(app);
   // tRPC API
   app.use(
     "/api/trpc",
