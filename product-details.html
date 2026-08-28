@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<!-- FYZEN STYLE NOTE: preserve the restored Fyzen Lab scientific-corporate visual language — navy/cobalt accents, clean laboratory surfaces, readable sans-serif type, practical catalog-first interactions. -->
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-title="product_details_page_title">Mahsulot Batafsil | FYZEN-LAB</title>
+    <link rel="icon" href="/assets/images/fyzen-cube-final_9ae90e1b.png?v=2.0" type="image/png">
+
+    <link rel="stylesheet" href="assets/css/styles.css?v=45.0">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        :root {
+            --p-blue: #00A8E1;
+            --p-dark: #0f172a;
+            --p-slate: #64748b;
+            --p-bg: #f8fafc;
+        }
+        
+        .view-btn:hover { color: var(--p-blue) !important; }
+        
+        .ai-scanner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e2e8f0;
+            border-top: 3px solid var(--p-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .p-details-wrapper { padding: 4rem 0; background: #ffffff; min-height: 80vh; }
+        
+        .p-title-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+        }
+        .p-wishlist-btn {
+            flex: 0 0 auto;
+            width: 48px;
+            height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1px;
+            border: 1px solid #dbe5ed;
+            border-radius: 15px;
+            background: #fff;
+            color: #94a3b8;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(15,23,42,0.06);
+            transition: color 160ms ease, background 160ms ease, border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+        }
+        .p-wishlist-btn svg { width: 23px; height: 23px; }
+        .p-wishlist-btn:hover,
+        .p-wishlist-btn:focus-visible { color: #ef476f; border-color: rgba(239,71,111,0.28); box-shadow: 0 10px 22px rgba(239,71,111,0.14); transform: translateY(-2px); }
+        .p-wishlist-btn:active { transform: scale(0.94); }
+        .p-wishlist-btn.active { color: #ef476f; background: #fff3f6; border-color: rgba(239,71,111,0.28); }
+
+        .p-main-title {
+            flex: 1 1 auto;
+            min-width: 0;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: var(--p-dark);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .p-top-layout {
+            display: grid;
+            grid-template-columns: 450px 1fr 320px;
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+
+        /* LEFT: IMAGE */
+        .p-image-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .p-main-image-wrap {
+            position: relative;
+            background: var(--p-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            height: 450px;
+            border-radius: 24px;
+            border: 1px solid rgba(0,168,225,0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .p-main-image-wrap:hover {
+            box-shadow: 0 20px 50px rgba(0,168,225,0.08);
+            transform: translateY(-5px);
+        }
+        .p-main-image-wrap img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05));
+        }
+        .p-badge-red {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 900;
+            padding: 6px 14px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(255,75,43,0.3);
+            z-index: 10;
+        }
+        .p-thumbnails {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .p-thumbnails img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            border: 2px solid #f1f5f9;
+            border-radius: 12px;
+            cursor: pointer;
+            padding: 8px;
+            transition: all 0.3s;
+            background: white;
+        }
+        .p-thumbnails img:hover, .p-thumbnails img.active { 
+            border-color: var(--p-blue);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,168,225,0.1);
+        }
+
+        /* MIDDLE: INFO */
+        .p-info-col {
+            display: flex;
+            flex-direction: column;
+        }
+        .p-short-desc {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--p-slate);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        .p-meta-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            background: var(--p-bg);
+            padding: 1.5rem;
+            border-radius: 16px;
+        }
+        .p-meta-list div {
+            color: var(--p-slate);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .p-meta-list strong {
+            color: var(--p-dark);
+            font-weight: 700;
+            min-width: 140px;
+        }
+        .p-meta-link {
+            color: var(--p-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .p-meta-link:hover { color: #0088cc; text-decoration: underline; }
+
+        .p-features-grid {
+            display: grid; 
+            grid-template-columns: repeat(5, 1fr); 
+            gap: 10px; 
+            margin-top: 2rem; 
+            padding-top: 2rem; 
+            border-top: 1px solid #f1f5f9;
+        }
+        @media (max-width: 992px) {
+            .p-features-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 576px) {
+            .p-features-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        .p-feature-card {
+            background: #ffffff; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 16px; 
+            padding: 20px 10px;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 12px;
+            text-align: center; 
+            cursor: pointer; 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .p-feature-card:hover { 
+            border-color: var(--p-light-blue); 
+            background: #f8fafc; 
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px -5px rgba(0, 168, 225, 0.15);
+        }
+        .p-feature-card svg { 
+            width: 28px; 
+            height: 28px; 
+            color: var(--p-light-blue); 
+            transition: 0.3s;
+        }
+        .p-feature-card:hover svg { 
+            transform: scale(1.1); 
+            color: var(--p-blue);
+        }
+        .p-feature-card span { 
+            font-size: 0.65rem; 
+            font-weight: 900; 
+            color: var(--p-blue); 
+            text-transform: uppercase; 
+            letter-spacing: 0.8px; 
+            line-height: 1.3;
+        }
+
+        /* RIGHT: PRICE CARD */
+        .p-price-card {
+            border: 1px solid rgba(0,168,225,0.15);
+            border-radius: 24px;
+            padding: 2.5rem 1.8rem;
+            text-align: center;
+            background: white;
+            box-shadow: 0 15px 40px rgba(0,168,225,0.05);
+            position: sticky;
+            top: 120px;
+        }
+        .p-price-val {
+            font-size: 1.8rem;
+            color: var(--p-blue);
+            font-weight: 800;
+            margin-bottom: 2rem;
+            letter-spacing: -0.5px;
+        }
+        .btn-request {
+            background: var(--gradient-blue);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 8px 20px rgba(0,168,225,0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .btn-request:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0,168,225,0.35);
+        }
+        .p-quantity-control {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin: 0 0 1.25rem;
+            padding: 10px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            background: #f8fafc;
+        }
+        .p-quantity-label {
+            color: var(--p-dark);
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+        .p-quantity-stepper {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 3px;
+            border: 1px solid #dbe5ed;
+            border-radius: 11px;
+            background: white;
+        }
+        .p-quantity-stepper button,
+        .p-quantity-stepper input {
+            width: 34px;
+            height: 34px;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--p-dark);
+            font: inherit;
+            font-weight: 900;
+            text-align: center;
+        }
+        .p-quantity-stepper button {
+            color: var(--p-blue);
+            cursor: pointer;
+            font-size: 1.2rem;
+            line-height: 1;
+            transition: background 150ms ease, transform 150ms ease;
+        }
+        .p-quantity-stepper button:hover,
+        .p-quantity-stepper button:focus-visible { background: #e8f8fd; }
+        .p-quantity-stepper button:active { transform: scale(0.94); }
+        .p-quantity-stepper button:disabled,
+        .p-quantity-stepper input:disabled { opacity: 0.45; cursor: not-allowed; }
+        .p-quantity-stepper input { appearance: textfield; font-size: 0.9rem; }
+        .p-quantity-stepper input::-webkit-outer-spin-button,
+        .p-quantity-stepper input::-webkit-inner-spin-button { margin: 0; appearance: none; }
+
+        .p-delivery {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--p-slate);
+            margin-top: 2rem;
+            font-weight: 600;
+        }
+        .p-share-panel {
+            margin-top: 1.4rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #eef2f7;
+        }
+        .p-share-label {
+            display: block;
+            margin-bottom: 0.65rem;
+            color: var(--p-dark);
+            font-size: 0.78rem;
+            font-weight: 850;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .p-share-actions { display: flex; align-items: center; gap: 7px; }
+        .p-share-link,
+        .p-share-native {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            background: white;
+            color: var(--p-dark);
+            cursor: pointer;
+            font: inherit;
+            font-size: 0.72rem;
+            font-weight: 900;
+            text-decoration: none;
+            transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, background 160ms ease;
+        }
+        .p-share-native { width: auto; padding: 0 11px; color: var(--p-blue); }
+        .p-share-link:hover,
+        .p-share-link:focus-visible,
+        .p-share-native:hover,
+        .p-share-native:focus-visible {
+            border-color: rgba(0,168,225,0.35);
+            box-shadow: 0 7px 16px rgba(0,168,225,0.12);
+            transform: translateY(-2px);
+        }
+        .p-share-telegram { color: #159bd7; }
+        .p-share-whatsapp { color: #18a957; }
+        .p-share-facebook { color: #1877f2; font-size: 1rem; }
+        .p-share-copy { color: #64748b; }
+        .p-similar-section { margin-top: 1rem; padding-top: 1rem; }
+        .p-similar-section[hidden] { display: none; }
+        .p-similar-heading-row { display: flex; justify-content: space-between; align-items: end; margin-bottom: 1.25rem; }
+        .p-eyebrow { color: var(--p-blue); font-size: 0.7rem; font-weight: 900; letter-spacing: 0.13em; text-transform: uppercase; }
+        .p-similar-section .p-section-title { margin-top: 0.35rem; margin-bottom: 0; }
+        .p-similar-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+        .p-similar-card {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #e6edf3;
+            border-radius: 16px;
+            background: #fff;
+            color: var(--p-dark);
+            text-decoration: none;
+            box-shadow: 0 8px 22px rgba(15,23,42,0.045);
+            transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+        }
+        .p-similar-card:hover { border-color: rgba(0,168,225,0.3); box-shadow: 0 14px 28px rgba(0,168,225,0.1); transform: translateY(-4px); }
+        .p-similar-image { width: 100%; height: 145px; padding: 12px; object-fit: contain; background: #f8fafc; }
+        .p-similar-copy { padding: 11px 12px 13px; }
+        .p-similar-brand { display: block; margin-bottom: 5px; color: var(--p-blue); font-size: 0.62rem; font-weight: 850; text-transform: uppercase; }
+        .p-similar-name { display: block; color: var(--p-dark); font-size: 0.82rem; font-weight: 800; line-height: 1.3; }
+        
+        /* TABS SECTION */
+        .p-tabs-section { margin-bottom: 4rem; }
+        .p-section-title {
+            font-size: 1.5rem;
+            color: var(--p-dark);
+            font-weight: 800;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f5f9;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .p-section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 60px;
+            height: 2px;
+            background: var(--p-blue);
+        }
+        .p-section-content {
+            font-size: 1.05rem;
+            color: var(--p-slate);
+            line-height: 1.8;
+        }
+        
+        .p-specs-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 1px solid #f1f5f9;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .p-specs-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .p-specs-table tr:last-child td { border-bottom: none; }
+        .p-specs-table tr:nth-child(even) { background: #fafafa; }
+        .p-specs-table td:first-child { color: var(--p-slate); width: 40%; font-weight: 600; }
+        .p-specs-table td:last-child { color: var(--p-dark); font-weight: 700; }
+
+        @media (max-width: 1200px) {
+            .p-top-layout { grid-template-columns: 1fr 1fr; }
+            .p-price-col { grid-column: span 2; }
+            .p-price-card { position: static; max-width: 500px; margin: 0 auto; }
+        }
+        @media (max-width: 768px) {
+            .p-top-layout { grid-template-columns: 1fr; }
+            .p-price-col { grid-column: span 1; }
+            .p-main-title { font-size: 1.8rem; }
+            .p-features-row { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* 3D Visual Excellence */
+        #faked3D {
+            width: 100%; height: 100%;
+            perspective: 2000px;
+            transform-style: preserve-3d;
+            cursor: grab;
+            user-select: none;
+            background: radial-gradient(circle at center, #ffffff 0%, #f1f5f9 100%);
+            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+        }
+        #faked3DInner {
+            position: relative;
+            width: 100%; height: 100%;
+            transform-style: preserve-3d;
+            pointer-events: none;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.1s ease-out;
+        }
+        .extrusion-layer {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 80%; height: 80%;
+            object-fit: contain;
+            pointer-events: none;
+            image-rendering: high-quality;
+        }
+        .floor-shadow {
+            position: absolute;
+            bottom: 10%; left: 50%;
+            width: 70%; height: 60px;
+            background: radial-gradient(ellipse at center, rgba(0,168,225,0.15) 0%, transparent 70%);
+            transform: translateX(-50%) rotateX(90deg);
+            filter: blur(15px);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .glare-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 50;
+        }
+
+        /* MODALS */
+        #infoModalOverlay, #zoomModal {
+            position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); 
+            backdrop-filter: blur(8px); z-index: 1000; display: none; align-items: center; justify-content: center;
+            opacity: 0; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #infoModalOverlay.active, #zoomModal.active { display: flex; opacity: 1; }
+        
+        .info-modal-content {
+            background: white; width: 90%; max-width: 600px; padding: 40px; border-radius: 32px;
+            position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            transform: translateY(20px); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .info-modal-overlay.active .info-modal-content { transform: translateY(0); }
+        
+        .info-modal-close {
+            position: absolute; top: 25px; right: 25px; cursor: pointer; color: var(--p-slate);
+            transition: 0.3s;
+        }
+        .info-modal-close:hover { color: var(--p-blue); transform: rotate(90deg); }
+        
+        .info-modal-title { font-size: 1.8rem; font-weight: 900; color: var(--p-dark); margin-bottom: 20px; }
+        .info-modal-body { font-size: 1.1rem; color: var(--p-slate); line-height: 1.8; }
+        .info-modal-body strong { color: var(--p-blue); }
+
+        .zoom-modal-content {
+            width: 95%; height: 90%; background: white; border-radius: 24px; position: relative;
+            padding: 40px; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+        }
+        .zoom-close-btn { 
+            position: absolute; top: 30px; right: 30px; cursor: pointer; z-index: 1100; 
+            color: white; background: rgba(255,255,255,0.1); width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center; border-radius: 50%;
+            backdrop-filter: blur(5px); transition: 0.3s;
+        }
+        .zoom-close-btn:hover { background: var(--p-blue); transform: rotate(90deg); }
+        .zoom-hint {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            color: rgba(255,255,255,0.7); font-size: 0.9rem; font-weight: 600;
+            background: rgba(0,0,0,0.3); padding: 8px 20px; border-radius: 50px;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .p-details-wrapper {
+                min-height: 100vh;
+                padding: 88px 0 3rem;
+                background: linear-gradient(180deg, #f8fbfd 0%, #ffffff 34%);
+            }
+            .p-details-wrapper > .container {
+                width: 100%;
+                max-width: 100%;
+                padding-right: 16px;
+                padding-left: 16px;
+            }
+            .p-title-row { align-items: flex-start; gap: 10px; }
+            .p-wishlist-btn { width: 44px; height: 44px; border-radius: 13px; }
+            .p-wishlist-btn svg { width: 21px; height: 21px; }
+            .p-main-title {
+                max-width: 100%;
+                margin: 0 0 1.1rem;
+                color: #071a33;
+                font-size: clamp(1.45rem, 6.2vw, 1.85rem);
+                line-height: 1.14;
+                letter-spacing: -0.6px;
+                overflow-wrap: anywhere;
+                word-break: normal;
+            }
+            .p-top-layout {
+                gap: 1.35rem;
+                margin-bottom: 2.7rem;
+            }
+            .p-image-col { gap: 0.8rem; min-width: 0; }
+            .view-toggle {
+                width: 100%;
+                margin-bottom: 0 !important;
+                padding: 3px !important;
+                border: 1px solid #e2e8f0;
+                border-radius: 14px !important;
+            }
+            .view-toggle button {
+                min-height: 42px;
+                padding: 8px 6px !important;
+                font-size: 0.66rem;
+                letter-spacing: 0.2px;
+            }
+            .view-toggle button svg { width: 16px; height: 16px; }
+            .p-main-image-wrap {
+                width: 100%;
+                height: min(76vw, 310px);
+                min-height: 230px;
+                padding: 1rem;
+                border-radius: 20px;
+                box-shadow: 0 12px 28px rgba(15, 23, 42, 0.07);
+            }
+            .p-main-image-wrap:hover { transform: none; }
+            .p-main-image-wrap img { max-width: 88%; max-height: 88%; }
+            .p-badge-red { top: 12px; left: 12px; padding: 5px 10px; font-size: 0.62rem; }
+            #viewContainer3D { height: min(88vw, 360px) !important; min-height: 230px; border-radius: 20px !important; }
+            #viewContainer3D .view-controls { right: 12px !important; bottom: 12px !important; }
+            .p-thumbnails { justify-content: flex-start; gap: 8px; padding: 0 2px; }
+            .p-thumbnails img { width: 58px; height: 58px; padding: 6px; border-radius: 10px; }
+            .p-info-col { min-width: 0; }
+            .p-short-desc {
+                margin-bottom: 1.15rem;
+                color: #52657c;
+                font-size: 0.95rem;
+                line-height: 1.62;
+            }
+            .p-meta-list {
+                gap: 0.7rem;
+                margin-bottom: 1.2rem;
+                padding: 1rem;
+                border: 1px solid #e7eef4;
+                border-radius: 16px;
+            }
+            .p-meta-list div {
+                align-items: flex-start;
+                flex-wrap: wrap;
+                gap: 4px 7px;
+                font-size: 0.86rem;
+                line-height: 1.4;
+            }
+            .p-meta-list strong { min-width: auto; }
+            .p-features-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 8px;
+                margin-top: 1.2rem;
+                padding-top: 1.2rem;
+            }
+            .p-feature-card {
+                min-height: 92px;
+                padding: 13px 7px;
+                gap: 8px;
+                border-radius: 14px;
+                box-shadow: 0 4px 12px rgba(15, 23, 42, 0.045);
+            }
+            .p-feature-card:hover { transform: none; }
+            .p-feature-card svg { width: 24px; height: 24px; }
+            .p-feature-card span { font-size: 0.6rem; letter-spacing: 0.5px; }
+            .p-price-card {
+                width: 100%;
+                max-width: none;
+                padding: 1.25rem 1rem;
+                border-radius: 20px;
+                box-shadow: 0 14px 32px rgba(0, 168, 225, 0.08);
+            }
+            .p-price-val { margin-bottom: 1.1rem; font-size: 1.35rem; }
+            .p-quantity-control { margin-bottom: 0.9rem; padding: 9px 10px; border-radius: 13px; }
+            .p-quantity-label { font-size: 0.78rem; }
+            .p-quantity-stepper button,
+            .p-quantity-stepper input { width: 36px; height: 36px; }
+            .btn-request {
+                min-height: 52px;
+                padding: 13px 12px;
+                border-radius: 13px;
+                font-size: 0.82rem;
+            }
+            .p-delivery { margin-top: 1rem; font-size: 0.78rem; }
+            .p-share-panel { margin-top: 1rem; padding-top: 0.95rem; }
+            .p-share-actions { gap: 6px; flex-wrap: wrap; }
+            .p-share-link, .p-share-native { min-width: 38px; min-height: 38px; }
+            .p-share-native { min-width: 0; }
+            .p-similar-section { margin-top: 0; padding-top: 0; }
+            .p-similar-heading-row { margin-bottom: 1rem; }
+            .p-similar-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+            .p-similar-image { height: 112px; padding: 9px; }
+            .p-similar-copy { padding: 9px 10px 11px; }
+            .p-similar-name { font-size: 0.75rem; }
+            .p-similar-brand { font-size: 0.55rem; }
+            .p-tabs-section { margin-bottom: 2.5rem; }
+            .p-section-title {
+                margin-bottom: 1rem;
+                padding-bottom: 10px;
+                font-size: 1.22rem;
+            }
+            .p-section-content { font-size: 0.93rem; line-height: 1.68; overflow-wrap: anywhere; }
+            .p-specs-table { display: block; max-width: 100%; overflow-x: auto; border-radius: 14px; }
+            .p-specs-table tbody { display: table; width: 100%; min-width: 100%; }
+            .p-specs-table td { padding: 12px 11px; font-size: 0.8rem; line-height: 1.35; overflow-wrap: anywhere; }
+            .p-specs-table td:first-child { width: 42%; }
+            .info-modal-content {
+                width: calc(100% - 24px);
+                max-height: calc(100vh - 32px);
+                overflow-y: auto;
+                padding: 3.1rem 1.15rem 1.25rem;
+                border-radius: 22px;
+            }
+            .info-modal-close { top: 16px; right: 16px; }
+            .info-modal-title { margin-bottom: 12px; font-size: 1.35rem; line-height: 1.2; }
+            .info-modal-body { font-size: 0.94rem; line-height: 1.65; }
+            .zoom-modal-content {
+                width: calc(100% - 20px);
+                height: min(78vh, 620px);
+                padding: 48px 10px 24px;
+                border-radius: 18px;
+            }
+            .zoom-close-btn { top: 10px; right: 10px; width: 42px; height: 42px; }
+            .zoom-hint { bottom: 12px; max-width: calc(100% - 32px); padding: 7px 12px; font-size: 0.72rem; text-align: center; }
+        }
+
+        @media (max-width: 380px) {
+            .p-details-wrapper > .container { padding-right: 14px; padding-left: 14px; }
+            .p-title-row { gap: 7px; }
+            .p-wishlist-btn { width: 42px; height: 42px; }
+            .p-main-title { font-size: 1.4rem; }
+            .p-feature-card { min-height: 86px; }
+            .p-feature-card span { font-size: 0.56rem; }
+            .p-share-label { font-size: 0.68rem; }
+            .p-price-card { padding-right: 0.85rem; padding-left: 0.85rem; }
+            .p-quantity-control { gap: 7px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .p-main-image-wrap,
+            .p-feature-card,
+            .btn-request,
+            .p-thumbnails img,
+            .info-modal-content,
+            #infoModalOverlay,
+            #zoomModal { transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-inner">
+            <a href="index.html?v=12" class="nav-brand" id="mainLogo">
+                <div class="logo-box">
+                    <img src="/assets/images/fyzen-cube-final_9ae90e1b.png" alt="FYZEN-LAB">
+                </div>
+                <div class="nav-brand-text">
+                    <span class="nav-brand-name">FYZEN-LAB</span>
+                    <span class="nav-brand-slogan" data-i18n="slogan">Science Without Limits</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="catalog.html?v=12" data-i18n="nav_catalog">Catalog</a></li>
+                <li class="nav-dropdown">
+                    <a href="products.html?v=12" class="nav-dropdown-toggle"><span data-i18n="nav_products">Products</span> <span class="nav-arrow">&#9662;</span></a>
+                    <div class="nav-dropdown-menu">
+                        <a href="products.html?cat=analytical" data-i18n="cat_analytical">Analytical Instruments</a>
+                        <a href="products.html?cat=medical" data-i18n="cat_medical">Medical & Clinical Laboratory</a>
+                        <a href="products.html?cat=chemistry" data-i18n="cat_chemistry">Chemistry Laboratory</a>
+                        <a href="products.html?cat=physics" data-i18n="cat_physics">Physics Laboratory</a>
+                        <a href="products.html?cat=biology" data-i18n="cat_biology">Biology & Microbiology</a>
+                        <a href="products.html?cat=environmental" data-i18n="cat_environmental">Environmental Testing</a>
+                        <a href="products.html?cat=agriculture" data-i18n="cat_agriculture">Agriculture & Soil Testing</a>
+                        <a href="products.html?cat=industrial" data-i18n="cat_industrial">Industrial & Material Testing</a>
+                        <a href="products.html?cat=petroleum" data-i18n="cat_petroleum">Petroleum & Mining Labs</a>
+                        <a href="products.html?cat=educational" data-i18n="cat_educational">Educational Laboratory</a>
+                        <a href="products.html?cat=furniture" data-i18n="cat_furniture">Laboratory Furniture & Safety</a>
+                        <a href="products.html?cat=consumables" data-i18n="cat_consumables">Consumables & Accessories</a>
+                    </div>
+                </li>
+                <li><a href="brands.html?v=12" data-i18n="nav_brands">Brands</a></li>
+                <li><a href="about.html?v=12" data-i18n="nav_about">About</a></li>
+                <li><a href="blog.html?v=12" data-i18n="nav_news">News</a></li>
+                <li><a href="contact.html?v=12" data-i18n="nav_contact">Contacts</a></li>
+            </ul>
+            <div class="nav-actions">
+                <form class="desktop-product-search" id="desktopProductSearch" role="search" onsubmit="submitDesktopProductSearch(event)">
+                    <svg class="desktop-product-search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+                    <input type="search" data-i18n="search_placeholder" placeholder="Search products..." autocomplete="off" aria-label="Search products">
+                    <button type="button" class="desktop-product-search-clear" data-search-clear aria-label="Clear search" hidden>×</button>
+                    <button type="submit" class="desktop-product-search-submit" aria-label="Search products"><span class="search-submit-icon">↵</span><span class="search-submit-spinner" aria-hidden="true"></span></button>
+                    <div class="desktop-search-suggestions" data-search-suggestions hidden role="listbox" aria-label="Popular searches">
+                        <div class="desktop-search-suggestions-label" data-i18n="popular_searches">Popular searches</div>
+                        <button type="button" data-search-suggestion="Shimadzu">Shimadzu</button>
+                        <button type="button" data-search-suggestion="Agilent">Agilent</button>
+                        <button type="button" data-search-suggestion="BINDER">BINDER</button>
+                        <button type="button" data-search-suggestion="HORIBA">HORIBA</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <header class="fyz-page-banner" aria-labelledby="pageBannerTitle">
+        <div class="fyz-page-banner-inner">
+            <span class="fyz-page-banner-kicker">FYZEN-LAB</span>
+            <h1 id="pageBannerTitle" data-i18n="product_details_title">Mahsulot tafsilotlari</h1>
+            <p data-i18n="back_to_catalog">Mahsulot haqida batafsil ma’lumot va texnik xususiyatlar.</p>
+        </div>
+    </header>
+
+    
+        
+
+    <main class="p-details-wrapper">
+        <div class="container">
+            <div class="p-title-row">
+                <h1 class="p-main-title" id="pTitle">Mahsulot nomi</h1>
+                <button type="button" class="p-wishlist-btn" id="productWishlistBtn" aria-pressed="false" data-i18n-aria-label="wishlist_add" aria-label="Sevimlilarga qo'shish" title="Sevimlilarga qo'shish">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg>
+                </button>
+            </div>
+            
+            <div class="p-top-layout">
+                <!-- Image Column -->
+                <div class="p-image-col">
+                    <div class="view-toggle" style="display:flex; justify-content:center; background: #f1f5f9; padding: 4px; border-radius: 12px; margin-bottom: 10px;">
+                        <button id="btn2D" class="view-btn active" onclick="switchView('2d')" style="flex:1; border:none; background:#fff; padding:10px; border-radius:8px; font-weight:800; color:var(--p-blue); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.05); transition:0.3s;" data-i18n="2d_view">2D IMAGE</button>
+                        <button id="btn3D" class="view-btn" onclick="switchView('3d')" style="flex:1; border:none; background:transparent; padding:10px; border-radius:8px; font-weight:800; color:var(--p-slate); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; transition:0.3s;">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                            <span data-i18n="3d_view">3D VIEW</span> <span style="background: linear-gradient(135deg, #ff416c, #ff4b2b); color: white; font-size: 0.6rem; padding: 2px 6px; border-radius: 4px;" data-i18n="ai_engine">AI</span>
+                        </button>
+                    </div>
+                    
+                    <div class="p-main-image-wrap" id="viewContainer2D" onclick="openZoom('2d')" style="cursor: zoom-in;">
+                        <span class="p-badge-red" style="display:none;" id="pAksiya">AKSIYA !</span>
+                        <img src="" alt="" id="mainImg">
+                    </div>
+                                       <div class="p-main-image-wrap" id="viewContainer3D" style="display:none; background: #ffffff; border-radius: 24px; overflow: hidden; position: relative; height: 500px; border: 2px solid #f1f5f9; box-shadow: inset 0 0 40px rgba(0,0,0,0.02);">
+                        <div id="aiLoadingOverlay" style="position: absolute; inset:0; background:rgba(255,255,255,0.95); z-index:20; display:none; flex-direction:column; align-items:center; justify-content:center; gap:20px; border-radius: 24px;">
+                            <div class="ai-scanner" style="width:80px; height:80px; border-width:4px;"></div>
+                            <div style="text-align:center;">
+                                <span style="font-weight:900; color:#002b5c; letter-spacing:2px; font-size:1.1rem; display:block; text-transform:uppercase;">AI 3D RECONSTRUCTION</span>
+                                <span style="font-size:0.8rem; color:#64748b; font-weight:600;">GENERATING VOLUMETRIC MESH...</span>
+                            </div>
+                        </div>
+                        
+                        <!-- REAL 3D VIEWER (When .glb is available) -->
+                        <model-viewer id="productModel" 
+                            alt="3D Product Model" 
+                            auto-rotate 
+                            camera-controls 
+                            shadow-intensity="1.5" 
+                            shadow-softness="1"
+                            environment-image="neutral"
+                            exposure="1.2"
+                            interaction-prompt="none"
+                            camera-orbit="45deg 75deg 105%"
+                            min-camera-orbit="auto auto 5%"
+                            max-camera-orbit="auto auto 200%"
+                            style="width: 100%; height: 100%; background-color: transparent; outline: none; display:none; position:relative; z-index:5;">
+                            <div class="view-controls" style="position:absolute; bottom:20px; right:20px; display:flex; gap:10px; z-index:10;">
+                                <button onclick="document.getElementById('productModel').setAttribute('auto-rotate', !document.getElementById('productModel').hasAttribute('auto-rotate'))" style="background:white; border:1px solid #e2e8f0; border-radius:8px; padding:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                                </button>
+                            </div>
+                        </model-viewer>
+
+                        <!-- AI FAKED 3D (Fallback for 2D images) -->
+                        <div id="faked3D" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; perspective:2000px; transform-style:preserve-3d; background: radial-gradient(circle at center, #ffffff 0%, #f8fafc 100%);">
+                            <div class="floor-shadow" id="floorShadow" style="bottom: 15%; width: 60%; height: 40px; background: radial-gradient(ellipse at center, rgba(0,43,92,0.1) 0%, transparent 70%);"></div>
+                            <div id="faked3DInner" style="position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; transform-style:preserve-3d;"></div>
+                            <div class="glare-overlay" id="glareOverlay" style="background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%, rgba(255,255,255,0.2) 100%);"></div>
+                            
+                            <!-- Environment Map Simulation Controls -->
+                            <div style="position:absolute; top:20px; left:20px; font-size:0.6rem; color:#94a3b8; font-weight:800; text-transform:uppercase; letter-spacing:1px; background:rgba(255,255,255,0.8); padding:4px 10px; border-radius:50px; border:1px solid #f1f5f9;">HDR Environment: Neutral</div>
+                        </div>
+                    </div>
+
+                    <div class="p-thumbnails">
+                        <img src="" id="thumbImg" style="display:none;" onclick="switchView('2d')">
+                    </div>
+                </div>
+
+                <!-- Info Column -->
+                <div class="p-info-col">
+                    <p class="p-short-desc" id="pShortDesc">Mahsulotning qisqacha xarakteristikasi va asosiy xususiyatlari shu yerda yoziladi.</p>
+                    
+                    <div class="p-meta-list">
+                        <div><strong data-i18n="brand_label">Ishlab chiqaruvchi :</strong> <a href="brands.html?v=12" class="p-meta-link" id="pBrand">FYZEN</a></div>
+                    </div>
+                    
+                    <div class="p-features-grid">
+                        <div class="p-feature-card" onclick="openInfoModal('kafolat')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> 
+                            <span data-i18n="warranty">Kafolat</span>
+                        </div>
+                        <div class="p-feature-card" onclick="openInfoModal('tolov')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg> 
+                            <span data-i18n="payment">To'lov</span>
+                        </div>
+                        <div class="p-feature-card" onclick="openInfoModal('servis')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> 
+                            <span data-i18n="service">Servis</span>
+                        </div>
+                        <div class="p-feature-card" onclick="openInfoModal('talim')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 
+                            <span data-i18n="training">O'qitish</span>
+                        </div>
+                        <div class="p-feature-card" onclick="openInfoModal('tanlash')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="2" y1="14" x2="6" y2="14"/><line x1="10" y1="12" x2="14" y2="12"/><line x1="18" y1="16" x2="22" y2="16"/></svg> 
+                            <span data-i18n="selection">Tanlash</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price Card Column -->
+                <div class="p-price-col">
+                    <div class="p-price-card">
+                        <div class="p-price-val" data-i18n="price_on_request">Narxi so'rov bo'yicha</div>
+                        <div id="pStockDisplay" style="margin-bottom: 15px;"></div>
+                        <div class="p-quantity-control" data-i18n-aria-label="quantity" aria-label="Miqdor">
+                            <span class="p-quantity-label" data-i18n="quantity">Miqdor</span>
+                            <div class="p-quantity-stepper">
+                                <button type="button" id="decreaseQtyBtn" data-i18n-aria-label="decrease_quantity" aria-label="Miqdorni kamaytirish">−</button>
+                                <input id="productQty" type="number" value="1" min="1" inputmode="numeric" data-i18n-aria-label="quantity" aria-label="Miqdor">
+                                <button type="button" id="increaseQtyBtn" data-i18n-aria-label="increase_quantity" aria-label="Miqdorni oshirish">+</button>
+                            </div>
+                        </div>
+                        <button class="btn-request" id="addToCartBtn">
+                            <svg viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                            <span data-i18n="add_to_cart">SAVATCHAGA</span>
+                        </button>
+                        <div class="p-delivery">
+                            <svg viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                            <span data-i18n="delivery_free">Bepul yetkazib berish</span>
+                        </div>
+                        <div class="p-share-panel" aria-labelledby="shareProductLabel">
+                            <span class="p-share-label" id="shareProductLabel" data-i18n="share_product">Ulashish</span>
+                            <div class="p-share-actions">
+                                <button type="button" class="p-share-native" id="nativeShareBtn" data-i18n="share_product">Ulashish</button>
+                                <a class="p-share-link p-share-telegram" id="shareTelegram" href="#" target="_blank" rel="noopener noreferrer" aria-label="Telegram">TG</a>
+                                <a class="p-share-link p-share-whatsapp" id="shareWhatsApp" href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WA</a>
+                                <a class="p-share-link p-share-facebook" id="shareFacebook" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+                                <button type="button" class="p-share-link p-share-copy" id="copyShareLink" data-i18n="copy_link" aria-label="Copy link">↗</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="p-tabs-section">
+                <h2 class="p-section-title" data-i18n="description_tab">Tavsif</h2>
+                <div class="p-section-content" id="pDesc">
+                    Ushbu mahsulot haqida batafsil ma'lumot tez orada qo'shiladi.
+                </div>
+            </div>
+
+            <!-- Characteristics Table -->
+            <div class="p-tabs-section">
+                <h2 class="p-section-title" data-i18n="specs_tab">Xarakteristikalar</h2>
+                <div class="p-section-content">
+                    <table class="p-specs-table" id="pSpecs">
+                        <tbody>
+                            <tr>
+                                <td colspan="2" style="text-align: center; color: #94a3b8; font-style: italic;" data-i18n="no_specs">Texnik xususiyatlar kiritilmagan</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <section class="p-similar-section" id="similarProductsSection" hidden>
+                <div class="p-similar-heading-row">
+                    <div>
+                        <span class="p-eyebrow" data-i18n="featured">Popular Products</span>
+                        <h2 class="p-section-title" data-i18n="similar_products">O'xshash mahsulotlar</h2>
+                    </div>
+                </div>
+                <div class="p-similar-grid" id="similarProductsGrid"></div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Fullscreen Zoom Modal -->
+    <div id="zoomModal" class="zoom-modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Product image viewer">
+        <div class="zoom-close-btn" onclick="closeZoom()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </div>
+        <div id="zoomContent" class="zoom-modal-content" style="background: transparent; box-shadow: none;"></div>
+        <div class="zoom-hint" data-i18n="zoom_hint">Sichqoncha bilan aylantirib ko'rishingiz mumkin</div>
+    </div>
+
+    <!-- INFO MODAL -->
+    <div class="info-modal-overlay" id="infoModalOverlay" role="dialog" aria-modal="true" aria-hidden="true" onclick="closeInfoModal()">
+        <div class="info-modal-content" onclick="if(event) event.stopPropagation()">
+            <div class="info-modal-close" onclick="closeInfoModal(true)">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </div>
+            <h3 class="info-modal-title" id="infoModalTitle">Sarlavha</h3>
+            <div class="info-modal-body" id="infoModalBody">
+                Matn bu yerda bo'ladi...
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/imagesBase64.js"></script>
+    <script src="assets/js/lang.js?v=27.0"></script>
+    <script src="assets/js/main.js?v=17.0"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initProductQuantity();
+            loadProductData();
+        });
+
+        function getProductQuantity() {
+            const input = document.getElementById('productQty');
+            const value = Math.max(1, parseInt(input?.value, 10) || 1);
+            const product = getProducts().find(item => item.id == productId);
+            const max = product && Number.isFinite(Number(product.stock)) ? Math.max(1, Number(product.stock)) : 999;
+            return Math.min(value, max);
+        }
+
+        function setProductQuantity(value) {
+            const input = document.getElementById('productQty');
+            if (!input) return;
+            const product = getProducts().find(item => item.id == productId);
+            const max = product && Number.isFinite(Number(product.stock)) ? Math.max(1, Number(product.stock)) : 999;
+            input.max = String(max);
+            input.value = String(Math.min(Math.max(1, parseInt(value, 10) || 1), max));
+        }
+
+        function initProductQuantity() {
+            const input = document.getElementById('productQty');
+            const decrease = document.getElementById('decreaseQtyBtn');
+            const increase = document.getElementById('increaseQtyBtn');
+            if (!input || input.dataset.bound === 'true') return;
+            input.dataset.bound = 'true';
+            decrease?.addEventListener('click', () => setProductQuantity(getProductQuantity() - 1));
+            increase?.addEventListener('click', () => setProductQuantity(getProductQuantity() + 1));
+            input.addEventListener('change', () => setProductQuantity(input.value));
+            input.addEventListener('blur', () => setProductQuantity(input.value));
+        }
+
+        function openInfoModal(type) {
+            const titles = {
+                kafolat: t('modal_kafolat_title') || 'Kafolat',
+                tolov: t('modal_tolov_title') || 'Payment',
+                servis: t('modal_servis_title') || 'Servis xizmati',
+                talim: t('modal_talim_title') || 'Education',
+                tanlash: t('modal_tanlash_title') || 'Selection'
+            };
+            const bodies = {
+                kafolat: t('modal_kafolat_body'),
+                tolov: t('modal_tolov_body'),
+                servis: t('modal_servis_body'),
+                talim: t('modal_talim_body'),
+                tanlash: t('modal_tanlash_body')
+            };
+            
+            document.getElementById('infoModalTitle').innerText = titles[type] || type;
+            document.getElementById('infoModalBody').innerHTML = bodies[type] || '...';
+            const infoOverlay = document.getElementById('infoModalOverlay');
+            infoOverlay.classList.add('active');
+            infoOverlay.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeInfoModal(force = false) {
+            // Using window.event as a fallback for inline onclick calls
+            const e = window.event;
+            if(force === true || (e && e.target.id === 'infoModalOverlay')) {
+                const infoOverlay = document.getElementById('infoModalOverlay');
+                infoOverlay.classList.remove('active');
+                infoOverlay.setAttribute('aria-hidden', 'true');
+            }
+        }
+
+        let isZoomed = false;
+        function openZoom(type) {
+            const modal = document.getElementById('zoomModal');
+            const content = document.getElementById('zoomContent');
+            isZoomed = true;
+            
+            content.innerHTML = '';
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+
+            if(type === '2d') {
+                const img = document.getElementById('mainImg').cloneNode();
+                img.style.maxWidth = '90%';
+                img.style.maxHeight = '90%';
+                img.style.objectFit = 'contain';
+                img.style.filter = 'drop-shadow(0 20px 50px rgba(0,0,0,0.3))';
+                content.appendChild(img);
+            } else {
+                const original3D = document.getElementById('faked3D');
+                content.appendChild(original3D);
+                original3D.style.width = '100%';
+                original3D.style.height = '100%';
+                original3D.style.background = 'transparent'; // Make it transparent in zoom
+            }
+        }
+
+        function closeZoom() {
+            const modal = document.getElementById('zoomModal');
+            const content = document.getElementById('zoomContent');
+            
+            const faked3D = document.getElementById('faked3D');
+            if(faked3D && faked3D.parentNode === content) {
+                const container3D = document.getElementById('viewContainer3D');
+                container3D.appendChild(faked3D);
+                faked3D.style.background = 'radial-gradient(circle at center, #ffffff 0%, #f1f5f9 100%)'; // Restore background
+            }
+            
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+            isZoomed = false;
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key !== 'Escape') return;
+            const infoOverlay = document.getElementById('infoModalOverlay');
+            const zoomModal = document.getElementById('zoomModal');
+            if (infoOverlay?.classList.contains('active')) closeInfoModal(true);
+            if (zoomModal?.classList.contains('active')) closeZoom();
+        });
+
+        function switchView(type) {
+            const btn2D = document.getElementById('btn2D');
+            const btn3D = document.getElementById('btn3D');
+            const cont2D = document.getElementById('viewContainer2D');
+            const cont3D = document.getElementById('viewContainer3D');
+            
+            if(type === '2d') {
+                btn2D.style.background = '#fff';
+                btn2D.style.color = '#00A8E1';
+                btn2D.style.boxShadow = '0 4px 12px rgba(0, 168, 225, 0.15)';
+                btn3D.style.background = '#f1f5f9';
+                btn3D.style.color = '#64748b';
+                btn3D.style.boxShadow = 'none';
+                
+                cont2D.style.display = 'flex';
+                cont3D.style.display = 'none';
+            } else {
+                // Check if the current product actually has a 3D model
+                const products = getProducts();
+                const p = products.find(item => item.id == productId);
+                if (p && !(p.glb || p.model3d)) {
+                    // 3D model is not uploaded from the admin panel!
+                    // Show "U mavjud emas" toast
+                    const msg = t('no_3d_model') || 'U mavjud emas';
+                    if (typeof showToast === 'function') {
+                        showToast(msg, 'info');
+                    } else {
+                        alert(msg);
+                    }
+                    return; // DO NOT switch view!
+                }
+
+                btn3D.style.background = '#fff';
+                btn3D.style.color = '#00A8E1';
+                btn3D.style.boxShadow = '0 4px 12px rgba(0, 168, 225, 0.15)';
+                btn2D.style.background = '#f1f5f9';
+                btn2D.style.color = '#64748b';
+                btn2D.style.boxShadow = 'none';
+                
+                cont2D.style.display = 'none';
+                cont3D.style.display = 'flex';
+                
+                // Ensure Three.js is initialized when container becomes visible
+                if(!productMesh) {
+                    initFaked3D();
+                }
+            }
+        }
+
+        let rotateX = 15;
+        let rotateY = -25;
+        let isDragging = false;
+        let lastX, lastY;
+
+        let scene, camera, renderer, productMesh;
+        let isRotating = false;
+
+        async function initFaked3D() {
+            const container = document.getElementById('faked3D');
+            const inner = document.getElementById('faked3DInner');
+            if(!container || !inner) return;
+
+            const products = getProducts();
+            const p = products.find(item => item.id == productId);
+            if(!p) return;
+
+            const loadingOverlay = document.getElementById('aiLoadingOverlay');
+            if(loadingOverlay) {
+                loadingOverlay.style.display = 'flex';
+                loadingOverlay.innerHTML = `
+                    <div class="ai-scanner" style="border-top-color: #00A8E1; width:70px; height:70px; border-width:5px;"></div>
+                    <div style="text-align:center; margin-top:20px;">
+                        <span style="font-weight:900; color:#002b5c; letter-spacing:2px; font-size:1.1rem; display:block; text-transform:uppercase;">AI ULTIMATE ENGINE</span>
+                        <span style="font-size:0.8rem; color:#64748b; font-weight:600; text-transform:uppercase;">Reconstructing High-Fidelity Geometry...</span>
+                    </div>
+                `;
+            }
+
+            // Cleanup
+            if(renderer) {
+                renderer.dispose();
+                inner.innerHTML = '';
+            }
+
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.2;
+            inner.appendChild(renderer.domElement);
+
+            // Studio Professional Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
+            scene.add(ambientLight);
+            
+            const mainLight = new THREE.DirectionalLight(0xffffff, 1.5);
+            mainLight.position.set(5, 10, 7.5);
+            scene.add(mainLight);
+
+            const fillLight = new THREE.PointLight(0x00A8E1, 0.5);
+            fillLight.position.set(-5, 0, 5);
+            scene.add(fillLight);
+
+            const loader = new THREE.TextureLoader();
+            loader.setCrossOrigin('anonymous');
+            
+            // Resolve the best image source for the 3D engine
+            let textureUrl = p.img;
+            if (textureUrl.startsWith('data:image/')) {
+                // Already base64 from admin panel
+                textureUrl = p.img;
+            } else if (window.FYZEN_IMAGES && window.FYZEN_IMAGES[p.img]) {
+                // Offline compiled base64 image
+                textureUrl = window.FYZEN_IMAGES[p.img];
+            } else if (p.img.startsWith('http')) {
+                // Remote image, use CORS proxy to prevent Canvas tainting
+                textureUrl = "https://images.weserv.nl/?url=" + encodeURIComponent(p.img);
+            }
+            
+            loader.load(textureUrl, (texture) => {
+                const aspect = texture.image.width / texture.image.height;
+                const geometry = new THREE.PlaneGeometry(3.2 * aspect, 3.2, 160, 160);
+                
+                const material = new THREE.MeshStandardMaterial({ 
+                    map: texture,
+                    displacementMap: texture,
+                    displacementScale: 0.75,
+                    displacementBias: -0.15,
+                    metalness: 0.2,
+                    roughness: 0.6,
+                    transparent: true,
+                    alphaTest: 0.05,
+                    side: THREE.DoubleSide
+                });
+
+                productMesh = new THREE.Mesh(geometry, material);
+                scene.add(productMesh);
+                
+                if(loadingOverlay) {
+                    loadingOverlay.style.opacity = '0';
+                    setTimeout(() => loadingOverlay.style.display = 'none', 500);
+                }
+                
+                animate3D();
+                setupThreeInteractions(container);
+            }, undefined, (err) => {
+                console.error("3D Load Failed", err);
+                if(loadingOverlay) {
+                    loadingOverlay.innerHTML = `
+                        <div style="text-align:center; padding:30px; max-width:80%;">
+                            <svg viewBox="0 0 24 24" width="48" height="48" stroke="#64748b" fill="none" stroke-width="2" style="margin-bottom:15px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                            <p style="color:#1e293b; font-weight:700; margin-bottom:10px;">AI generatsiya uchun rasm ruxsat bermadi</p>
+                            <p style="color:#64748b; font-size:0.85rem; line-height:1.4;">Ushbu rasm tashqi serverda himoyalangan. 3D ko'rinish uchun rasmni saytga yuklash tavsiya etiladi.</p>
+                            <button onclick="switchView('2d')" style="margin-top:20px; background:#00A8E1; color:white; border:none; padding:10px 25px; border-radius:12px; cursor:pointer; font-weight:700; box-shadow:0 10px 20px rgba(0,168,225,0.2);">2D tasvirni ko'rish</button>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        function animate3D() {
+            if(!productMesh || !renderer) return;
+            requestAnimationFrame(animate3D);
+            if(!isRotating) {
+                productMesh.rotation.y = Math.sin(Date.now() * 0.0008) * 0.25;
+                productMesh.rotation.z = Math.cos(Date.now() * 0.0005) * 0.05;
+            }
+            renderer.render(scene, camera);
+        }
+
+        function setupThreeInteractions(container) {
+            let mouseDown = false;
+            let mouseX = 0, mouseY = 0;
+
+            container.onmousedown = (e) => {
+                mouseDown = true;
+                isRotating = true;
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                container.style.cursor = 'grabbing';
+            };
+
+            window.onmousemove = (e) => {
+                if (!mouseDown || !productMesh) return;
+                const deltaX = e.clientX - mouseX;
+                const deltaY = e.clientY - mouseY;
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+
+                productMesh.rotation.y += deltaX * 0.008;
+                productMesh.rotation.x += deltaY * 0.008;
+            };
+
+            window.onmouseup = () => {
+                mouseDown = false;
+                isRotating = false;
+                container.style.cursor = 'grab';
+            };
+            
+            // Touch support
+            container.ontouchstart = (e) => {
+                mouseDown = true;
+                isRotating = true;
+                mouseX = e.touches[0].clientX;
+                mouseY = e.touches[0].clientY;
+            };
+            container.ontouchmove = (e) => {
+                if (!mouseDown || !productMesh) return;
+                const deltaX = e.touches[0].clientX - mouseX;
+                const deltaY = e.touches[0].clientY - mouseY;
+                mouseX = e.touches[0].clientX;
+                mouseY = e.touches[0].clientY;
+                productMesh.rotation.y += deltaX * 0.008;
+                productMesh.rotation.x += deltaY * 0.008;
+            };
+            container.ontouchend = () => {
+                mouseDown = false;
+                isRotating = false;
+            };
+        }
+
+        function localizedProductName(product) {
+            const lang = typeof getCurrentLang === 'function' ? getCurrentLang() : 'uz';
+            return product?.[`name_${lang}`] || product?.name || product?.name_en || 'Product';
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? '').replace(/[&<>'"]/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character]));
+        }
+
+        function syncProductWishlistButton(product) {
+            const button = document.getElementById('productWishlistBtn');
+            if (!button || !product) return;
+            const wishlist = JSON.parse(localStorage.getItem('fyzen_wishlist') || '[]');
+            const active = wishlist.some(item => item.id == product.id);
+            const label = t(active ? 'wishlist_remove' : 'wishlist_add');
+            button.classList.toggle('active', active);
+            button.setAttribute('aria-pressed', String(active));
+            button.setAttribute('aria-label', label);
+            button.title = label;
+        }
+
+        function initProductWishlist(product) {
+            const button = document.getElementById('productWishlistBtn');
+            if (!button || !product || button.dataset.bound === 'true') return;
+            button.dataset.bound = 'true';
+            button.addEventListener('click', () => {
+                toggleWishlist(product.id, button);
+                syncProductWishlistButton(product);
+            });
+            syncProductWishlistButton(product);
+        }
+
+        function updateShareLinks(product) {
+            const title = localizedProductName(product);
+            const url = window.location.href;
+            const encodedUrl = encodeURIComponent(url);
+            const encodedText = encodeURIComponent(`${title} | FYZEN-LAB`);
+            const telegram = document.getElementById('shareTelegram');
+            const whatsapp = document.getElementById('shareWhatsApp');
+            const facebook = document.getElementById('shareFacebook');
+            const native = document.getElementById('nativeShareBtn');
+            if (telegram) telegram.href = `https://t.me/share/url?url=${encodedUrl}&text=${encodedText}`;
+            if (whatsapp) whatsapp.href = `https://wa.me/?text=${encodedText}%20${encodedUrl}`;
+            if (facebook) facebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+            if (native) {
+                native.hidden = typeof navigator.share !== 'function';
+                native.onclick = async () => {
+                    if (typeof navigator.share !== 'function') return;
+                    try { await navigator.share({ title, text: `${title} | FYZEN-LAB`, url }); } catch (error) {
+                        if (error?.name !== 'AbortError') console.warn('Native share failed', error);
+                    }
+                };
+            }
+        }
+
+        function initShareActions(product) {
+            updateShareLinks(product);
+            const copyButton = document.getElementById('copyShareLink');
+            if (!copyButton || copyButton.dataset.bound === 'true') return;
+            copyButton.dataset.bound = 'true';
+            copyButton.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(window.location.href);
+                    if (typeof showToast === 'function') showToast(t('link_copied'), 'success');
+                } catch {
+                    window.prompt(t('copy_link'), window.location.href);
+                }
+            });
+        }
+
+        function renderSimilarProducts(currentProduct) {
+            const section = document.getElementById('similarProductsSection');
+            const grid = document.getElementById('similarProductsGrid');
+            if (!section || !grid || !currentProduct) return;
+            const similar = getProducts().filter(product => product.id != currentProduct.id && product.category === currentProduct.category).slice(0, 4);
+            if (!similar.length) { section.hidden = true; grid.innerHTML = ''; return; }
+            grid.innerHTML = similar.map(product => `<a class="p-similar-card" href="product-details.html?id=${encodeURIComponent(product.id)}">
+                <img class="p-similar-image" src="${escapeHtml(product.img)}" alt="${escapeHtml(localizedProductName(product))}" loading="lazy">
+                <span class="p-similar-copy"><span class="p-similar-brand">${escapeHtml(product.brand || 'FYZEN')}</span><span class="p-similar-name">${escapeHtml(localizedProductName(product))}</span></span>
+            </a>`).join('');
+            section.hidden = false;
+        }
+
+        function refreshProductDetailLanguage() {
+            const product = getProducts().find(item => item.id == productId);
+            if (!product) return;
+            const title = document.getElementById('pTitle');
+            if (title) title.textContent = localizedProductName(product);
+            const category = document.getElementById('pCat');
+            if (category) category.textContent = t('cat_' + product.category) || product.category;
+            updateShareLinks(product);
+            renderSimilarProducts(product);
+            syncProductWishlistButton(product);
+        }
+
+        function loadProductData() {
+            const products = getProducts();
+            const p = products.find(item => item.id == productId);
+            if(!p) {
+                const wrapper = document.querySelector('.p-details-wrapper');
+                if(wrapper) wrapper.innerHTML = `<div class="container" style="text-align:center; padding:5rem;"><h2 data-i18n="no_products">Mahsulot topilmadi</h2><a href="products.html?v=12" class="btn btn-primary" data-i18n="back_to_catalog">Katalogga qaytish</a></div>`;
+                if(typeof updateI18n === 'function') updateI18n();
+                return;
+            }
+
+            const titleEl = document.getElementById('pTitle');
+            if(titleEl) titleEl.innerText = localizedProductName(p);
+            
+            const catName = t('cat_' + p.category) || t(p.category) || p.category;
+            const catEl = document.getElementById('pCat');
+            if(catEl) {
+                catEl.innerText = catName;
+                catEl.href = `products.html?cat=${p.category}`;
+            }
+
+            const mainImgEl = document.getElementById('mainImg');
+            if(mainImgEl) mainImgEl.src = p.img;
+            
+            const viewToggle = document.querySelector('.view-toggle');
+            if (viewToggle) {
+                if (p.glb || p.model3d) {
+                    viewToggle.style.display = 'flex';
+                } else {
+                    viewToggle.style.display = 'none';
+                }
+            }
+            
+            const brandEl = document.getElementById('pBrand');
+            if(p.brand && brandEl) {
+                brandEl.innerText = p.brand;
+                brandEl.href = `brands.html?search=${p.brand}`;
+            }
+
+            const skuEl = document.getElementById('pSku');
+            if(skuEl) skuEl.innerText = String(p.id).padStart(8, '0');
+
+            const thumb = document.getElementById('thumbImg');
+            if(thumb) {
+                thumb.src = p.img;
+                thumb.style.display = 'block';
+            }
+
+            let description = p.description || p.desc;
+            const descEl = document.getElementById('pDesc');
+            if(descEl) {
+                descEl.innerHTML = description && description.trim() !== '' ? 
+                    description.replace(/\n/g, '<br>') : t('no_desc');
+            }
+            
+            const specsTbody = document.querySelector('#pSpecs tbody');
+            if(specsTbody) {
+                specsTbody.innerHTML = `
+                    <tr><td>${t('brand_label') || 'Brend'}</td><td>${p.brand || 'FYZEN'}</td></tr>
+                    <tr><td>${t('category_label') || 'Kategoriya'}</td><td>${catName}</td></tr>
+                    <tr><td>${t('warranty') || 'Kafolat'}</td><td>${p.warranty || '1-3 yil'}</td></tr>
+                    <tr><td>${t('certificate_label') || 'Sertifikat'}</td><td>${p.certificate || t('cert_values') || 'ISO, CE, Sertifikat sifati'}</td></tr>
+                    <tr><td>${t('delivery_label') || 'Yetkazib berish'}</td><td>${p.delivery || t('delivery_time') || '1-3 ish kuni'}</td></tr>
+                `;
+            }
+
+            initShareActions(p);
+            renderSimilarProducts(p);
+            initProductWishlist(p);
+
+            const quantityInput = document.getElementById('productQty');
+            if (quantityInput) {
+                const isOutOfStock = Number(p.stock) <= 0;
+                quantityInput.max = String(Math.max(1, Number(p.stock) || 1));
+                quantityInput.disabled = isOutOfStock;
+                setProductQuantity(quantityInput.value);
+            }
+            document.querySelectorAll('#decreaseQtyBtn, #increaseQtyBtn').forEach(button => {
+                button.disabled = Number(p.stock) <= 0;
+            });
+            const cartBtn = document.getElementById('addToCartBtn');
+            const stockDisplay = document.getElementById('pStockDisplay');
+            
+            if (p.stock <= 0) {
+                if (stockDisplay) stockDisplay.innerHTML = `<span style="color:#e11d48; font-weight:800; font-size:0.85rem; background:#fff1f2; padding:6px 12px; border-radius:8px; display:inline-flex; align-items:center; gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> Sotuvda qolmagan</span>`;
+                if (cartBtn) {
+                    cartBtn.style.opacity = '0.4';
+                    cartBtn.style.cursor = 'not-allowed';
+                    cartBtn.onclick = null;
+                }
+            } else {
+                if (stockDisplay) stockDisplay.innerHTML = `<span style="color:#16a34a; font-weight:800; font-size:0.85rem; background:#f0fdf4; padding:6px 12px; border-radius:8px; display:inline-flex; align-items:center; gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Omborda: ${p.stock} dona mavjud</span>`;
+                if (cartBtn) {
+                    cartBtn.style.opacity = '1';
+                    cartBtn.style.cursor = 'pointer';
+                    cartBtn.onclick = () => {
+                        if(typeof addToCart === 'function') addToCart(p, getProductQuantity());
+                    };
+                }
+            }
+
+            const modelViewer = document.getElementById('productModel');
+            const faked3D = document.getElementById('faked3D');
+            
+            if (modelViewer && faked3D) {
+                if (p.glb || p.model3d) {
+                    modelViewer.style.display = 'block';
+                    modelViewer.src = p.glb || p.model3d;
+                    faked3D.style.display = 'none';
+                    switchView('3d'); // Auto switch to 3D
+                } else {
+                    modelViewer.style.display = 'none';
+                    faked3D.style.display = 'none';
+                    switchView('2d'); // Default to 2D view
+                }
+            }
+            
+            if(typeof updateI18n === 'function') updateI18n();
+        }
+    </script>
+    
+    <!-- INFO MODAL -->
+    <div class="info-modal-overlay" id="infoModalOverlay" role="dialog" aria-modal="true" aria-hidden="true" onclick="closeInfoModal()">
+        <div class="info-modal-content" onclick="if(event) event.stopPropagation()">
+            <div class="info-modal-close" onclick="closeInfoModal(true)">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </div>
+            <h3 class="info-modal-title" id="infoModalTitle">Sarlavha</h3>
+            <div class="info-modal-body" id="infoModalBody">
+                Matn bu yerda bo'ladi...
+            </div>
+        </div>
+    </div>
+
+
+
+
+<footer class="fyz-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-about-logo">
+                    <img src="/assets/images/fyzen-cube-final_9ae90e1b.png" alt="FYZEN">
+                    <span>FYZEN LAB</span>
+                </div>
+                <p class="footer-desc-p" data-i18n="footer_about_text">O'zbekistonda yuqori sifatli tibbiy va laboratoriya uskunalari bo'yicha ishonchli hamkoringiz. Chegarasiz ilm-fan.</p>
+                <p class="footer-desc-p" style="margin-top: 15px; font-size: 0.95rem; opacity: 0.85;" data-i18n="footer_extra_info">Barcha turdagi laboratoriya jihozlarini O'zbekiston bo'ylab tez va ishonchli yetkazib beramiz. 24/7 texnik yordam mavjud.</p>
+                <div class="footer-socials">
+                    <a href="https://t.me/fyzen_lab" class="footer-social-btn" target="_blank" title="Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></a>
+                    <a href="https://www.instagram.com/fyzen_lab?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==" class="footer-social-btn" target="_blank" title="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="https://wa.me/998990342002" class="footer-social-btn" target="_blank" rel="noopener noreferrer" title="WhatsApp" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.83 11.83 0 0 0 12.08 0C5.54 0 .22 5.32.22 11.86c0 2.09.55 4.13 1.59 5.93L.12 24l6.35-1.67a11.86 11.86 0 0 0 5.61 1.43h.01c6.54 0 11.86-5.32 11.86-11.86 0-3.17-1.23-6.15-3.43-8.42ZM12.09 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.77.99 1-3.67-.24-.38a9.84 9.84 0 0 1-1.51-5.29c0-5.47 4.45-9.92 9.92-9.92 2.65 0 5.14 1.03 7.01 2.91a9.86 9.86 0 0 1 2.9 7.02c0 5.47-4.45 9.92-9.91 9.92Zm5.44-7.43c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.91-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35Z"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_quick_links">Tezkor havolalar</h4>
+                <ul class="footer-links">
+                    <li><a href="catalog.html?v=12" data-i18n="katalog">Katalog</a></li>
+                    <li><a href="brands.html?v=12" data-i18n="nav_brands">Brendlar</a></li>
+                    <li><a href="about.html?v=12" data-i18n="nav_about">Biz haqimizda</a></li>
+                    <li><a href="blog.html?v=12" data-i18n="nav_news">Yangiliklar</a></li>
+                    <li><a href="contact.html?v=12" data-i18n="nav_contact">Aloqa</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_categories_title">Asosiy kategoriyalar</h4>
+                <ul class="footer-links">
+                    <li><a href="products.html?cat=analytical" data-i18n="cat_analytical">Analitik uskunalar</a></li>
+                    <li><a href="products.html?cat=medical" data-i18n="cat_medical">Tibbiy va klinik laboratoriya</a></li>
+                    <li><a href="products.html?cat=chemistry" data-i18n="cat_chemistry">Kimyo laboratoriyasi</a></li>
+                    <li><a href="products.html?cat=physics" data-i18n="cat_physics">Fizika laboratoriyasi</a></li>
+                    <li><a href="products.html?cat=biology" data-i18n="cat_biology">Biologiya va mikrobiologiya</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 data-i18n="footer_contact">Aloqa</h4>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+                    <div class="footer-contact-info">
+                        <span data-i18n="address">Manzil</span>
+                        <strong data-i18n="footer_address">Xorazm, O‘zbekiston</strong>
+                    </div>
+                </div>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
+                    <div class="footer-contact-info">
+                        <span data-i18n="phone">Telefon</span>
+                        <strong data-i18n="footer_phone">+998 99 034 20 02</strong>
+                    </div>
+                </div>
+                <div class="footer-contact-item">
+                    <div class="footer-contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+                    <div class="footer-contact-info">
+                        <span>Email</span>
+                        <strong data-i18n="footer_email">info@fyzen-lab.uz</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 FYZEN-LAB. <span data-i18n="all_rights_reserved">Barcha huquqlar himoyalangan.</span></p>
+            <p data-i18n="footer_working_hours">Dush - Shan: 09:00 - 18:00</p>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Fyzen Contact FAB -->
+<div class="fyzen-contact-wrapper" id="fyzenContactWrapper">
+    <div class="fyzen-contact-menu" id="fyzenContactMenu">
+        <a href="tel:+998990342002" class="contact-item">
+            <span class="contact-label" data-i18n="fab_phone">Qo'ng'iroq</span>
+            <div class="contact-icon icon-phone"><svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-2.18 2.18c-2.83-1.44-5.15-3.76-6.59-6.59l2.18-2.18c.28-.27.36-.66.24-1.01-.36-1.11-.56-2.3-.56-3.53 0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.58c0-.55-.45-1-1-1z"/></svg></div>
+        </a>
+        <a href="https://t.me/fyzen_lab" target="_blank" class="contact-item">
+            <span class="contact-label" data-i18n="fab_telegram">Telegram</span>
+            <div class="contact-icon icon-telegram"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.891 8.11l-1.92 9.063c-.145.638-.523.795-1.057.495l-2.924-2.154-1.41 1.358c-.156.156-.287.287-.588.287l.209-2.969L15.59 9.948c.234-.208-.052-.323-.364-.115l-6.656 4.19-2.876-.898c-.625-.195-.638-.625.13-.923L16.94 8.012c.513-.188.962.117.848.71z"/></svg></div>
+        </a>
+        <a href="https://www.instagram.com/fyzen_lab?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==" target="_blank" class="contact-item">
+            <span class="contact-label" data-i18n="fab_instagram">Instagram</span>
+            <div class="contact-icon icon-instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.805.249 2.227.412.558.217.957.477 1.377.896.42.42.68.818.896 1.377.163.422.358 1.057.412 2.227.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.249 1.805-.412 2.227-.217.558-.477.957-.896 1.377-.42.42-.818.68-1.377.896-.422.163-1.057.358-2.227.412-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.805-.249-2.227-.412-.558-.217-.957-.477-1.377-.896-.42-.42-.68-.818-.896-1.377-.163-.422-.358-1.057-.412-2.227-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.054-1.17.249-1.805.412-2.227.217-.558.477-.957.896-1.377.42-.42.818-.68 1.377-.896.422-.163 1.057-.358 2.227-.412 1.266-.058 1.646-.07 4.85-.07M12 0C8.741 0 8.333.014 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.741 0 12s.014 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126s1.337 1.079 2.126 1.384c.766.296 1.636.499 2.913.558C8.333 23.986 8.741 24 12 24s3.667-.014 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384s1.079-1.338 1.384-2.126c.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126s-1.338-1.079-2.126-1.384c-.765-.296-1.636-.499-2.913-.558C15.667.012 15.259 0 12 0m0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324M12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8m6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881"/></svg></div>
+        </a>
+        <a href="https://wa.me/998990342002" target="_blank" class="contact-item">
+            <span class="contact-label" data-i18n="fab_whatsapp">WhatsApp</span>
+            <div class="contact-icon icon-whatsapp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+        </a>
+        <a href="mailto:info@fyzen-lab.uz" class="contact-item">
+            <span class="contact-label" data-i18n="fab_email">Email</span>
+            <div class="contact-icon icon-email"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+        </a>
+    </div>
+    <button class="fyzen-fab-main" id="fyzenFabMain">
+        <span class="fyzen-fab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="fyzen-fab-ripple"></div>
+    </button>
+</div>
+
+
+<script>
+    (function() {
+        const wrapper = document.getElementById('fyzenContactWrapper');
+        const btn = document.getElementById('fyzenFabMain');
+        const menu = document.getElementById('fyzenContactMenu');
+        if (!wrapper || !btn || !menu) return;
+        const iconContainer = btn.querySelector('.fyzen-fab-icon');
+        let isForcedClosed = false;
+        function openMenu() { if (isForcedClosed) return; btn.classList.add('open'); menu.classList.add('open'); iconContainer.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 12L7 7m5 5l5 5m-5-5l5-5m-5 5l-5 5" stroke-width="2.5" stroke-linecap="round"/></svg>`; }
+        function closeMenu(forced = false) { btn.classList.remove('open'); menu.classList.remove('open'); iconContainer.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`; if (forced) isForcedClosed = true; }
+        
+        // Only open when mouse hits the CHAT button specifically
+        btn.addEventListener('mouseenter', openMenu);
+        
+        // Stay open while inside the wrapper, close only when leaving the whole area
+        wrapper.addEventListener('mouseleave', () => { closeMenu(); isForcedClosed = false; });
+        
+        btn.addEventListener('click', (e) => { e.stopPropagation(); if (btn.classList.contains('open')) { closeMenu(true); } else { isForcedClosed = false; openMenu(); } });
+        document.addEventListener('click', (e) => { if (!wrapper.contains(e.target)) { closeMenu(); isForcedClosed = false; } });
+    })();
+</script>
+
+</body>
+</html>
