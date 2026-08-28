@@ -1,0 +1,14 @@
+import { chromium } from "playwright";
+const browser = await chromium.launch({ headless: true });
+const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+await page.goto("https://3000-idoosqu28lnue7qss1a3m-e8b50e28.us5.manus.computer/admin.html?admin-mobile-debug-2=1", { waitUntil: "networkidle" });
+await page.waitForTimeout(300);
+await page.locator("#adminLoginScreen").evaluate(el => el.classList.add("hidden"));
+await page.locator(".admin-menu-toggle").click();
+await page.waitForTimeout(300);
+const before = await page.evaluate(() => ({ body: document.body.className, target: document.elementFromPoint(370, 400)?.className, onclick: document.querySelector('.admin-sidebar-scrim')?.getAttribute('onclick') }));
+await page.mouse.click(370, 400);
+await page.waitForTimeout(100);
+const after = await page.evaluate(() => ({ body: document.body.className, target: document.elementFromPoint(370, 400)?.className }));
+console.log(JSON.stringify({ before, after }));
+await browser.close();

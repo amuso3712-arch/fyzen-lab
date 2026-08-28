@@ -1,0 +1,7 @@
+# About Us and Contacts mobile audit
+
+The 375px and 390px screenshots show that About Us is technically stacked but visually undersized: the hero image, logo, headings, body copy, value cards, client strip, and footer text are rendered at an overly small scale with too much long-page density. Contacts has a clearer card/form structure, but its top hero title is hidden behind the fixed navbar because the page header begins at the viewport top and its mobile padding is not high enough. The contact section and form need a slightly wider readable type scale, tighter section rhythm, and safer horizontal padding while preserving the Telegram form flow. The About page needs page-specific mobile typography, hero/logo sizing, card padding, client strip sizing, and footer compaction.
+
+After the v21 correction, both pages were rechecked at 375px and 390px. The Contacts title now begins below the 69px fixed navbar, the cards and form remain within the viewport, and the About hero/card, values, client strip, and footer have a more intentional phone scale and rhythm. No horizontal overflow was observed in the visual captures.
+
+The follow-up v24 Russian-language audit confirmed that the long About title is now constrained to the card’s inner column at both 375px and 390px. The title no longer widens the flex item or clips at the left edge; `documentElement.scrollWidth` matches the viewport width in both runs. A smaller Russian phone type scale and disabled automatic hyphenation produce a cleaner line rhythm.

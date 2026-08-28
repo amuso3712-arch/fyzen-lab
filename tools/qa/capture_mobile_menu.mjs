@@ -1,0 +1,13 @@
+import { chromium } from "playwright";
+const browser = await chromium.launch({ headless: true });
+const page = await browser.newPage({ viewport: { width: 375, height: 812 }, deviceScaleFactor: 1 });
+await page.goto("https://3000-ii17i7r3w8hhw969gazsx-24be962.us4.manus.computer/index.html?mobile-menu-capture=1", { waitUntil: "domcontentloaded" });
+await page.waitForTimeout(900);
+await page.locator(".menu-toggle").click();
+await page.waitForTimeout(350);
+const result = await page.locator("#mobileNavOverlay").evaluate(el => ({ className:el.className, rect:(() => { const r=el.getBoundingClientRect(); return {x:r.x,y:r.y,width:r.width,height:r.height}; })(), links:[...el.querySelectorAll(':scope > a, :scope > .mobile-nav-dropdown > .mobile-nav-dropdown-toggle')].map(x=>({text:x.textContent.trim(), x:x.getBoundingClientRect().x, y:x.getBoundingClientRect().y, width:x.getBoundingClientRect().width, height:x.getBoundingClientRect().height})) }));
+const widths = result.links.map(link => Math.round(link.width));
+if (!widths.every(width => width === 148)) throw new Error(`Top-level menu widths are not equal: ${widths.join(', ')}`);
+await page.screenshot({ path: "/home/ubuntu/mobile-menu-final.png", fullPage: false });
+console.log(JSON.stringify(result));
+await browser.close();
