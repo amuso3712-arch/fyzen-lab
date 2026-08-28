@@ -35,382 +35,15 @@ async function sendContactMessage(data) {
 // ====================================================
 // DATA MANAGEMENT
 // ====================================================
-const DEFAULT_PRODUCTS = [
-    {
-        "id": 1,
-        "name": "Mindray BC-5000",
-        "name_uz": "Mindray BC-5000 Gematologik Analizator",
-        "name_ru": "Mindray BC-5000 Гематологический Анализатор",
-        "name_en": "Mindray BC-5000 Hematology Analyzer",
-        "category": "medical",
-        "brand": "Mindray",
-        "img": "/manus-storage/mindray_bc5000_3f60d97e.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 2,
-        "name": "Mindray BS-240",
-        "name_uz": "Mindray BS-240 Bioximik Analizator",
-        "name_ru": "Mindray BS-240 Биохимический Анализатор",
-        "name_en": "Mindray BS-240 Biochemistry Analyzer",
-        "category": "medical",
-        "brand": "Mindray",
-        "img": "/manus-storage/mindray_dc70_d9fd8a0e.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 3,
-        "name": "Nexcope NE910",
-        "name_uz": "Nexcope NE910 Trinokuljar Mikroskop",
-        "name_ru": "Nexcope NE910 Тринокулярный Микроскоп",
-        "name_en": "Nexcope NE910 Trinocular Microscope",
-        "category": "analytical",
-        "brand": "Nexcope",
-        "img": "/manus-storage/nexcope_ne910_dad1b169.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 4,
-        "name": "Shimadzu GC-2030",
-        "name_uz": "Shimadzu GC-2030 Gaz Xromatografi",
-        "name_ru": "Shimadzu GC-2030 Газовый Хроматограф",
-        "name_en": "Shimadzu GC-2030 Gas Chromatograph",
-        "category": "chemistry",
-        "brand": "Shimadzu",
-        "img": "/manus-storage/shimadzu_gc2030_eb0a7e59.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 5,
-        "name": "Olympus BX53",
-        "name_uz": "Olympus BX53 Tadqiqot Mikroskobi",
-        "name_ru": "Olympus BX53 Исследовательский Микроскоп",
-        "name_en": "Olympus BX53 Research Microscope",
-        "category": "analytical",
-        "brand": "Olympus",
-        "img": "/manus-storage/olympus_bx53_eff0f61a.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 6,
-        "name": "Roche cobas e411",
-        "name_uz": "Roche cobas e411 Immunologik Analizator",
-        "name_ru": "Roche cobas e411 Иммунологический Анализатор",
-        "name_en": "Roche cobas e411 Immunology Analyzer",
-        "category": "medical",
-        "brand": "Roche",
-        "img": "/manus-storage/siemens_somatom_f3144f82.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 7,
-        "name": "Anton Paar DMA 5000",
-        "name_uz": "Anton Paar DMA 5000 Zichlik O'lchagich",
-        "name_ru": "Anton Paar DMA 5000 Измеритель Плотности",
-        "name_en": "Anton Paar DMA 5000 Density Meter",
-        "category": "petroleum",
-        "brand": "Anton Paar",
-        "img": "/manus-storage/anton_paar_dma_fc700bcb.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 8,
-        "name": "Binder KB 53",
-        "name_uz": "Binder KB 53 Iqlim Kamerasi",
-        "name_ru": "Binder KB 53 Климатическая Камера",
-        "name_en": "Binder KB 53 Climate Chamber",
-        "category": "biology",
-        "brand": "Binder",
-        "img": "/manus-storage/binder_kb53_0923396b.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 16,
-        "name": "Eppendorf Centrifuge 5810",
-        "name_uz": "Eppendorf 5810 Sentrifuga",
-        "name_ru": "Eppendorf 5810 Центрифуга",
-        "name_en": "Eppendorf 5810 Centrifuge",
-        "category": "biology",
-        "brand": "Eppendorf",
-        "img": "/manus-storage/agilent_1260_5fded2ca.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 17,
-        "name": "PCR Thermocycler Pro",
-        "name_uz": "PCR Termosikler Pro",
-        "name_ru": "PCR Термоциклер Pro",
-        "name_en": "PCR Thermocycler Pro",
-        "category": "biology",
-        "brand": "Bio-Rad",
-        "img": "/manus-storage/kern_obn_1c32962d.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 9,
-        "name": "MATEST S205",
-        "name_uz": "MATEST S205 Siqishga Sinov Mashinasi",
-        "name_ru": "MATEST S205 Машина для Сжатия",
-        "name_en": "MATEST S205 Compression Testing Machine",
-        "category": "industrial",
-        "brand": "MATEST",
-        "img": "/manus-storage/matest_s205_b00d84f8.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 18,
-        "name": "Shimadzu Hardness Tester",
-        "name_uz": "Shimadzu Qattiqlik Sinov Qurilmasi",
-        "name_ru": "Shimadzu Твердомер",
-        "name_en": "Shimadzu Hardness Tester",
-        "category": "industrial",
-        "brand": "Shimadzu",
-        "img": "/manus-storage/shimadzu_gc2030_eb0a7e59.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 19,
-        "name": "Universal Testing Machine",
-        "name_uz": "Universal Sinov Mashinasi",
-        "name_ru": "Универсальная Испытательная Машина",
-        "name_en": "Universal Testing Machine",
-        "category": "industrial",
-        "brand": "MATEST",
-        "img": "/manus-storage/anton_paar_dma_fc700bcb.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 10,
-        "name": "Zeiss Axio Observer",
-        "name_uz": "Zeiss Axio Observer Teskari Mikroskop",
-        "name_ru": "Zeiss Axio Observer Инвертированный Микроскоп",
-        "name_en": "Zeiss Axio Observer Inverted Microscope",
-        "category": "physics",
-        "brand": "Zeiss",
-        "img": "/manus-storage/zeiss_axio_ed273a39.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 20,
-        "name": "Optical Spectrometer SP-300",
-        "name_uz": "Optik Spektrometr SP-300",
-        "name_ru": "Оптический Спектрометр SP-300",
-        "name_en": "Optical Spectrometer SP-300",
-        "category": "physics",
-        "brand": "Shimadzu",
-        "img": "/manus-storage/mindray_bc5000_3f60d97e.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 21,
-        "name": "Digital Oscilloscope DS1054",
-        "name_uz": "Raqamli Osiloskop DS1054",
-        "name_ru": "Цифровой Осциллограф DS1054",
-        "name_en": "Digital Oscilloscope DS1054",
-        "category": "physics",
-        "brand": "Rigol",
-        "img": "/manus-storage/siemens_somatom_f3144f82.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 11,
-        "name": "Agilent 1260 Infinity",
-        "name_uz": "Agilent 1260 Infinity HPLC Tizimi",
-        "name_ru": "Agilent 1260 Infinity ВЭЖХ Система",
-        "name_en": "Agilent 1260 Infinity HPLC System",
-        "category": "environmental",
-        "brand": "Agilent",
-        "img": "/manus-storage/agilent_1260_5fded2ca.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 22,
-        "name": "Water Quality Analyzer WQA-7",
-        "name_uz": "Suv Sifati Analizatori WQA-7",
-        "name_ru": "Анализатор Качества Воды WQA-7",
-        "name_en": "Water Quality Analyzer WQA-7",
-        "category": "environmental",
-        "brand": "Hach",
-        "img": "/manus-storage/matest_s205_b00d84f8.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 23,
-        "name": "Air Particle Counter APC-3",
-        "name_uz": "Havo Zarracha Hisoblagichi APC-3",
-        "name_ru": "Счётчик Частиц Воздуха APC-3",
-        "name_en": "Air Particle Counter APC-3",
-        "category": "environmental",
-        "brand": "TSI",
-        "img": "/manus-storage/binder_kb53_0923396b.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 12,
-        "name": "KERN OBN 132",
-        "name_uz": "KERN OBN 132 O'quv Mikroskobi",
-        "name_ru": "KERN OBN 132 Учебный Микроскоп",
-        "name_en": "KERN OBN 132 Educational Microscope",
-        "category": "educational",
-        "brand": "KERN",
-        "img": "/manus-storage/kern_obn_1c32962d.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 24,
-        "name": "Student Physics Kit Pro",
-        "name_uz": "O'quvchi Fizika To'plami Pro",
-        "name_ru": "Школьный Физический Набор Pro",
-        "name_en": "Student Physics Kit Pro",
-        "category": "educational",
-        "brand": "FYZEN",
-        "img": "/manus-storage/zeiss_axio_ed273a39.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 25,
-        "name": "Biology Classroom Set",
-        "name_uz": "Biologiya Sinf Xonasi To'plami",
-        "name_ru": "Комплект для Кабинета Биологии",
-        "name_en": "Biology Classroom Set",
-        "category": "educational",
-        "brand": "FYZEN",
-        "img": "/manus-storage/olympus_bx53_eff0f61a.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 13,
-        "name": "Soil Testing Kit V2",
-        "name_uz": "Tuproq Tahlil Komplekti V2",
-        "name_ru": "Комплект Анализа Почвы V2",
-        "name_en": "Soil Testing Kit V2",
-        "category": "agriculture",
-        "brand": "FYZEN",
-        "img": "/manus-storage/soil_kit_5bd32ca3.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 26,
-        "name": "Grain Moisture Analyzer GM-900",
-        "name_uz": "Don Namligi Analizatori GM-900",
-        "name_ru": "Анализатор Влажности Зерна GM-900",
-        "name_en": "Grain Moisture Analyzer GM-900",
-        "category": "agriculture",
-        "brand": "KETT",
-        "img": "/manus-storage/pipette_set_30455136.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 27,
-        "name": "Portable Nitrate Tester",
-        "name_uz": "Ko'chma Nitrat Sinov Qurilmasi",
-        "name_ru": "Портативный Нитрат-тестер",
-        "name_en": "Portable Nitrate Tester",
-        "category": "agriculture",
-        "brand": "Hach",
-        "img": "/manus-storage/agilent_1260_5fded2ca.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 14,
-        "name": "Laboratory Fume Hood",
-        "name_uz": "Laboratoriya Vityaj Shkaflari",
-        "name_ru": "Лабораторный Вытяжной Шкаф",
-        "name_en": "Laboratory Fume Hood",
-        "category": "furniture",
-        "brand": "Binder",
-        "img": "/manus-storage/fume_hood_01725376.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 28,
-        "name": "Lab Bench Workstation Pro",
-        "name_uz": "Laboratoriya Ish Stoli Pro",
-        "name_ru": "Лабораторный Рабочий Стол Pro",
-        "name_en": "Lab Bench Workstation Pro",
-        "category": "furniture",
-        "brand": "FYZEN",
-        "img": "/manus-storage/binder_kb53_0923396b.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 29,
-        "name": "Safety Cabinet Type II",
-        "name_uz": "Xavfsizlik Shkafi II tur",
-        "name_ru": "Защитный Шкаф II типа",
-        "name_en": "Safety Cabinet Type II",
-        "category": "furniture",
-        "brand": "Esco",
-        "img": "/manus-storage/matest_s205_b00d84f8.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 15,
-        "name": "Premium Pipette Set",
-        "name_uz": "Premium Pipetka To'plami",
-        "name_ru": "Премиум Набор Пипеток",
-        "name_en": "Premium Pipette Set",
-        "category": "consumables",
-        "brand": "Eppendorf",
-        "img": "/manus-storage/pipette_set_30455136.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 30,
-        "name": "Microcentrifuge Tubes 1.5ml",
-        "name_uz": "Mikrosentrifuga Naylar 1.5ml",
-        "name_ru": "Пробирки для Микроцентрифуги 1.5мл",
-        "name_en": "Microcentrifuge Tubes 1.5ml",
-        "category": "consumables",
-        "brand": "Eppendorf",
-        "img": "/manus-storage/soil_kit_5bd32ca3.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 31,
-        "name": "Disposable Petri Dishes (Pack 20)",
-        "name_uz": "Bir Martalik Petri Idishlari (20 ta)",
-        "name_ru": "Одноразовые Чашки Петри (20 шт)",
-        "name_en": "Disposable Petri Dishes (Pack 20)",
-        "category": "consumables",
-        "brand": "Corning",
-        "img": "/manus-storage/kern_obn_1c32962d.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 32,
-        "name": "Anton Paar SVM 3001",
-        "name_uz": "Anton Paar SVM 3001 Qovushqoqlik Metr",
-        "name_ru": "Anton Paar SVM 3001 Вискозиметр",
-        "name_en": "Anton Paar SVM 3001 Viscometer",
-        "category": "petroleum",
-        "brand": "Anton Paar",
-        "img": "/manus-storage/anton_paar_dma_fc700bcb.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 33,
-        "name": "Flash Point Tester FPT-800",
-        "name_uz": "Alangalanish Nuqtasi Sinov Qurilmasi FPT-800",
-        "name_ru": "Тестер Температуры Вспышки FPT-800",
-        "name_en": "Flash Point Tester FPT-800",
-        "category": "petroleum",
-        "brand": "Tanaka",
-        "img": "/manus-storage/shimadzu_gc2030_eb0a7e59.jpg",
-        "price": "Request"
-    },
-    {
-        "id": 34,
-        "name": "Crude Oil Distillation Unit",
-        "name_uz": "Xom Neft Haydash Qurilmasi",
-        "name_ru": "Установка Перегонки Сырой Нефти",
-        "name_en": "Crude Oil Distillation Unit",
-        "category": "petroleum",
-        "brand": "Koehler",
-        "img": "/manus-storage/siemens_somatom_f3144f82.jpg",
-        "price": "Request"
-    }
-];
+function resetTestingContentOnce() {
+    const RESET_VERSION = 'v1-testing-content-cleared';
+    if (localStorage.getItem('fyzen_content_reset') === RESET_VERSION) return;
+    ['fyzen_products', 'fyzen_published_products', 'fyzen_news', 'fyzen_cart', 'fyzen_wishlist'].forEach(key => localStorage.removeItem(key));
+    localStorage.setItem('fyzen_content_reset', RESET_VERSION);
+}
+resetTestingContentOnce();
+
+const DEFAULT_PRODUCTS = [];
 
 function getProducts() {
     // Auto-reset: if DB version changed (e.g. new local images), wipe stale localStorage
@@ -554,6 +187,7 @@ function updateNavbarIcons() {
     const currentLang = localStorage.getItem('fyzen_lang') || 'ru';
 
     // ICONS AND AUTH + LANG (Right Side)
+    const desktopSearch = navActions.querySelector('.desktop-product-search');
     const oldIcons = navActions.querySelector('.fyz-premium-icons');
     if (oldIcons) oldIcons.remove();
 
@@ -585,6 +219,7 @@ function updateNavbarIcons() {
     `;
     
     navActions.innerHTML = '';
+    if (desktopSearch) navActions.appendChild(desktopSearch);
     navActions.appendChild(iconGroup);
 
 
@@ -880,7 +515,7 @@ function initMobileNav() {
         const icon = mobileNavIconMap[i18nKey] || defaultNavIcon;
         
         const dropdownMenu = parentLi ? parentLi.querySelector('.nav-dropdown-menu') : null;
-        if (dropdownMenu) {
+        if (dropdownMenu && i18nKey !== 'nav_products') {
             // Build sub-menu with category icons
             const subLinks = dropdownMenu.querySelectorAll('a');
             let subHtml = '';
@@ -897,7 +532,6 @@ function initMobileNav() {
                     <div class="mobile-nav-dropdown-toggle" onclick="toggleMobileSubMenu(event, this)">
                         <span class="mobile-nav-icon">${icon}</span>
                         <a href="${link.getAttribute('href')}" data-i18n="${i18nKey || ''}">${text}</a>
-                        <span class="mobile-nav-arrow">&#9662;</span>
                     </div>
                     <div class="mobile-nav-dropdown-menu">
                         ${subHtml}
@@ -905,6 +539,7 @@ function initMobileNav() {
                 </div>
             `;
         } else {
+            // Products stays a compact single mobile link; its category list remains desktop-only.
             linksHtml += `<a href="${link.getAttribute('href')}" onclick="toggleMobileMenu()"><span class="mobile-nav-icon">${icon}</span><span data-i18n="${i18nKey || ''}">${text}</span></a>`;
         }
         
@@ -917,18 +552,16 @@ function initMobileNav() {
     const currentLang = localStorage.getItem('fyzen_lang') || 'ru';
     
     overlay.innerHTML = `
-        <div class="mobile-nav-header">
-            <div class="mobile-nav-brand">
-                <span class="mobile-nav-brand-mark"><img src="/manus-storage/fyzen-cube-final_9ae90e1b.png" alt="FYZEN-LAB"></span>
-                <span class="mobile-nav-brand-copy">
-                    <span class="mobile-nav-brand-name">FYZEN-LAB</span>
-                    <span class="mobile-nav-brand-slogan">SCIENCE WITHOUT LIMITS</span>
-                </span>
-            </div>
+        <div class="mobile-nav-header mobile-nav-header--compact">
             <button type="button" class="mobile-nav-close" onclick="toggleMobileMenu()" aria-label="Close navigation menu">
                 <svg viewBox="0 0 24 24" width="21" height="21" stroke="currentColor" fill="none" stroke-width="2.4" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
+        <form class="mobile-product-search" id="mobileProductSearch" role="search" onsubmit="submitMobileProductSearch(event)">
+            <svg class="mobile-product-search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+            <input id="mobileProductSearchInput" type="search" data-i18n="search_placeholder" placeholder="Search for products..." autocomplete="off" enterkeyhint="search" aria-label="Search products">
+            <button type="submit" aria-label="Search">↵</button>
+        </form>
         ${linksHtml}
         <div class="mobile-lang-switcher lang-switcher" style="margin-top:20px; display:flex; gap:10px; justify-content:center; border: 1px solid rgba(0, 168, 225, 0.15); border-radius: 8px; padding: 4px; background: rgba(255, 255, 255, 0.5);">
             <button type="button" data-lang="uz" onclick="changeLanguage('uz')" class="lang-btn ${currentLang === 'uz' ? 'active-lang' : ''}" style="flex:1; background:transparent; border:none; padding:8px; font-weight:800; font-size:0.85rem; color:#64748b; cursor:pointer; transition:all 0.3s; border-radius:6px;">UZ</button>
@@ -943,6 +576,62 @@ function initMobileNav() {
             toggleMobileMenu();
         }
     });
+}
+
+function submitDesktopProductSearch(event) {
+    event.preventDefault();
+    const form = event.currentTarget || event.target;
+    const input = form?.querySelector('input[type="search"]');
+    const submit = form?.querySelector('.desktop-product-search-submit');
+    const query = input?.value.trim() || '';
+    if (!query) {
+        input?.focus();
+        return;
+    }
+    form.classList.add('is-search-loading');
+    if (submit) submit.disabled = true;
+    window.setTimeout(() => {
+        window.location.href = `products.html?search=${encodeURIComponent(query)}`;
+    }, 220);
+}
+
+function initDesktopProductSearch() {
+    document.querySelectorAll('.desktop-product-search').forEach(form => {
+        const input = form.querySelector('input[type="search"]');
+        const clear = form.querySelector('[data-search-clear]');
+        const suggestions = form.querySelector('[data-search-suggestions]');
+        if (!input || !clear || !suggestions || form.dataset.searchReady === 'true') return;
+        form.dataset.searchReady = 'true';
+        const syncClear = () => { clear.hidden = !input.value; };
+        const openSuggestions = () => { suggestions.hidden = false; };
+        input.addEventListener('focus', openSuggestions);
+        input.addEventListener('input', () => { syncClear(); openSuggestions(); });
+        input.addEventListener('blur', () => window.setTimeout(() => { suggestions.hidden = true; }, 150));
+        clear.addEventListener('click', () => { input.value = ''; syncClear(); input.focus(); openSuggestions(); });
+        suggestions.querySelectorAll('[data-search-suggestion]').forEach(button => {
+            button.addEventListener('mousedown', event => event.preventDefault());
+            button.addEventListener('click', () => {
+                input.value = button.dataset.searchSuggestion || '';
+                syncClear();
+                suggestions.hidden = true;
+                form.requestSubmit();
+            });
+        });
+        syncClear();
+    });
+}
+
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initDesktopProductSearch);
+else initDesktopProductSearch();
+function submitMobileProductSearch(event) {
+    event.preventDefault();
+    const input = document.getElementById('mobileProductSearchInput');
+    const query = input?.value.trim() || '';
+    if (!query) {
+        input?.focus();
+        return;
+    }
+    window.location.href = `products.html?search=${encodeURIComponent(query)}`;
 }
 
 // SVG icons mapped by data-i18n key for top-level nav items
@@ -1034,6 +723,38 @@ function toggleMobileSubMenu(e, element) {
         dropdown.classList.toggle('open');
     }
 }
+
+function toggleFoundedBadgeTooltip(event) {
+    event?.preventDefault();
+    event?.stopPropagation();
+    const badge = event?.currentTarget || document.querySelector('.founded-badge');
+    const wrapper = badge?.closest('.founded-badge-wrap');
+    if (!wrapper || !badge) return;
+    const shouldOpen = !wrapper.classList.contains('is-tooltip-open');
+    document.querySelectorAll('.founded-badge-wrap.is-tooltip-open').forEach(openWrapper => {
+        openWrapper.classList.remove('is-tooltip-open');
+        openWrapper.querySelector('.founded-badge')?.setAttribute('aria-expanded', 'false');
+    });
+    wrapper.classList.toggle('is-tooltip-open', shouldOpen);
+    badge.setAttribute('aria-expanded', String(shouldOpen));
+}
+
+document.addEventListener('click', event => {
+    if (event.target.closest('.founded-badge-wrap')) return;
+    document.querySelectorAll('.founded-badge-wrap.is-tooltip-open').forEach(wrapper => {
+        wrapper.classList.remove('is-tooltip-open');
+        wrapper.querySelector('.founded-badge')?.setAttribute('aria-expanded', 'false');
+    });
+});
+
+document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    document.querySelectorAll('.founded-badge-wrap.is-tooltip-open').forEach(wrapper => {
+        wrapper.classList.remove('is-tooltip-open');
+        const badge = wrapper.querySelector('.founded-badge');
+        badge?.setAttribute('aria-expanded', 'false');
+    });
+});
 
 function toggleMobileMenu() {
     const overlay = document.getElementById('mobileNavOverlay');
