@@ -1,0 +1,21 @@
+CREATE TABLE `news_submissions` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`slug` varchar(180) NOT NULL,
+	`titleEn` varchar(240) NOT NULL,
+	`titleUz` varchar(240) NOT NULL,
+	`titleRu` varchar(240) NOT NULL,
+	`excerptEn` text,
+	`excerptUz` text,
+	`excerptRu` text,
+	`contentEn` text,
+	`contentUz` text,
+	`contentRu` text,
+	`imageUrl` varchar(600),
+	`publishedAt` timestamp,
+	`status` enum('draft','approved','rejected') NOT NULL DEFAULT 'draft',
+	`createdBy` varchar(80) NOT NULL,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `news_submissions_id` PRIMARY KEY(`id`),
+	CONSTRAINT `news_submissions_slug_unique` UNIQUE(`slug`)
+);

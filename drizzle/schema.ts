@@ -88,4 +88,48 @@ export const telegramAdminAuditLogs = mysqlTable("telegram_admin_audit_logs", {
 
 export type TelegramAdminAuditLog = typeof telegramAdminAuditLogs.$inferSelect;
 
+export const brandSubmissions = mysqlTable("brand_submissions", {
+  id: int("id").autoincrement().primaryKey(),
+  slug: varchar("slug", { length: 180 }).notNull().unique(),
+  name: varchar("name", { length: 160 }).notNull(),
+  logoUrl: varchar("logoUrl", { length: 600 }),
+  websiteUrl: varchar("websiteUrl", { length: 600 }),
+  specialtyEn: varchar("specialtyEn", { length: 300 }),
+  specialtyUz: varchar("specialtyUz", { length: 300 }),
+  specialtyRu: varchar("specialtyRu", { length: 300 }),
+  descriptionEn: text("descriptionEn"),
+  descriptionUz: text("descriptionUz"),
+  descriptionRu: text("descriptionRu"),
+  status: mysqlEnum("status", ["draft", "approved", "rejected"]).default("draft").notNull(),
+  createdBy: varchar("createdBy", { length: 80 }).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type BrandSubmission = typeof brandSubmissions.$inferSelect;
+export type InsertBrandSubmission = typeof brandSubmissions.$inferInsert;
+
+export const newsSubmissions = mysqlTable("news_submissions", {
+  id: int("id").autoincrement().primaryKey(),
+  slug: varchar("slug", { length: 180 }).notNull().unique(),
+  titleEn: varchar("titleEn", { length: 240 }).notNull(),
+  titleUz: varchar("titleUz", { length: 240 }).notNull(),
+  titleRu: varchar("titleRu", { length: 240 }).notNull(),
+  excerptEn: text("excerptEn"),
+  excerptUz: text("excerptUz"),
+  excerptRu: text("excerptRu"),
+  contentEn: text("contentEn"),
+  contentUz: text("contentUz"),
+  contentRu: text("contentRu"),
+  imageUrl: varchar("imageUrl", { length: 600 }),
+  publishedAt: timestamp("publishedAt"),
+  status: mysqlEnum("status", ["draft", "approved", "rejected"]).default("draft").notNull(),
+  createdBy: varchar("createdBy", { length: 80 }).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type NewsSubmission = typeof newsSubmissions.$inferSelect;
+export type InsertNewsSubmission = typeof newsSubmissions.$inferInsert;
+
 // TODO: Add your tables here
