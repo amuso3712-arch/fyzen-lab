@@ -150,9 +150,32 @@ function vitePluginManusDebugCollector(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
+function vitePluginLegacyAssets(): Plugin {
+  return {
+    name: "fyzen-legacy-assets",
+    apply: "build",
+    writeBundle(options) {
+      const outDir = options.dir ?? path.dirname(options.file ?? path.resolve(PROJECT_ROOT, "dist/public"));
+      const sourceDir = path.resolve(clientRoot, "assets");
+      const targetDir = path.resolve(outDir, "assets");
+      fs.cpSync(sourceDir, targetDir, { recursive: true, force: true });
+    },
+  };
+}
 
-const clientRoot = path.resolve(import.meta.dirname, "client");
+const plugins = [
+  react(),
+  tailwindcss(),
+  jsxLocPlugin(),
+  vitePluginManusRuntime(),
+  vitePluginManusDebugCollector(),
+  vitePluginLegacyAssets(),
+];
+
+const configBase = fs.existsSync(path.resolve(import.meta.dirname, "client"))
+  ? import.meta.dirname
+  : path.resolve(import.meta.dirname, "..");
+const clientRoot = path.resolve(configBase, "client");
 const htmlInputs = Object.fromEntries(
   fs
     .readdirSync(clientRoot)
