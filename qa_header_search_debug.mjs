@@ -1,0 +1,13 @@
+import { chromium } from "playwright";
+const browser = await chromium.launch({ headless: true });
+const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
+page.on("console", message => console.log("console", message.type(), message.text()));
+page.on("pageerror", error => console.log("pageerror", error.message));
+await page.goto("http://127.0.0.1:3000/index.html", { waitUntil: "networkidle" });
+console.log("before", await page.evaluate(() => ({ fn: typeof window.submitDesktopProductSearch, onsubmit: document.querySelector("#desktopProductSearch")?.getAttribute("onsubmit") })));
+const form = page.locator("#desktopProductSearch");
+await form.locator('input[type="search"]').fill("Shimadzu");
+await form.locator("button[type=submit]").click();
+await page.waitForTimeout(500);
+console.log("after", page.url());
+await browser.close();

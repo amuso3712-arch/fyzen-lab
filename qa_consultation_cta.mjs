@@ -1,0 +1,10 @@
+import { chromium } from "playwright";
+const browser = await chromium.launch({ headless: true });
+const page = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+await page.goto("http://127.0.0.1:3000/index.html", { waitUntil: "networkidle" });
+const cta = page.locator('a[data-i18n="consultation_btn"]');
+const href = await cta.getAttribute("href");
+await cta.click();
+await page.waitForLoadState("networkidle");
+console.log(JSON.stringify({ href, url: page.url(), formCount: await page.locator("#contactForm").count(), hash: new URL(page.url()).hash }));
+await browser.close();

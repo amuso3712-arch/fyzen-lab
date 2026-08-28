@@ -1,0 +1,15 @@
+import { chromium } from "playwright";
+const browser = await chromium.launch({ headless: true });
+const desktop = await browser.newPage({ viewport: { width: 1280, height: 720 } });
+await desktop.goto("http://127.0.0.1:3000/index.html", { waitUntil: "networkidle" });
+const desktopSearch = desktop.locator("#desktopProductSearch");
+const desktopVisible = await desktopSearch.isVisible();
+await desktopSearch.locator('input[type="search"]').fill("Shimadzu");
+await desktopSearch.locator("button").click();
+await desktop.waitForLoadState("networkidle");
+const desktopUrl = desktop.url();
+const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+await mobile.goto("http://127.0.0.1:3000/index.html", { waitUntil: "networkidle" });
+const mobileDesktopSearchVisible = await mobile.locator("#desktopProductSearch").isVisible().catch(() => false);
+console.log(JSON.stringify({ desktopVisible, desktopUrl, mobileDesktopSearchVisible }));
+await browser.close();
