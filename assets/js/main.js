@@ -1,4 +1,4 @@
-// ====================================================
+﻿// ====================================================
 // SERVER API HELPERS
 // ====================================================
 function getApiUrl(endpoint) {
@@ -35,15 +35,382 @@ async function sendContactMessage(data) {
 // ====================================================
 // DATA MANAGEMENT
 // ====================================================
-function resetTestingContentOnce() {
-    const RESET_VERSION = 'v1-testing-content-cleared';
-    if (localStorage.getItem('fyzen_content_reset') === RESET_VERSION) return;
-    ['fyzen_products', 'fyzen_published_products', 'fyzen_news', 'fyzen_cart', 'fyzen_wishlist'].forEach(key => localStorage.removeItem(key));
-    localStorage.setItem('fyzen_content_reset', RESET_VERSION);
-}
-resetTestingContentOnce();
-
-const DEFAULT_PRODUCTS = [];
+const DEFAULT_PRODUCTS = [
+    {
+        "id": 1,
+        "name": "Mindray BC-5000",
+        "name_uz": "Mindray BC-5000 Gematologik Analizator",
+        "name_ru": "Mindray BC-5000 Ð“ÐµÐ¼Ð°Ñ‚Ð¾Ð»Ð¾Ð³Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹ ÐÐ½Ð°Ð»Ð¸Ð·Ð°Ñ‚Ð¾Ñ€",
+        "name_en": "Mindray BC-5000 Hematology Analyzer",
+        "category": "medical",
+        "brand": "Mindray",
+        "img": "/assets/images/mindray_bc5000_3f60d97e.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 2,
+        "name": "Mindray BS-240",
+        "name_uz": "Mindray BS-240 Bioximik Analizator",
+        "name_ru": "Mindray BS-240 Ð‘Ð¸Ð¾Ñ…Ð¸Ð¼Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹ ÐÐ½Ð°Ð»Ð¸Ð·Ð°Ñ‚Ð¾Ñ€",
+        "name_en": "Mindray BS-240 Biochemistry Analyzer",
+        "category": "medical",
+        "brand": "Mindray",
+        "img": "/assets/images/mindray_dc70_d9fd8a0e.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 3,
+        "name": "Nexcope NE910",
+        "name_uz": "Nexcope NE910 Trinokuljar Mikroskop",
+        "name_ru": "Nexcope NE910 Ð¢Ñ€Ð¸Ð½Ð¾ÐºÑƒÐ»ÑÑ€Ð½Ñ‹Ð¹ ÐœÐ¸ÐºÑ€Ð¾ÑÐºÐ¾Ð¿",
+        "name_en": "Nexcope NE910 Trinocular Microscope",
+        "category": "analytical",
+        "brand": "Nexcope",
+        "img": "/assets/images/nexcope_ne910_dad1b169.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 4,
+        "name": "Shimadzu GC-2030",
+        "name_uz": "Shimadzu GC-2030 Gaz Xromatografi",
+        "name_ru": "Shimadzu GC-2030 Ð“Ð°Ð·Ð¾Ð²Ñ‹Ð¹ Ð¥Ñ€Ð¾Ð¼Ð°Ñ‚Ð¾Ð³Ñ€Ð°Ñ„",
+        "name_en": "Shimadzu GC-2030 Gas Chromatograph",
+        "category": "chemistry",
+        "brand": "Shimadzu",
+        "img": "/assets/images/shimadzu_gc2030_eb0a7e59.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 5,
+        "name": "Olympus BX53",
+        "name_uz": "Olympus BX53 Tadqiqot Mikroskobi",
+        "name_ru": "Olympus BX53 Ð˜ÑÑÐ»ÐµÐ´Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒÑÐºÐ¸Ð¹ ÐœÐ¸ÐºÑ€Ð¾ÑÐºÐ¾Ð¿",
+        "name_en": "Olympus BX53 Research Microscope",
+        "category": "analytical",
+        "brand": "Olympus",
+        "img": "/assets/images/olympus_bx53_eff0f61a.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 6,
+        "name": "Roche cobas e411",
+        "name_uz": "Roche cobas e411 Immunologik Analizator",
+        "name_ru": "Roche cobas e411 Ð˜Ð¼Ð¼ÑƒÐ½Ð¾Ð»Ð¾Ð³Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹ ÐÐ½Ð°Ð»Ð¸Ð·Ð°Ñ‚Ð¾Ñ€",
+        "name_en": "Roche cobas e411 Immunology Analyzer",
+        "category": "medical",
+        "brand": "Roche",
+        "img": "/assets/images/siemens_somatom_f3144f82.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 7,
+        "name": "Anton Paar DMA 5000",
+        "name_uz": "Anton Paar DMA 5000 Zichlik O'lchagich",
+        "name_ru": "Anton Paar DMA 5000 Ð˜Ð·Ð¼ÐµÑ€Ð¸Ñ‚ÐµÐ»ÑŒ ÐŸÐ»Ð¾Ñ‚Ð½Ð¾ÑÑ‚Ð¸",
+        "name_en": "Anton Paar DMA 5000 Density Meter",
+        "category": "petroleum",
+        "brand": "Anton Paar",
+        "img": "/assets/images/anton_paar_dma_fc700bcb.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 8,
+        "name": "Binder KB 53",
+        "name_uz": "Binder KB 53 Iqlim Kamerasi",
+        "name_ru": "Binder KB 53 ÐšÐ»Ð¸Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ°Ñ ÐšÐ°Ð¼ÐµÑ€Ð°",
+        "name_en": "Binder KB 53 Climate Chamber",
+        "category": "biology",
+        "brand": "Binder",
+        "img": "/assets/images/binder_kb53_0923396b.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 16,
+        "name": "Eppendorf Centrifuge 5810",
+        "name_uz": "Eppendorf 5810 Sentrifuga",
+        "name_ru": "Eppendorf 5810 Ð¦ÐµÐ½Ñ‚Ñ€Ð¸Ñ„ÑƒÐ³Ð°",
+        "name_en": "Eppendorf 5810 Centrifuge",
+        "category": "biology",
+        "brand": "Eppendorf",
+        "img": "/assets/images/agilent_1260_5fded2ca.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 17,
+        "name": "PCR Thermocycler Pro",
+        "name_uz": "PCR Termosikler Pro",
+        "name_ru": "PCR Ð¢ÐµÑ€Ð¼Ð¾Ñ†Ð¸ÐºÐ»ÐµÑ€ Pro",
+        "name_en": "PCR Thermocycler Pro",
+        "category": "biology",
+        "brand": "Bio-Rad",
+        "img": "/assets/images/kern_obn_1c32962d.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 9,
+        "name": "MATEST S205",
+        "name_uz": "MATEST S205 Siqishga Sinov Mashinasi",
+        "name_ru": "MATEST S205 ÐœÐ°ÑˆÐ¸Ð½Ð° Ð´Ð»Ñ Ð¡Ð¶Ð°Ñ‚Ð¸Ñ",
+        "name_en": "MATEST S205 Compression Testing Machine",
+        "category": "industrial",
+        "brand": "MATEST",
+        "img": "/assets/images/matest_s205_b00d84f8.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 18,
+        "name": "Shimadzu Hardness Tester",
+        "name_uz": "Shimadzu Qattiqlik Sinov Qurilmasi",
+        "name_ru": "Shimadzu Ð¢Ð²ÐµÑ€Ð´Ð¾Ð¼ÐµÑ€",
+        "name_en": "Shimadzu Hardness Tester",
+        "category": "industrial",
+        "brand": "Shimadzu",
+        "img": "/assets/images/shimadzu_gc2030_eb0a7e59.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 19,
+        "name": "Universal Testing Machine",
+        "name_uz": "Universal Sinov Mashinasi",
+        "name_ru": "Ð£Ð½Ð¸Ð²ÐµÑ€ÑÐ°Ð»ÑŒÐ½Ð°Ñ Ð˜ÑÐ¿Ñ‹Ñ‚Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð°Ñ ÐœÐ°ÑˆÐ¸Ð½Ð°",
+        "name_en": "Universal Testing Machine",
+        "category": "industrial",
+        "brand": "MATEST",
+        "img": "/assets/images/anton_paar_dma_fc700bcb.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 10,
+        "name": "Zeiss Axio Observer",
+        "name_uz": "Zeiss Axio Observer Teskari Mikroskop",
+        "name_ru": "Zeiss Axio Observer Ð˜Ð½Ð²ÐµÑ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹ ÐœÐ¸ÐºÑ€Ð¾ÑÐºÐ¾Ð¿",
+        "name_en": "Zeiss Axio Observer Inverted Microscope",
+        "category": "physics",
+        "brand": "Zeiss",
+        "img": "/assets/images/zeiss_axio_ed273a39.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 20,
+        "name": "Optical Spectrometer SP-300",
+        "name_uz": "Optik Spektrometr SP-300",
+        "name_ru": "ÐžÐ¿Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹ Ð¡Ð¿ÐµÐºÑ‚Ñ€Ð¾Ð¼ÐµÑ‚Ñ€ SP-300",
+        "name_en": "Optical Spectrometer SP-300",
+        "category": "physics",
+        "brand": "Shimadzu",
+        "img": "/assets/images/mindray_bc5000_3f60d97e.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 21,
+        "name": "Digital Oscilloscope DS1054",
+        "name_uz": "Raqamli Osiloskop DS1054",
+        "name_ru": "Ð¦Ð¸Ñ„Ñ€Ð¾Ð²Ð¾Ð¹ ÐžÑÑ†Ð¸Ð»Ð»Ð¾Ð³Ñ€Ð°Ñ„ DS1054",
+        "name_en": "Digital Oscilloscope DS1054",
+        "category": "physics",
+        "brand": "Rigol",
+        "img": "/assets/images/siemens_somatom_f3144f82.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 11,
+        "name": "Agilent 1260 Infinity",
+        "name_uz": "Agilent 1260 Infinity HPLC Tizimi",
+        "name_ru": "Agilent 1260 Infinity Ð’Ð­Ð–Ð¥ Ð¡Ð¸ÑÑ‚ÐµÐ¼Ð°",
+        "name_en": "Agilent 1260 Infinity HPLC System",
+        "category": "environmental",
+        "brand": "Agilent",
+        "img": "/assets/images/agilent_1260_5fded2ca.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 22,
+        "name": "Water Quality Analyzer WQA-7",
+        "name_uz": "Suv Sifati Analizatori WQA-7",
+        "name_ru": "ÐÐ½Ð°Ð»Ð¸Ð·Ð°Ñ‚Ð¾Ñ€ ÐšÐ°Ñ‡ÐµÑÑ‚Ð²Ð° Ð’Ð¾Ð´Ñ‹ WQA-7",
+        "name_en": "Water Quality Analyzer WQA-7",
+        "category": "environmental",
+        "brand": "Hach",
+        "img": "/assets/images/matest_s205_b00d84f8.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 23,
+        "name": "Air Particle Counter APC-3",
+        "name_uz": "Havo Zarracha Hisoblagichi APC-3",
+        "name_ru": "Ð¡Ñ‡Ñ‘Ñ‚Ñ‡Ð¸Ðº Ð§Ð°ÑÑ‚Ð¸Ñ† Ð’Ð¾Ð·Ð´ÑƒÑ…Ð° APC-3",
+        "name_en": "Air Particle Counter APC-3",
+        "category": "environmental",
+        "brand": "TSI",
+        "img": "/assets/images/binder_kb53_0923396b.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 12,
+        "name": "KERN OBN 132",
+        "name_uz": "KERN OBN 132 O'quv Mikroskobi",
+        "name_ru": "KERN OBN 132 Ð£Ñ‡ÐµÐ±Ð½Ñ‹Ð¹ ÐœÐ¸ÐºÑ€Ð¾ÑÐºÐ¾Ð¿",
+        "name_en": "KERN OBN 132 Educational Microscope",
+        "category": "educational",
+        "brand": "KERN",
+        "img": "/assets/images/kern_obn_1c32962d.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 24,
+        "name": "Student Physics Kit Pro",
+        "name_uz": "O'quvchi Fizika To'plami Pro",
+        "name_ru": "Ð¨ÐºÐ¾Ð»ÑŒÐ½Ñ‹Ð¹ Ð¤Ð¸Ð·Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹ ÐÐ°Ð±Ð¾Ñ€ Pro",
+        "name_en": "Student Physics Kit Pro",
+        "category": "educational",
+        "brand": "FYZEN",
+        "img": "/assets/images/zeiss_axio_ed273a39.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 25,
+        "name": "Biology Classroom Set",
+        "name_uz": "Biologiya Sinf Xonasi To'plami",
+        "name_ru": "ÐšÐ¾Ð¼Ð¿Ð»ÐµÐºÑ‚ Ð´Ð»Ñ ÐšÐ°Ð±Ð¸Ð½ÐµÑ‚Ð° Ð‘Ð¸Ð¾Ð»Ð¾Ð³Ð¸Ð¸",
+        "name_en": "Biology Classroom Set",
+        "category": "educational",
+        "brand": "FYZEN",
+        "img": "/assets/images/olympus_bx53_eff0f61a.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 13,
+        "name": "Soil Testing Kit V2",
+        "name_uz": "Tuproq Tahlil Komplekti V2",
+        "name_ru": "ÐšÐ¾Ð¼Ð¿Ð»ÐµÐºÑ‚ ÐÐ½Ð°Ð»Ð¸Ð·Ð° ÐŸÐ¾Ñ‡Ð²Ñ‹ V2",
+        "name_en": "Soil Testing Kit V2",
+        "category": "agriculture",
+        "brand": "FYZEN",
+        "img": "/assets/images/soil_kit_5bd32ca3.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 26,
+        "name": "Grain Moisture Analyzer GM-900",
+        "name_uz": "Don Namligi Analizatori GM-900",
+        "name_ru": "ÐÐ½Ð°Ð»Ð¸Ð·Ð°Ñ‚Ð¾Ñ€ Ð’Ð»Ð°Ð¶Ð½Ð¾ÑÑ‚Ð¸ Ð—ÐµÑ€Ð½Ð° GM-900",
+        "name_en": "Grain Moisture Analyzer GM-900",
+        "category": "agriculture",
+        "brand": "KETT",
+        "img": "/assets/images/pipette_set_30455136.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 27,
+        "name": "Portable Nitrate Tester",
+        "name_uz": "Ko'chma Nitrat Sinov Qurilmasi",
+        "name_ru": "ÐŸÐ¾Ñ€Ñ‚Ð°Ñ‚Ð¸Ð²Ð½Ñ‹Ð¹ ÐÐ¸Ñ‚Ñ€Ð°Ñ‚-Ñ‚ÐµÑÑ‚ÐµÑ€",
+        "name_en": "Portable Nitrate Tester",
+        "category": "agriculture",
+        "brand": "Hach",
+        "img": "/assets/images/agilent_1260_5fded2ca.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 14,
+        "name": "Laboratory Fume Hood",
+        "name_uz": "Laboratoriya Vityaj Shkaflari",
+        "name_ru": "Ð›Ð°Ð±Ð¾Ñ€Ð°Ñ‚Ð¾Ñ€Ð½Ñ‹Ð¹ Ð’Ñ‹Ñ‚ÑÐ¶Ð½Ð¾Ð¹ Ð¨ÐºÐ°Ñ„",
+        "name_en": "Laboratory Fume Hood",
+        "category": "furniture",
+        "brand": "Binder",
+        "img": "/assets/images/fume_hood_01725376.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 28,
+        "name": "Lab Bench Workstation Pro",
+        "name_uz": "Laboratoriya Ish Stoli Pro",
+        "name_ru": "Ð›Ð°Ð±Ð¾Ñ€Ð°Ñ‚Ð¾Ñ€Ð½Ñ‹Ð¹ Ð Ð°Ð±Ð¾Ñ‡Ð¸Ð¹ Ð¡Ñ‚Ð¾Ð» Pro",
+        "name_en": "Lab Bench Workstation Pro",
+        "category": "furniture",
+        "brand": "FYZEN",
+        "img": "/assets/images/binder_kb53_0923396b.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 29,
+        "name": "Safety Cabinet Type II",
+        "name_uz": "Xavfsizlik Shkafi II tur",
+        "name_ru": "Ð—Ð°Ñ‰Ð¸Ñ‚Ð½Ñ‹Ð¹ Ð¨ÐºÐ°Ñ„ II Ñ‚Ð¸Ð¿Ð°",
+        "name_en": "Safety Cabinet Type II",
+        "category": "furniture",
+        "brand": "Esco",
+        "img": "/assets/images/matest_s205_b00d84f8.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 15,
+        "name": "Premium Pipette Set",
+        "name_uz": "Premium Pipetka To'plami",
+        "name_ru": "ÐŸÑ€ÐµÐ¼Ð¸ÑƒÐ¼ ÐÐ°Ð±Ð¾Ñ€ ÐŸÐ¸Ð¿ÐµÑ‚Ð¾Ðº",
+        "name_en": "Premium Pipette Set",
+        "category": "consumables",
+        "brand": "Eppendorf",
+        "img": "/assets/images/pipette_set_30455136.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 30,
+        "name": "Microcentrifuge Tubes 1.5ml",
+        "name_uz": "Mikrosentrifuga Naylar 1.5ml",
+        "name_ru": "ÐŸÑ€Ð¾Ð±Ð¸Ñ€ÐºÐ¸ Ð´Ð»Ñ ÐœÐ¸ÐºÑ€Ð¾Ñ†ÐµÐ½Ñ‚Ñ€Ð¸Ñ„ÑƒÐ³Ð¸ 1.5Ð¼Ð»",
+        "name_en": "Microcentrifuge Tubes 1.5ml",
+        "category": "consumables",
+        "brand": "Eppendorf",
+        "img": "/assets/images/soil_kit_5bd32ca3.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 31,
+        "name": "Disposable Petri Dishes (Pack 20)",
+        "name_uz": "Bir Martalik Petri Idishlari (20 ta)",
+        "name_ru": "ÐžÐ´Ð½Ð¾Ñ€Ð°Ð·Ð¾Ð²Ñ‹Ðµ Ð§Ð°ÑˆÐºÐ¸ ÐŸÐµÑ‚Ñ€Ð¸ (20 ÑˆÑ‚)",
+        "name_en": "Disposable Petri Dishes (Pack 20)",
+        "category": "consumables",
+        "brand": "Corning",
+        "img": "/assets/images/kern_obn_1c32962d.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 32,
+        "name": "Anton Paar SVM 3001",
+        "name_uz": "Anton Paar SVM 3001 Qovushqoqlik Metr",
+        "name_ru": "Anton Paar SVM 3001 Ð’Ð¸ÑÐºÐ¾Ð·Ð¸Ð¼ÐµÑ‚Ñ€",
+        "name_en": "Anton Paar SVM 3001 Viscometer",
+        "category": "petroleum",
+        "brand": "Anton Paar",
+        "img": "/assets/images/anton_paar_dma_fc700bcb.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 33,
+        "name": "Flash Point Tester FPT-800",
+        "name_uz": "Alangalanish Nuqtasi Sinov Qurilmasi FPT-800",
+        "name_ru": "Ð¢ÐµÑÑ‚ÐµÑ€ Ð¢ÐµÐ¼Ð¿ÐµÑ€Ð°Ñ‚ÑƒÑ€Ñ‹ Ð’ÑÐ¿Ñ‹ÑˆÐºÐ¸ FPT-800",
+        "name_en": "Flash Point Tester FPT-800",
+        "category": "petroleum",
+        "brand": "Tanaka",
+        "img": "/assets/images/shimadzu_gc2030_eb0a7e59.jpg",
+        "price": "Request"
+    },
+    {
+        "id": 34,
+        "name": "Crude Oil Distillation Unit",
+        "name_uz": "Xom Neft Haydash Qurilmasi",
+        "name_ru": "Ð£ÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ° ÐŸÐµÑ€ÐµÐ³Ð¾Ð½ÐºÐ¸ Ð¡Ñ‹Ñ€Ð¾Ð¹ ÐÐµÑ„Ñ‚Ð¸",
+        "name_en": "Crude Oil Distillation Unit",
+        "category": "petroleum",
+        "brand": "Koehler",
+        "img": "/assets/images/siemens_somatom_f3144f82.jpg",
+        "price": "Request"
+    }
+];
 
 function getProducts() {
     // Auto-reset: if DB version changed (e.g. new local images), wipe stale localStorage
@@ -69,8 +436,8 @@ function getProducts() {
         localProducts = localProducts.map(lp => {
             if (!lp.category) lp.category = "medical";
             let cat = String(lp.category).toLowerCase().trim();
-            if (cat === "lab" || cat === "лаборатория") cat = "analytical";
-            else if (cat === "диагностика") cat = "medical";
+            if (cat === "lab" || cat === "Ð»Ð°Ð±Ð¾Ñ€Ð°Ñ‚Ð¾Ñ€Ð¸Ñ") cat = "analytical";
+            else if (cat === "Ð´Ð¸Ð°Ð³Ð½Ð¾ÑÑ‚Ð¸ÐºÐ°") cat = "medical";
             else if (!validCategories.includes(cat)) cat = "medical"; // Fallback for any other corrupted data
             lp.category = cat;
             return lp;
@@ -143,7 +510,7 @@ function showToast(msg, type = 'success') {
     toast.className = `fyz-toast ${type}`;
     toast.innerHTML = `
         <div class="toast-content">
-            <div class="toast-icon">${type === 'success' ? '✓' : (type === 'wish' ? '❤️' : 'ℹ️')}</div>
+            <div class="toast-icon">${type === 'success' ? 'âœ“' : (type === 'wish' ? 'â¤ï¸' : 'â„¹ï¸')}</div>
             <div class="toast-msg">${msg}</div>
         </div>
     `;
@@ -187,7 +554,6 @@ function updateNavbarIcons() {
     const currentLang = localStorage.getItem('fyzen_lang') || 'ru';
 
     // ICONS AND AUTH + LANG (Right Side)
-    const desktopSearch = navActions.querySelector('.desktop-product-search');
     const oldIcons = navActions.querySelector('.fyz-premium-icons');
     if (oldIcons) oldIcons.remove();
 
@@ -219,7 +585,6 @@ function updateNavbarIcons() {
     `;
     
     navActions.innerHTML = '';
-    if (desktopSearch) navActions.appendChild(desktopSearch);
     navActions.appendChild(iconGroup);
 
 
@@ -314,7 +679,7 @@ function initCartSidebar() {
         <div class="cart-sidebar" id="cartSidebar">
             <div class="cart-sidebar-header" style="display:flex; justify-content:space-between; align-items:center; padding:20px; border-bottom:1px solid #eee;">
                 <h3 style="font-weight:900; color:var(--primary-dark); margin:0;">${t('cart')}</h3>
-                <button onclick="toggleCartSidebar()" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:#94a3b8;">✕</button>
+                <button onclick="toggleCartSidebar()" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:#94a3b8;">âœ•</button>
             </div>
             <div class="cart-sidebar-items" id="cartSidebarItems" style="padding:20px; flex:1; overflow-y:auto;"></div>
             <div class="cart-sidebar-footer" style="padding:20px; border-top:1px solid #eee;">
@@ -347,7 +712,7 @@ function renderCartSidebarItems() {
     if(!cont) return;
     
     if(cart.length === 0) { 
-        cont.innerHTML = `<div style="text-align:center; padding:60px 20px; color:#94a3b8;"><div style="font-size:3rem; margin-bottom:15px;">🛒</div><p style="font-weight:700;">${t('empty_cart')}</p></div>`; 
+        cont.innerHTML = `<div style="text-align:center; padding:60px 20px; color:#94a3b8;"><div style="font-size:3rem; margin-bottom:15px;">ðŸ›’</div><p style="font-weight:700;">${t('empty_cart')}</p></div>`; 
         if(footer) footer.style.display = 'none';
         return; 
     }
@@ -364,7 +729,7 @@ function renderCartSidebarItems() {
                     <button onclick="changeQty(${i}, 1)" style="width:24px; height:24px; border-radius:6px; border:1px solid #e2e8f0; background:white; cursor:pointer;">+</button>
                 </div>
             </div>
-            <button onclick="removeCartItem(${i})" style="background:none; border:none; color:#cbd5e1; cursor:pointer; font-size:1.2rem;">✕</button>
+            <button onclick="removeCartItem(${i})" style="background:none; border:none; color:#cbd5e1; cursor:pointer; font-size:1.2rem;">âœ•</button>
         </div>
     `).join('');
 }
@@ -511,11 +876,11 @@ function initMobileNav() {
         const parentLi = link.closest('li');
         const textSpan = link.querySelector('[data-i18n]') || link;
         const i18nKey = textSpan.getAttribute('data-i18n') || link.getAttribute('data-i18n');
-        const text = textSpan.textContent.trim().replace(/[▾▼]/g, '');
+        const text = textSpan.textContent.trim().replace(/[â–¾â–¼]/g, '');
         const icon = mobileNavIconMap[i18nKey] || defaultNavIcon;
         
         const dropdownMenu = parentLi ? parentLi.querySelector('.nav-dropdown-menu') : null;
-        if (dropdownMenu && i18nKey !== 'nav_products') {
+        if (dropdownMenu) {
             // Build sub-menu with category icons
             const subLinks = dropdownMenu.querySelectorAll('a');
             let subHtml = '';
@@ -532,6 +897,7 @@ function initMobileNav() {
                     <div class="mobile-nav-dropdown-toggle" onclick="toggleMobileSubMenu(event, this)">
                         <span class="mobile-nav-icon">${icon}</span>
                         <a href="${link.getAttribute('href')}" data-i18n="${i18nKey || ''}">${text}</a>
+                        <span class="mobile-nav-arrow">&#9662;</span>
                     </div>
                     <div class="mobile-nav-dropdown-menu">
                         ${subHtml}
@@ -539,7 +905,6 @@ function initMobileNav() {
                 </div>
             `;
         } else {
-            // Products stays a compact single mobile link; its category list remains desktop-only.
             linksHtml += `<a href="${link.getAttribute('href')}" onclick="toggleMobileMenu()"><span class="mobile-nav-icon">${icon}</span><span data-i18n="${i18nKey || ''}">${text}</span></a>`;
         }
         
@@ -552,16 +917,18 @@ function initMobileNav() {
     const currentLang = localStorage.getItem('fyzen_lang') || 'ru';
     
     overlay.innerHTML = `
-        <div class="mobile-nav-header mobile-nav-header--compact">
+        <div class="mobile-nav-header">
+            <div class="mobile-nav-brand">
+                <span class="mobile-nav-brand-mark"><img src="/assets/images/fyzen-cube-final_9ae90e1b.png" alt="FYZEN-LAB"></span>
+                <span class="mobile-nav-brand-copy">
+                    <span class="mobile-nav-brand-name">FYZEN-LAB</span>
+                    <span class="mobile-nav-brand-slogan">SCIENCE WITHOUT LIMITS</span>
+                </span>
+            </div>
             <button type="button" class="mobile-nav-close" onclick="toggleMobileMenu()" aria-label="Close navigation menu">
                 <svg viewBox="0 0 24 24" width="21" height="21" stroke="currentColor" fill="none" stroke-width="2.4" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
-        <form class="mobile-product-search" id="mobileProductSearch" role="search" onsubmit="submitMobileProductSearch(event)">
-            <svg class="mobile-product-search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
-            <input id="mobileProductSearchInput" type="search" data-i18n="search_placeholder" placeholder="Search for products..." autocomplete="off" enterkeyhint="search" aria-label="Search products">
-            <button type="submit" aria-label="Search">↵</button>
-        </form>
         ${linksHtml}
         <div class="mobile-lang-switcher lang-switcher" style="margin-top:20px; display:flex; gap:10px; justify-content:center; border: 1px solid rgba(0, 168, 225, 0.15); border-radius: 8px; padding: 4px; background: rgba(255, 255, 255, 0.5);">
             <button type="button" data-lang="uz" onclick="changeLanguage('uz')" class="lang-btn ${currentLang === 'uz' ? 'active-lang' : ''}" style="flex:1; background:transparent; border:none; padding:8px; font-weight:800; font-size:0.85rem; color:#64748b; cursor:pointer; transition:all 0.3s; border-radius:6px;">UZ</button>
@@ -576,62 +943,6 @@ function initMobileNav() {
             toggleMobileMenu();
         }
     });
-}
-
-function submitDesktopProductSearch(event) {
-    event.preventDefault();
-    const form = event.currentTarget || event.target;
-    const input = form?.querySelector('input[type="search"]');
-    const submit = form?.querySelector('.desktop-product-search-submit');
-    const query = input?.value.trim() || '';
-    if (!query) {
-        input?.focus();
-        return;
-    }
-    form.classList.add('is-search-loading');
-    if (submit) submit.disabled = true;
-    window.setTimeout(() => {
-        window.location.href = `products.html?search=${encodeURIComponent(query)}`;
-    }, 220);
-}
-
-function initDesktopProductSearch() {
-    document.querySelectorAll('.desktop-product-search').forEach(form => {
-        const input = form.querySelector('input[type="search"]');
-        const clear = form.querySelector('[data-search-clear]');
-        const suggestions = form.querySelector('[data-search-suggestions]');
-        if (!input || !clear || !suggestions || form.dataset.searchReady === 'true') return;
-        form.dataset.searchReady = 'true';
-        const syncClear = () => { clear.hidden = !input.value; };
-        const openSuggestions = () => { suggestions.hidden = false; };
-        input.addEventListener('focus', openSuggestions);
-        input.addEventListener('input', () => { syncClear(); openSuggestions(); });
-        input.addEventListener('blur', () => window.setTimeout(() => { suggestions.hidden = true; }, 150));
-        clear.addEventListener('click', () => { input.value = ''; syncClear(); input.focus(); openSuggestions(); });
-        suggestions.querySelectorAll('[data-search-suggestion]').forEach(button => {
-            button.addEventListener('mousedown', event => event.preventDefault());
-            button.addEventListener('click', () => {
-                input.value = button.dataset.searchSuggestion || '';
-                syncClear();
-                suggestions.hidden = true;
-                form.requestSubmit();
-            });
-        });
-        syncClear();
-    });
-}
-
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initDesktopProductSearch);
-else initDesktopProductSearch();
-function submitMobileProductSearch(event) {
-    event.preventDefault();
-    const input = document.getElementById('mobileProductSearchInput');
-    const query = input?.value.trim() || '';
-    if (!query) {
-        input?.focus();
-        return;
-    }
-    window.location.href = `products.html?search=${encodeURIComponent(query)}`;
 }
 
 // SVG icons mapped by data-i18n key for top-level nav items
@@ -667,7 +978,7 @@ function addMobileNavIcons() {
     const nav = document.getElementById('mobileNavOverlay');
     if (!nav) return;
 
-    // Add icons to top-level direct links (КАТАЛОГ, БРЕНДЫ, О НАС, etc.)
+    // Add icons to top-level direct links (ÐšÐÐ¢ÐÐ›ÐžÐ“, Ð‘Ð Ð•ÐÐ”Ð«, Ðž ÐÐÐ¡, etc.)
     document.querySelectorAll('#mobileNavOverlay > a').forEach(link => {
         const key = link.getAttribute('data-i18n') || '';
         const svgHtml = mobileNavIconMap[key] || defaultNavIcon;
@@ -677,7 +988,7 @@ function addMobileNavIcons() {
         link.insertBefore(iconSpan, link.firstChild);
     });
 
-    // Add icons to dropdown toggle links (ПРОДУКТЫ)
+    // Add icons to dropdown toggle links (ÐŸÐ ÐžÐ”Ð£ÐšÐ¢Ð«)
     document.querySelectorAll('#mobileNavOverlay .mobile-nav-dropdown-toggle').forEach(toggle => {
         const link = toggle.querySelector('a');
         if (!link) return;
@@ -723,38 +1034,6 @@ function toggleMobileSubMenu(e, element) {
         dropdown.classList.toggle('open');
     }
 }
-
-function toggleFoundedBadgeTooltip(event) {
-    event?.preventDefault();
-    event?.stopPropagation();
-    const badge = event?.currentTarget || document.querySelector('.founded-badge');
-    const wrapper = badge?.closest('.founded-badge-wrap');
-    if (!wrapper || !badge) return;
-    const shouldOpen = !wrapper.classList.contains('is-tooltip-open');
-    document.querySelectorAll('.founded-badge-wrap.is-tooltip-open').forEach(openWrapper => {
-        openWrapper.classList.remove('is-tooltip-open');
-        openWrapper.querySelector('.founded-badge')?.setAttribute('aria-expanded', 'false');
-    });
-    wrapper.classList.toggle('is-tooltip-open', shouldOpen);
-    badge.setAttribute('aria-expanded', String(shouldOpen));
-}
-
-document.addEventListener('click', event => {
-    if (event.target.closest('.founded-badge-wrap')) return;
-    document.querySelectorAll('.founded-badge-wrap.is-tooltip-open').forEach(wrapper => {
-        wrapper.classList.remove('is-tooltip-open');
-        wrapper.querySelector('.founded-badge')?.setAttribute('aria-expanded', 'false');
-    });
-});
-
-document.addEventListener('keydown', event => {
-    if (event.key !== 'Escape') return;
-    document.querySelectorAll('.founded-badge-wrap.is-tooltip-open').forEach(wrapper => {
-        wrapper.classList.remove('is-tooltip-open');
-        const badge = wrapper.querySelector('.founded-badge');
-        badge?.setAttribute('aria-expanded', 'false');
-    });
-});
 
 function toggleMobileMenu() {
     const overlay = document.getElementById('mobileNavOverlay');
