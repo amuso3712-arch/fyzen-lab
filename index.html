@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<!-- FYZEN STYLE NOTE: preserve the restored Fyzen Lab scientific-corporate visual language — navy/cobalt accents, clean laboratory surfaces, readable sans-serif type, practical catalog-first interactions. -->
+﻿<!DOCTYPE html>
+<!-- FYZEN STYLE NOTE: preserve the restored Fyzen Lab scientific-corporate visual language â€” navy/cobalt accents, clean laboratory surfaces, readable sans-serif type, practical catalog-first interactions. -->
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n-title="home_page_title">FYZEN-LAB - Tibbiy Uskunalar</title>
+    <title>FYZEN-LAB - Tibbiy Uskunalar</title>
     <link rel="icon" href="/assets/images/fyzen-cube-final_9ae90e1b.png?v=2.0" type="image/png">
 
-    <link rel="stylesheet" href="assets/css/styles.css?v=45.0">
+    <link rel="stylesheet" href="assets/css/styles.css?v=29.0">
     <script>
         // Early language initialization to prevent flicker
         (function() {
@@ -23,20 +23,6 @@
         background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(241,245,249,0.8) 100%) !important;
         position: relative;
         overflow: hidden;
-        border: 1px solid rgba(0,168,225,.14);
-        transition: transform 220ms cubic-bezier(.23,1,.32,1), box-shadow 220ms cubic-bezier(.23,1,.32,1), border-color 220ms ease;
-    }
-    .cat-card-p:hover, .cat-card-p:focus-within {
-        transform: translateY(-7px);
-        border-color: rgba(0,168,225,.55);
-        box-shadow: 0 22px 44px rgba(0,76,130,.15), 0 0 0 4px rgba(0,168,225,.07);
-    }
-    .cat-card-p .cat-img-wrapper, .cat-card-p img { transition: transform 220ms cubic-bezier(.23,1,.32,1), filter 220ms ease; }
-    .cat-card-p:hover .cat-img-wrapper, .cat-card-p:focus-within .cat-img-wrapper { transform: scale(1.035); }
-    .cat-card-p:hover img, .cat-card-p:focus-within img { transform: scale(1.06); filter: saturate(1.08); }
-    @media (prefers-reduced-motion: reduce) {
-        .cat-card-p, .cat-card-p .cat-img-wrapper, .cat-card-p img { transition: none !important; }
-        .cat-card-p:hover, .cat-card-p:focus-within, .cat-card-p:hover .cat-img-wrapper, .cat-card-p:focus-within .cat-img-wrapper, .cat-card-p:hover img, .cat-card-p:focus-within img { transform: none !important; }
     }
     .cat-img-wrapper {
         background: linear-gradient(135deg, #002b5c 0%, #00a8e1 100%) !important;
@@ -56,59 +42,6 @@
     .cat-img-wrapper img[src*="placehold.co"], .cat-img-wrapper img:not([src]) {
         opacity: 0.3;
     }
-    @media (max-width: 768px) {
-        .categories-section { padding: 34px 0 64px !important; }
-        .categories-section .section-header { margin-bottom: 28px !important; padding: 0 16px; }
-        .categories-section .section-title { font-size: clamp(1.75rem, 8vw, 2.35rem) !important; line-height: 1.1 !important; }
-        .categories-section .section-header p { font-size: .92rem !important; line-height: 1.45; }
-        .categories-grid-p { display: grid !important; grid-template-columns: 1fr !important; gap: 12px !important; padding: 0 16px !important; }
-        .categories-grid-p .cat-card-p {
-            display: grid !important;
-            grid-template-columns: 112px minmax(0, 1fr) !important;
-            grid-template-rows: auto 1fr !important;
-            align-items: start !important;
-            gap: 8px 12px !important;
-            min-height: 112px !important;
-            padding: 10px !important;
-            text-align: left !important;
-        }
-        .categories-grid-p .cat-img-wrapper {
-            grid-column: 1 !important;
-            grid-row: 1 / -1 !important;
-            width: 112px !important;
-            height: 92px !important;
-            margin: 0 !important;
-            border-radius: 13px !important;
-        }
-        .categories-grid-p .cat-icon-p {
-            grid-column: 2 !important;
-            width: 30px !important;
-            height: 30px !important;
-            margin: 0 !important;
-            border-radius: 9px !important;
-        }
-        .categories-grid-p .cat-icon-p svg { width: 17px !important; height: 17px !important; }
-        .categories-grid-p .cat-text-area {
-            grid-column: 2 !important;
-            min-width: 0 !important;
-            align-self: start !important;
-        }
-        .categories-grid-p .cat-text-area h3 {
-            margin: 0 !important;
-            font-size: .9rem !important;
-            line-height: 1.2 !important;
-            overflow-wrap: anywhere;
-        }
-        .categories-grid-p .cat-text-area p {
-            display: block !important;
-            max-height: none !important;
-            margin-top: 5px !important;
-            opacity: .78 !important;
-            font-size: .72rem !important;
-            line-height: 1.35 !important;
-            overflow-wrap: anywhere;
-        }
-    }
 </style>
 </head>
 <body>
@@ -123,7 +56,7 @@
 
     <nav class="navbar">
         <div class="container nav-inner">
-            <a href="index.html?v=12" class="nav-brand" id="mainLogo">
+            <a href="index.html?v=11" class="nav-brand" id="mainLogo">
                 <div class="logo-box">
                     <img src="/assets/images/fyzen-cube-final_9ae90e1b.png" alt="FYZEN-LAB">
                 </div>
@@ -135,9 +68,9 @@
 
             
             <ul class="nav-links">
-                <li><a href="catalog.html?v=12" data-i18n="nav_catalog">Catalog</a></li>
+                <li><a href="catalog.html?v=11" data-i18n="nav_catalog">Catalog</a></li>
                 <li class="nav-dropdown">
-                    <a href="products.html?v=12" class="nav-dropdown-toggle"><span data-i18n="nav_products">Products</span> <span class="nav-arrow">&#9662;</span></a>
+                    <a href="products.html?v=11" class="nav-dropdown-toggle"><span data-i18n="nav_products">Products</span> <span class="nav-arrow">&#9662;</span></a>
                     <div class="nav-dropdown-menu">
                         <a href="products.html?cat=analytical" data-i18n="cat_analytical">Analytical Instruments</a>
                         <a href="products.html?cat=medical" data-i18n="cat_medical">Medical & Clinical Laboratory</a>
@@ -156,27 +89,14 @@
                     Consumables & Accessories</a>
                     </div>
                 </li>
-                <li><a href="brands.html?v=12" data-i18n="nav_brands">Brands</a></li>
-                <li><a href="about.html?v=12" data-i18n="nav_about">About</a></li>
-                <li><a href="blog.html?v=12" data-i18n="nav_news">News</a></li>
-                <li><a href="contact.html?v=12" data-i18n="nav_contact">Contacts</a></li>
+                <li><a href="brands.html?v=11" data-i18n="nav_brands">Brands</a></li>
+                <li><a href="about.html?v=11" data-i18n="nav_about">About</a></li>
+                <li><a href="blog.html?v=11" data-i18n="nav_news">News</a></li>
+                <li><a href="contact.html?v=11" data-i18n="nav_contact">Contacts</a></li>
             </ul>
 
             <div class="nav-actions">
                 <!-- Ikonkalar va Auth main.js orqali dinamik qo'shiladi -->
-                <form class="desktop-product-search" id="desktopProductSearch" role="search" onsubmit="submitDesktopProductSearch(event)">
-                    <svg class="desktop-product-search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
-                    <input type="search" data-i18n="search_placeholder" placeholder="Search products..." autocomplete="off" aria-label="Search products">
-                    <button type="button" class="desktop-product-search-clear" data-search-clear aria-label="Clear search" hidden>×</button>
-                    <button type="submit" class="desktop-product-search-submit" aria-label="Search products"><span class="search-submit-icon">↵</span><span class="search-submit-spinner" aria-hidden="true"></span></button>
-                    <div class="desktop-search-suggestions" data-search-suggestions hidden role="listbox" aria-label="Popular searches">
-                        <div class="desktop-search-suggestions-label" data-i18n="popular_searches">Popular searches</div>
-                        <button type="button" data-search-suggestion="Shimadzu">Shimadzu</button>
-                        <button type="button" data-search-suggestion="Agilent">Agilent</button>
-                        <button type="button" data-search-suggestion="BINDER">BINDER</button>
-                        <button type="button" data-search-suggestion="HORIBA">HORIBA</button>
-                    </div>
-                </form>
                 <div class="nav-lang-switcher">
                     <div class="lang-pill">
                         <button onclick="changeLanguage('uz')" class="lang-btn" data-lang="uz">UZ</button>
@@ -197,20 +117,20 @@
                 <h1 class="hero-title" data-i18n="hero_title_new">Har bir o'lchovda <span>aniqlik</span> va ishonch</h1>
                 <p class="hero-subtitle" data-i18n="hero_subtitle">FYZEN-LAB O'zbekistondagi klinika va laboratoriyalar uchun eng zamonaviy, jahon standartlaridagi uskunalarni yetkazib beradi.</p>
                 <div class="hero-btns">
-                    <a href="products.html?v=12" class="btn btn-shimmer" data-i18n="explore_btn">MAHSULOTLARNI KO'RISH</a>
-                    <a href="contact.html#contactForm" class="btn btn-outline" data-i18n="consultation_btn" style="background: rgba(255,255,255,0.7); backdrop-filter: blur(5px);">KONSULTATSIYA OLISH</a>
+                    <a href="products.html?v=11" class="btn btn-shimmer" data-i18n="explore_btn">MAHSULOTLARNI KO'RISH</a>
+                    <a href="call.html" class="btn btn-outline" data-i18n="consultation_btn" style="background: rgba(255,255,255,0.7); backdrop-filter: blur(5px);">KONSULTATSIYA OLISH</a>
                 </div>
             </div>
-            <div class="founded-badge-group">
-                <div class="founded-badge-wrap">
-                    <button type="button" class="founded-badge" aria-label="Tashkil topgan yil: 2024" data-i18n-aria-label="founded_year_aria" aria-describedby="foundedBadgeTooltip" aria-expanded="false" onclick="toggleFoundedBadgeTooltip(event)">
-                        <span class="founded-info">
-                            <span class="num">2024</span>
-                            <span class="txt" data-i18n="founded_year_label">Tashkil topgan yil</span>
-                        </span>
-                    </button>
-                    <span id="foundedBadgeTooltip" class="founded-badge-tooltip" role="tooltip" data-i18n="founded_year_tooltip">2024-yildan beri FYZEN-LAB tasdiqlangan tibbiy va laboratoriya uskunalarini amaliy maslahat bilan birlashtiradi.</span>
-                </div>
+            <div class="experience-badge">
+                        <div class="exp-icon">
+                            <svg viewBox="0 0 24 24" width="35" height="35" fill="none" stroke="url(#fyzGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <div class="exp-info">
+                            <span class="num">10+</span>
+                            <span class="txt" data-i18n="years_experience">Yillik Tajriba</span>
+                        </div>
             </div>
         </div>
     </header>
@@ -343,8 +263,8 @@
     <!-- LOAD THE SVG DATABASE FIRST -->
     <script src="assets/js/brand-logos.js"></script>
     
-    <script src="assets/js/lang.js?v=27.0"></script>
-    <script src="assets/js/main.js?v=17.0"></script>
+    <script src="assets/js/lang.js?v=14.0"></script>
+    <script src="assets/js/main.js?v=12.0"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const hideLoader = () => {
@@ -391,17 +311,17 @@
                 <div class="footer-socials">
                     <a href="https://t.me/fyzen_lab" class="footer-social-btn" target="_blank" title="Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></a>
                     <a href="https://www.instagram.com/fyzen_lab?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==" class="footer-social-btn" target="_blank" title="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-                    <a href="https://wa.me/998990342002" class="footer-social-btn" target="_blank" rel="noopener noreferrer" title="WhatsApp" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.83 11.83 0 0 0 12.08 0C5.54 0 .22 5.32.22 11.86c0 2.09.55 4.13 1.59 5.93L.12 24l6.35-1.67a11.86 11.86 0 0 0 5.61 1.43h.01c6.54 0 11.86-5.32 11.86-11.86 0-3.17-1.23-6.15-3.43-8.42ZM12.09 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.77.99 1-3.67-.24-.38a9.84 9.84 0 0 1-1.51-5.29c0-5.47 4.45-9.92 9.92-9.92 2.65 0 5.14 1.03 7.01 2.91a9.86 9.86 0 0 1 2.9 7.02c0 5.47-4.45 9.92-9.91 9.92Zm5.44-7.43c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.91-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35Z"/></svg></a>
+                    <a href="#" class="footer-social-btn" title="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
                 </div>
             </div>
             <div class="footer-col">
                 <h4 data-i18n="footer_quick_links">Tezkor havolalar</h4>
                 <ul class="footer-links">
-                    <li><a href="catalog.html?v=12" data-i18n="katalog">Katalog</a></li>
-                    <li><a href="brands.html?v=12" data-i18n="nav_brands">Brendlar</a></li>
-                    <li><a href="about.html?v=12" data-i18n="nav_about">Biz haqimizda</a></li>
-                    <li><a href="blog.html?v=12" data-i18n="nav_news">Yangiliklar</a></li>
-                    <li><a href="contact.html?v=12" data-i18n="nav_contact">Aloqa</a></li>
+                    <li><a href="catalog.html?v=11" data-i18n="katalog">Katalog</a></li>
+                    <li><a href="brands.html?v=11" data-i18n="nav_brands">Brendlar</a></li>
+                    <li><a href="about.html?v=11" data-i18n="nav_about">Biz haqimizda</a></li>
+                    <li><a href="blog.html?v=11" data-i18n="nav_news">Yangiliklar</a></li>
+                    <li><a href="contact.html?v=11" data-i18n="nav_contact">Aloqa</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -420,7 +340,7 @@
                     <div class="footer-contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
                     <div class="footer-contact-info">
                         <span data-i18n="address">Manzil</span>
-                        <strong data-i18n="footer_address">Xorazm, O‘zbekiston</strong>
+                        <strong data-i18n="footer_address">Toshkent, Yunusobod tumani</strong>
                     </div>
                 </div>
                 <div class="footer-contact-item">

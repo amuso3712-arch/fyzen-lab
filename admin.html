@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<!-- FYZEN STYLE NOTE: preserve the restored Fyzen Lab scientific-corporate visual language — navy/cobalt accents, clean laboratory surfaces, readable sans-serif type, practical catalog-first interactions. -->
+﻿<!DOCTYPE html>
+<!-- FYZEN STYLE NOTE: preserve the restored Fyzen Lab scientific-corporate visual language â€” navy/cobalt accents, clean laboratory surfaces, readable sans-serif type, practical catalog-first interactions. -->
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
     <title data-i18n="admin_panel">FYZEN Pro Admin | Boshqaruv Paneli</title>
     <link rel="icon" href="/assets/images/fyzen-cube-final_9ae90e1b.png?v=2.0" type="image/png">
 
-    <link rel="stylesheet" href="assets/css/styles.css?v=45.0">
+    <link rel="stylesheet" href="assets/css/styles.css?v=29.0">
     <script>
         // Early language initialization to prevent flicker
         (function() {
@@ -397,7 +397,7 @@
             <p>Admin panelga faqat ruxsat berilgan Manus hisoblari kira oladi.</p>
             <button type="button" class="admin-login-btn" onclick="startAdminLogin()">MANUS HISOBI ORQALI KIRISH</button>
             <div class="admin-login-error" id="adminLoginError" role="alert"></div>
-            <div class="logout-hint">Login qilgandan so‘ng admin role server tomonidan tekshiriladi.</div>
+            <div class="logout-hint">Login qilgandan soâ€˜ng admin role server tomonidan tekshiriladi.</div>
         </div>
     </div>
     <aside class="admin-sidebar">
@@ -450,7 +450,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
             <h2 id="tabTitle" data-i18n="admin_main_panel">Asosiy Panel</h2>
-            <a href="https://t.me/fyzen_bot" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; margin-left:18px; padding:8px 14px; border:1px solid rgba(0,168,225,.35); border-radius:999px; color:var(--admin-accent); background:rgba(0,168,225,.06); font-size:.72rem; font-weight:800; text-decoration:none; white-space:nowrap;">Telegram primary · @fyzen_bot</a>
+            <a href="https://t.me/fyzen_bot" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; margin-left:18px; padding:8px 14px; border:1px solid rgba(0,168,225,.35); border-radius:999px; color:var(--admin-accent); background:rgba(0,168,225,.06); font-size:.72rem; font-weight:800; text-decoration:none; white-space:nowrap;">Telegram primary Â· @fyzen_bot</a>
             <div style="flex: 1; max-width: 450px; margin-left: 3rem;">
                 <div class="nav-search" style="background: white; border: 2px solid var(--admin-border); width: 100%; border-radius: 12px; overflow: hidden; display: flex;">
                     <input type="text" data-i18n="admin_search_placeholder" placeholder="Qidirish..." id="adminSearch" oninput="handleAdminSearch()" style="flex: 1; border: none; padding: 12px 20px; outline: none; font-weight: 600;">
@@ -577,7 +577,7 @@
 
     <div class="admin-modal" id="orderDetailsModal" role="dialog" aria-modal="true" aria-labelledby="orderDetailsTitle">
         <div class="modal-card">
-            <div class="modal-header"><h3 id="orderDetailsTitle" data-i18n="admin_order_details">Buyurtma tafsilotlari</h3><button type="button" class="close-modal" onclick="closeOrderDetails()" aria-label="Close">×</button></div>
+            <div class="modal-header"><h3 id="orderDetailsTitle" data-i18n="admin_order_details">Buyurtma tafsilotlari</h3><button type="button" class="close-modal" onclick="closeOrderDetails()" aria-label="Close">Ã—</button></div>
             <div data-order-details style="line-height:1.7;color:#334155;"></div>
             <button type="button" class="btn-p btn-p-primary" style="width:100%;margin-top:1.2rem;" onclick="closeOrderDetails()" data-i18n="close">Yopish</button>
         </div>
@@ -716,8 +716,8 @@
         </div>
     </div>
 
-    <script src="assets/js/lang.js?v=27.0"></script>
-    <script src="assets/js/main.js?v=17.0"></script>
+    <script src="assets/js/lang.js?v=16.0"></script>
+    <script src="assets/js/main.js?v=12.0"></script>
     <script>
         // ====================================================
         // ADMIN AUTH CONFIG
@@ -741,7 +741,7 @@
             const response = await fetch('/api/admin/orders', { credentials: 'include' });
             if (response.status === 401) { showAdminLogin('Avval Manus hisobingiz bilan kiring.'); return []; }
             if (response.status === 403) { showAdminLogin('Bu hisobda admin ruxsati mavjud emas.'); return []; }
-            if (!response.ok) throw new Error('Buyurtmalarni yuklab bo‘lmadi.');
+            if (!response.ok) throw new Error('Buyurtmalarni yuklab boâ€˜lmadi.');
             const payload = await response.json();
             adminOrders = Array.isArray(payload.orders) ? payload.orders : [];
             adminSessionVerified = true;
@@ -767,7 +767,7 @@
             document.getElementById('ownerOnlyNav').classList.remove('hidden');
             document.getElementById('sidebarRoleLabel').innerText = "Platform Owner";
             document.getElementById('adminUserRole').innerText = "Founder & Owner";
-            document.getElementById('adminUserAvatar').innerText = "👑";
+            document.getElementById('adminUserAvatar').innerText = "ðŸ‘‘";
             document.getElementById('adminUserName').innerText = 'Admin';
         }
 
@@ -828,8 +828,8 @@
                     if (!msg || !msg.text) return;
                     const text = msg.text;
                     
-                    // Parse order messages (🚀 format)
-                    if (text.includes('Yangi So\'rov') || text.includes('Yangi So\u2019rov') || text.includes('🚀')) {
+                    // Parse order messages (ðŸš€ format)
+                    if (text.includes('Yangi So\'rov') || text.includes('Yangi So\u2019rov') || text.includes('ðŸš€')) {
                         const inquiry = {
                             id: update.update_id || orderIndex++,
                             customerName: extractField(text, 'Mijoz:') || 'Noma\'lum',
@@ -844,8 +844,8 @@
                         inquiries.push(inquiry);
                     }
                     
-                    // Parse contact messages (✉️ format)
-                    if (text.includes('Yangi Xabar') || text.includes('✉️')) {
+                    // Parse contact messages (âœ‰ï¸ format)
+                    if (text.includes('Yangi Xabar') || text.includes('âœ‰ï¸')) {
                         const inquiry = {
                             id: update.update_id || orderIndex++,
                             customerName: extractField(text, 'Ism:') || 'Noma\'lum',
@@ -959,7 +959,7 @@
             const html = sorted.map(i => {
                 const currentStatus = ['new', 'processing', 'completed', 'cancelled'].includes(i.status) ? i.status : (i.status === 'Bajarildi' ? 'completed' : 'new');
                 const statusClass = currentStatus === 'completed' ? 'status-done' : currentStatus === 'cancelled' ? 'status-cancelled' : 'status-new';
-                const items = Array.isArray(i.items) ? i.items.map(item => `${escapeHtml(item.name)} × ${item.quantity}`).join(', ') : '';
+                const items = Array.isArray(i.items) ? i.items.map(item => `${escapeHtml(item.name)} Ã— ${item.quantity}`).join(', ') : '';
                 return `
                     <tr data-order-id="${escapeHtml(i.id)}">
                         <td>#${escapeHtml(i.id)}</td>
@@ -968,7 +968,7 @@
                         <td class="hidden-on-recent">${escapeHtml(i.organization || '-')}</td>
                         <td>${new Date(i.date || i.createdAt).toLocaleDateString()}</td>
                         <td>${i.isServerOrder ? `<select class="form-input order-status-select ${statusClass}" data-request-id="${escapeHtml(i.id)}" onchange="updateOrderStatus(this)">${statusOptions(currentStatus)}</select>` : `<span class="status-badge">${escapeHtml(t('admin_legacy_request'))}</span>`}<small style="display:block;max-width:220px;margin-top:6px;color:#64748b;">${items}</small></td>
-                        <td>${i.isServerOrder ? `<button class="btn-p btn-p-primary" style="padding:8px 15px; font-size:0.75rem;" onclick="viewOrderDetails('${escapeHtml(i.id)}')">${escapeHtml(t('admin_view_order'))}</button>` : '<span style="color:#94a3b8;">—</span>'}</td>
+                        <td>${i.isServerOrder ? `<button class="btn-p btn-p-primary" style="padding:8px 15px; font-size:0.75rem;" onclick="viewOrderDetails('${escapeHtml(i.id)}')">${escapeHtml(t('admin_view_order'))}</button>` : '<span style="color:#94a3b8;">â€”</span>'}</td>
                     </tr>`;
             }).join('');
             recent.innerHTML = html;
@@ -1091,7 +1091,7 @@
         function viewOrderDetails(requestId) {
             const order = adminOrders.find(item => String(item.requestId || item.id) === String(requestId));
             if (!order) return;
-            const items = Array.isArray(order.items) ? order.items.map(item => `<li>${escapeHtml(item.name)} × ${escapeHtml(item.quantity)}</li>`).join('') : '<li>-</li>';
+            const items = Array.isArray(order.items) ? order.items.map(item => `<li>${escapeHtml(item.name)} Ã— ${escapeHtml(item.quantity)}</li>`).join('') : '<li>-</li>';
             const modal = document.getElementById('orderDetailsModal');
             modal.querySelector('[data-order-details]').innerHTML = `<strong>#${escapeHtml(order.requestId || order.id)}</strong><p>${escapeHtml(order.customerName)}<br>${escapeHtml(order.customerPhone)}<br>${escapeHtml(order.organization || '')}</p><ul>${items}</ul><p>${escapeHtml(order.notes || '')}</p>`;
             modal.classList.add('active');
@@ -1426,7 +1426,7 @@
     <div class="container">
         <div class="footer-grid">
             <div class="footer-brand">
-                <a href="index.html?v=12" class="nav-brand">
+                <a href="index.html?v=11" class="nav-brand">
                     <div class="logo-box"><img src="/assets/images/fyzen-cube-final_9ae90e1b.png" alt="FYZEN-LAB"></div>
                     <div class="brand-text-wrapper">
                         <span style="color:white;">FYZEN-LAB</span>
@@ -1443,15 +1443,15 @@
             </div>
             <div class="footer-links-group">
                 <h4 data-i18n="nav_about">About</h4>
-                <a href="about.html?v=12" data-i18n="nav_about">About Us</a>
-                <a href="brands.html?v=12" data-i18n="nav_brands">Brands</a>
-                <a href="contact.html?v=12" data-i18n="nav_contact">Contacts</a>
+                <a href="about.html?v=11" data-i18n="nav_about">About Us</a>
+                <a href="brands.html?v=11" data-i18n="nav_brands">Brands</a>
+                <a href="contact.html?v=11" data-i18n="nav_contact">Contacts</a>
             </div>
             <div class="footer-contact">
                 <h4 data-i18n="nav_contact">Contacts</h4>
-                <p>📍 Xorazm, O‘zbekiston</p>
-                <p>📞 +998 99 034 20 02</p>
-                <p>📧 info@fyzen-lab.uz</p>
+                <p>ðŸ“ Toshkent, Yunusobod tumani</p>
+                <p>ðŸ“ž +998 99 034 20 02</p>
+                <p>ðŸ“§ info@fyzen-lab.uz</p>
             </div>
         </div>
         <div class="footer-bottom">

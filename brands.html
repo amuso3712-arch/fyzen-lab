@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<!-- FYZEN STYLE NOTE: preserve the restored Fyzen Lab scientific-corporate visual language — navy/cobalt accents, clean laboratory surfaces, readable sans-serif type, practical catalog-first interactions. -->
+﻿<!DOCTYPE html>
+<!-- FYZEN STYLE NOTE: preserve the restored Fyzen Lab scientific-corporate visual language â€” navy/cobalt accents, clean laboratory surfaces, readable sans-serif type, practical catalog-first interactions. -->
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n-title="brands_page_title">FYZEN-LAB - Tibbiy Uskunalar</title>
+    <title>FYZEN-LAB - Tibbiy Uskunalar</title>
     <link rel="icon" href="/assets/images/fyzen-cube-final_9ae90e1b.png?v=2.0" type="image/png">
 
-    <link rel="stylesheet" href="assets/css/styles.css?v=45.0">
+    <link rel="stylesheet" href="assets/css/styles.css?v=29.0">
     <script>
         // Early language initialization to prevent flicker
         (function() {
@@ -25,81 +25,19 @@
         .hero-title span { background: linear-gradient(135deg, #00A8E1, #2B358E); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .image-wrapper { position: relative; animation: hero-float 6s ease-in-out infinite; }
         @keyframes hero-float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(1deg); } }
-        .founded-badge { position: absolute; bottom: 30px; left: -50px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); padding: 18px 25px; border-radius: 25px; box-shadow: 0 15px 45px rgba(0, 168, 225, 0.1); border: 1px solid rgba(0, 168, 225, 0.2); display: flex; align-items: center; gap: 15px; width: fit-content; z-index: 10; animation: badge-float 4s ease-in-out infinite; }
-        .founded-icon { font-size: 2.2rem; }
-        .founded-info { text-align: left; }
-        .founded-badge .num { display: block; font-size: 1.8rem; font-weight: 900; color: var(--primary-blue); line-height: 1; }
-        .founded-badge .txt { font-size: 0.75rem; font-weight: 800; color: var(--text-main); text-transform: uppercase; white-space: nowrap; }
+        .experience-badge { position: absolute; bottom: 30px; left: -50px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); padding: 18px 25px; border-radius: 25px; box-shadow: 0 15px 45px rgba(0, 168, 225, 0.1); border: 1px solid rgba(0, 168, 225, 0.2); display: flex; align-items: center; gap: 15px; width: fit-content; z-index: 10; animation: badge-float 4s ease-in-out infinite; }
+        .exp-icon { font-size: 2.2rem; }
+        .exp-info { text-align: left; }
+        .experience-badge .num { display: block; font-size: 1.8rem; font-weight: 900; color: var(--primary-blue); line-height: 1; }
+        .experience-badge .txt { font-size: 0.75rem; font-weight: 800; color: var(--text-main); text-transform: uppercase; white-space: nowrap; }
         @keyframes badge-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         .btn-shimmer { position: relative; overflow: hidden; background: linear-gradient(135deg, #00A8E1, #2B358E, #00A8E1); background-size: 200% auto; animation: shimmer 4s infinite linear; padding: 1.2rem 2.8rem; border-radius: 50px; color: white; font-weight: 800; font-size: 1.1rem; box-shadow: 0 15px 35px rgba(0, 168, 225, 0.3); }
         @keyframes shimmer { to { background-position: 200% center; } }
 
         /* --- BRAND HOVER ACTION --- */
-        .brand-trust-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; max-width: 880px; margin: 0 auto 3rem; }
-        .brand-trust-card { padding: 1rem 1.1rem; border: 1px solid rgba(0, 168, 225, 0.16); border-radius: 18px; background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(241,248,253,.92)); box-shadow: 0 12px 30px rgba(15, 42, 76, .07); text-align: center; }
-        .brand-trust-card strong { display: block; color: #172554; font-size: 1.1rem; letter-spacing: -.02em; }
-        .brand-trust-card span { display: block; margin-top: .2rem; color: #64748b; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
         .brand-item {
             position: relative;
-            cursor: pointer;
-            touch-action: manipulation;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 198px;
-            padding: 22px 18px 42px;
-            border: 1px solid rgba(0, 168, 225, .18);
-            border-radius: 26px;
-            background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(246,251,255,.94));
-            box-shadow: 0 14px 34px rgba(15, 42, 76, .06);
-            cursor: pointer;
-            transition: transform 220ms cubic-bezier(.23,1,.32,1), box-shadow 220ms cubic-bezier(.23,1,.32,1), border-color 220ms ease;
-        }
-        .brand-item::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 50% 0%, rgba(0,168,225,.14), transparent 48%);
-            opacity: 0;
-            transition: opacity 220ms ease;
-            pointer-events: none;
-        }
-        .brand-item:hover,
-        .brand-item:focus-visible,
-        .brand-item:focus-within {
-            transform: translateY(-8px);
-            border-color: rgba(0, 168, 225, .62);
-            box-shadow: 0 24px 48px rgba(0, 91, 153, .16), 0 0 0 4px rgba(0,168,225,.08);
-            outline: none;
-        }
-        .brand-item:hover::before,
-        .brand-item:focus-visible::before,
-        .brand-item:focus-within::before { opacity: 1; }
-        .brand-logo-container {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            min-height: 96px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 220ms cubic-bezier(.23,1,.32,1), filter 220ms ease;
-        }
-        .brand-logo-container .verified-brand-logo {
-            display: block;
-            width: auto;
-            height: auto;
-            max-width: min(100%, 170px) !important;
-            max-height: 72px !important;
-            object-fit: contain;
-        }
-        .brand-item:hover .brand-logo-container,
-        .brand-item:focus-visible .brand-logo-container,
-        .brand-item:focus-within .brand-logo-container {
-            transform: translateY(-7px) scale(1.06);
-            filter: drop-shadow(0 10px 14px rgba(0, 105, 170, .12));
         }
         .brand-hover-action {
             position: absolute;
@@ -147,17 +85,6 @@
             opacity: 0;
             transform: translateY(-6px);
         }
-        @media (max-width: 576px) {
-            .brands-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px !important; }
-            .brand-item { min-height: 170px; padding: 18px 12px 42px !important; }
-            .brand-logo-container { min-height: 88px; }
-            .brand-logo-container .verified-brand-logo { max-width: 100% !important; max-height: 78px !important; }
-            .brand-name { font-size: .64rem; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .brand-item, .brand-item::before, .brand-logo-container, .brand-hover-action, .brand-name { transition: none !important; }
-            .brand-item:hover, .brand-item:focus-visible, .brand-item:focus-within, .brand-item:hover .brand-logo-container, .brand-item:focus-visible .brand-logo-container, .brand-item:focus-within .brand-logo-container, .brand-item:hover .brand-name { transform: none !important; }
-        }
 
         
         
@@ -196,18 +123,13 @@
             background: linear-gradient(135deg, #00A8E1, #2B358E);
             color: white;
         }
-        @media (max-width: 768px) {
-            .brand-trust-strip { grid-template-columns: 1fr; gap: 8px; margin-bottom: 2rem; }
-            .brand-trust-card { display: flex; align-items: baseline; justify-content: center; gap: .55rem; padding: .8rem 1rem; }
-            .brand-trust-card span { margin-top: 0; }
-        }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="container nav-inner">
-            <a href="index.html?v=12" class="nav-brand" id="mainLogo">
+            <a href="index.html?v=11" class="nav-brand" id="mainLogo">
                 <div class="logo-box">
                     <img src="/assets/images/fyzen-cube-final_9ae90e1b.png" alt="FYZEN-LAB">
                 </div>
@@ -217,9 +139,9 @@
                 </div>
             </a>
             <ul class="nav-links">
-                <li><a href="catalog.html?v=12" data-i18n="nav_catalog">Catalog</a></li>
+                <li><a href="catalog.html?v=11" data-i18n="nav_catalog">Catalog</a></li>
                 <li class="nav-dropdown">
-                    <a href="products.html?v=12" class="nav-dropdown-toggle"><span data-i18n="nav_products">Products</span> <span class="nav-arrow">&#9662;</span></a>
+                    <a href="products.html?v=11" class="nav-dropdown-toggle"><span data-i18n="nav_products">Products</span> <span class="nav-arrow">&#9662;</span></a>
                     <div class="nav-dropdown-menu">
                         <a href="products.html?cat=analytical" data-i18n="cat_analytical">Analytical Instruments</a>
                         <a href="products.html?cat=medical" data-i18n="cat_medical">Medical & Clinical Laboratory</a>
@@ -235,36 +157,14 @@
                         <a href="products.html?cat=consumables" data-i18n="cat_consumables">Consumables & Accessories</a>
                     </div>
                 </li>
-                <li><a href="brands.html?v=12" data-i18n="nav_brands">Brands</a></li>
-                <li><a href="about.html?v=12" data-i18n="nav_about">About</a></li>
-                <li><a href="blog.html?v=12" data-i18n="nav_news">News</a></li>
-                <li><a href="contact.html?v=12" data-i18n="nav_contact">Contacts</a></li>
+                <li><a href="brands.html?v=11" data-i18n="nav_brands">Brands</a></li>
+                <li><a href="about.html?v=11" data-i18n="nav_about">About</a></li>
+                <li><a href="blog.html?v=11" data-i18n="nav_news">News</a></li>
+                <li><a href="contact.html?v=11" data-i18n="nav_contact">Contacts</a></li>
             </ul>
-            <div class="nav-actions">
-                <form class="desktop-product-search" id="desktopProductSearch" role="search" onsubmit="submitDesktopProductSearch(event)">
-                    <svg class="desktop-product-search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
-                    <input type="search" data-i18n="search_placeholder" placeholder="Search products..." autocomplete="off" aria-label="Search products">
-                    <button type="button" class="desktop-product-search-clear" data-search-clear aria-label="Clear search" hidden>×</button>
-                    <button type="submit" class="desktop-product-search-submit" aria-label="Search products"><span class="search-submit-icon">↵</span><span class="search-submit-spinner" aria-hidden="true"></span></button>
-                    <div class="desktop-search-suggestions" data-search-suggestions hidden role="listbox" aria-label="Popular searches">
-                        <div class="desktop-search-suggestions-label" data-i18n="popular_searches">Popular searches</div>
-                        <button type="button" data-search-suggestion="Shimadzu">Shimadzu</button>
-                        <button type="button" data-search-suggestion="Agilent">Agilent</button>
-                        <button type="button" data-search-suggestion="BINDER">BINDER</button>
-                        <button type="button" data-search-suggestion="HORIBA">HORIBA</button>
-                    </div>
-                </form>
-            </div>
+            <div class="nav-actions"></div>
         </div>
     </nav>
-    <header class="fyz-page-banner" aria-labelledby="pageBannerTitle">
-        <div class="fyz-page-banner-inner">
-            <span class="fyz-page-banner-kicker">FYZEN-LAB</span>
-            <h1 id="pageBannerTitle" data-i18n="nav_brands">Brendlar</h1>
-            <p data-i18n="partners_subtitle">Jahonning yetakchi ishlab chiqaruvchilari bilan hamkorlikdagi yechimlar.</p>
-        </div>
-    </header>
-
     <div id="loader">
         <div class="spinner" style="border:none; animation: hero-float 3s ease-in-out infinite;">
             <img src="/assets/images/fyzen-cube-final_9ae90e1b.png" alt="FYZEN-LAB" style="width: 100px; height: 100px; object-fit: contain;">
@@ -282,99 +182,64 @@
     <section class="section brands-section" id="brands" style="padding-top:120px;">
         <div class="container">
             <h2 class="section-title" style="text-align:center; margin-bottom:1rem;" data-i18n="partners">Hamkorlarimiz</h2>
-            <p style="text-align:center; color:#64748b; margin-bottom:2.2rem; font-weight:600;" data-i18n="partners_subtitle">Jahonning yetakchi tibbiy texnologiya ishlab chiqaruvchilari bilan hamkorlikda</p>
-            <div class="brand-trust-strip" aria-label="Brand highlights">
-                <div class="brand-trust-card"><strong>29</strong><span data-i18n="brands_count_label">Verified brands</span></div>
-                <div class="brand-trust-card"><strong>12</strong><span data-i18n="brands_categories_label">Lab categories</span></div>
-                <div class="brand-trust-card"><strong>24/7</strong><span data-i18n="brands_support_label">Technical support</span></div>
-            </div>
+            <p style="text-align:center; color:#64748b; margin-bottom:4rem; font-weight:600;" data-i18n="partners_subtitle">Jahonning yetakchi tibbiy texnologiya ishlab chiqaruvchilari bilan hamkorlikda</p>
             <div class="brands-grid" id="brandsGrid"></div>
         </div>
     </section>
 
-    <div class="brand-details-modal" id="brandDetailsModal" role="dialog" aria-modal="true" aria-labelledby="brandDetailsTitle" aria-describedby="brandDetailsDescription" hidden>
-        <div class="brand-details-backdrop" data-brand-modal-close></div>
-        <section class="brand-details-panel">
-            <button type="button" class="brand-details-close" data-brand-modal-close aria-label="Close">×</button>
-            <div class="brand-details-logo-wrap" id="brandDetailsLogo"></div>
-            <span class="brand-details-kicker" data-i18n="brand_profile">Brand profile</span>
-            <h2 id="brandDetailsTitle"></h2>
-            <p class="brand-details-specialty" id="brandDetailsSpecialty"></p>
-            <p class="brand-details-description" id="brandDetailsDescription"></p>
-            <a class="brand-details-products" id="brandDetailsProducts" href="products.html" data-i18n="view_products">View Products</a>
-        </section>
-    </div>
-    <style>
-        .brand-details-modal[hidden] { display: none; }
-        .brand-details-modal { position: fixed; inset: 0; z-index: 5000; display: grid; place-items: center; padding: 18px; overscroll-behavior: contain; }
-        .brand-details-backdrop { position: absolute; inset: 0; background: rgba(1,11,26,.64); backdrop-filter: blur(10px); }
-        .brand-details-panel { position: relative; width: min(100%, 470px); max-height: min(720px, calc(100vh - 36px)); overflow-y: auto; padding: 34px 28px 28px; border: 1px solid rgba(0,168,225,.28); border-radius: 28px; background: linear-gradient(145deg, #fff, #f3f9fd); box-shadow: 0 30px 80px rgba(1,11,26,.28); text-align: center; animation: brandModalIn 220ms cubic-bezier(.23,1,.32,1); }
-        .brand-details-close { position: absolute; top: 12px; right: 14px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: rgba(1,11,26,.06); color: #1e293b; font-size: 1.45rem; cursor: pointer; }
-        .brand-details-close:hover, .brand-details-close:focus-visible { background: rgba(0,168,225,.14); outline: 3px solid rgba(0,168,225,.2); outline-offset: 2px; }
-        .brand-details-logo-wrap { width: 148px; height: 92px; display: grid; place-items: center; margin: 8px auto 18px; border-radius: 20px; background: #fff; box-shadow: 0 12px 28px rgba(0,76,130,.1); }
-        .brand-details-logo-wrap img { max-width: 124px; max-height: 72px; object-fit: contain; }
-        .brand-logo-fallback { color: #00a8e1; font-size: 2.4rem; font-weight: 900; }
-        .brand-details-kicker { color: #00a8e1; font-size: .7rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
-        .brand-details-panel h2 { margin: 8px 0 10px; color: #071b36; font-size: clamp(1.55rem, 4vw, 2rem); }
-        .brand-details-specialty { margin: 0 0 14px; color: #0e78b8; font-weight: 800; }
-        .brand-details-description { min-height: 52px; margin: 0 auto 22px; color: #64748b; line-height: 1.65; }
-        .brand-details-products { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: linear-gradient(135deg,#00a8e1,#2b358e); color: white; font-weight: 850; text-decoration: none; box-shadow: 0 12px 24px rgba(0,168,225,.24); }
-        @keyframes brandModalIn { from { opacity: 0; transform: translateY(10px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        @media (max-width: 520px) { .brand-details-modal { padding: 12px; } .brand-details-panel { max-height: calc(100vh - 24px); padding: 30px 20px 22px; border-radius: 22px; } .brand-details-logo-wrap { width: 132px; height: 82px; } }
-        @media (prefers-reduced-motion: reduce) { .brand-details-panel { animation: none; } }
-    </style>
     <!-- LOAD THE SVG DATABASE FIRST -->
     <script src="assets/js/brand-logos.js"></script>
-    <script src="assets/js/verified-brands.js?v=3.0"></script>
-    <script src="assets/js/lang.js?v=27.0"></script>
-    <script src="assets/js/main.js?v=17.0"></script>
+    <script src="assets/js/lang.js?v=14.0"></script>
+    <script src="assets/js/main.js?v=12.0"></script>
     <script>
-        let brandsList = (window.FYZEN_VERIFIED_BRANDS || []).map(name => ({ name }));
-        async function loadPublishedBrands() {
-            try {
-                const response = await fetch('/api/brands/published', { headers: { Accept: 'application/json' } });
-                if (!response.ok) return;
-                const payload = await response.json();
-                for (const brand of Array.isArray(payload.brands) ? payload.brands : []) {
-                    if (!brand?.name || brandsList.some(item => item.name.toLowerCase() === brand.name.toLowerCase())) continue;
-                    window.FYZEN_BRAND_META = window.FYZEN_BRAND_META || {};
-                    const domain = String(brand.websiteUrl || '').replace(/^https?:\/\//i, '').split('/')[0];
-                    window.FYZEN_BRAND_META[brand.name] = { domain, logo: brand.logoUrl || '', specialty: brand.specialty || {}, description: brand.description || {} };
-                    brandsList.push({ name: brand.name });
-                }
-            } catch { /* Static verified directory remains available offline. */ }
-        }
+        const brandsList = [
+            { name: "Mindray" },
+            { name: "Siemens" },
+            { name: "Philips" },
+            { name: "GE Healthcare" },
+            { name: "Roche" },
+            { name: "Abbott" },
+            { name: "Olympus" },
+            { name: "Sysmex" },
+            { name: "Shimadzu" },
+            { name: "Bio-Rad" },
+            { name: "Thermo Fisher" },
+            { name: "Zeiss" },
+            { name: "Agilent" },
+            { name: "Becton Dickinson" },
+            { name: "Medtronic" },
+            { name: "Honeywell" },
+            { name: "Stryker" },
+            { name: "Baxter" },
+            { name: "Danaher" },
+            { name: "B. Braun" },
+            { name: "Terumo" },
+            { name: "DrÃ¤ger" },
+            { name: "Nihon Kohden" },
+            { name: "Boston Scientific" },
+            { name: "Anton Paar" },
+            { name: "Nexcope" },
+            { name: "JEOL" },
+            { name: "Binder" },
+            { name: "IKA" },
+            { name: "KERN" },
+            { name: "Bioneer" },
+            { name: "SNOL" },
+            { name: "Corrtest" },
+            { name: "Elvatech" },
+            { name: "Geolux" },
+            { name: "Hanwei" },
+            { name: "INSIZE" },
+            { name: "LI-COR" },
+            { name: "Meta-xrom" },
+            { name: "Normalab" },
+            { name: "Scentroid" },
+            { name: "MATEST" },
+            { name: "EVERFINE" },
+            { name: "LIB Industry" }
+        ];
 
-        const brandModal = document.getElementById('brandDetailsModal');
-        let brandModalTrigger = null;
-        const closeBrandModal = () => {
-            if (!brandModal) return;
-            brandModal.hidden = true;
-            document.body.style.overflow = '';
-            brandModalTrigger?.focus();
-            brandModalTrigger = null;
-        };
-        const openBrandDetails = (brandName) => {
-            const profile = window.FYZEN_BRAND_META?.[brandName];
-            if (!profile || !brandModal) return;
-            brandModalTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-            const lang = localStorage.getItem('fyzen_lang') || 'ru';
-            const locale = ['ru', 'uz', 'en'].includes(lang) ? lang : 'en';
-            const logoUrl = window.FYZEN_BRAND_LOGO_URL?.(brandName);
-            document.getElementById('brandDetailsTitle').textContent = brandName;
-            document.getElementById('brandDetailsSpecialty').textContent = profile.specialty[locale];
-            document.getElementById('brandDetailsDescription').textContent = profile.description[locale];
-            document.getElementById('brandDetailsLogo').innerHTML = logoUrl ? `<img src="${logoUrl}" alt="${brandName} logo" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.hidden=false;"><span class="brand-logo-fallback" hidden aria-hidden="true">✦</span>` : '<span class="brand-logo-fallback" aria-hidden="true">✦</span>';
-            document.getElementById('brandDetailsProducts').href = `products.html?brand=${encodeURIComponent(brandName)}`;
-            brandModal.hidden = false;
-            document.body.style.overflow = 'hidden';
-            document.querySelector('.brand-details-close')?.focus();
-        };
-        document.addEventListener('click', (event) => { if (event.target.closest('[data-brand-modal-close]')) closeBrandModal(); });
-        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && brandModal && !brandModal.hidden) closeBrandModal(); });
-
-        document.addEventListener('DOMContentLoaded', async () => {
-            await loadPublishedBrands();
+        document.addEventListener('DOMContentLoaded', () => {
             const brandsGrid = document.getElementById('brandsGrid');
             if(brandsGrid) {
                 brandsGrid.innerHTML = brandsList.map(brand => {
@@ -382,12 +247,12 @@
                     const logoContent = typeof brandSVGLogos !== 'undefined' ? brandSVGLogos[brand.name] : null;
                     
                     return `
-                        <div class="brand-item" role="button" tabindex="0" aria-haspopup="dialog" aria-label="${brand.name}" onclick="openBrandDetails('${brand.name.replace(/'/g, "\\'")}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault(); this.click();}">
+                        <div class="brand-item" onclick="window.location.href='products.html?brand=${encodeURIComponent(brand.name)}'">
                             <div class="brand-logo-container">
-                                ${logoContent || `<img class="verified-brand-logo" src="${window.FYZEN_BRAND_LOGO_URL(brand.name)}" alt="${brand.name} logo" loading="eager" decoding="async" onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.hidden=false;"><span class="brand-logo-fallback" hidden aria-hidden="true">✦</span>`}
+                                ${logoContent ? logoContent : `<div class="brand-fallback">${brand.name}</div>`}
                             </div>
                             <div class="brand-hover-action">
-                                <button type="button" class="brand-btn" data-i18n="view_products" onclick="event.stopPropagation(); window.location.href='products.html?brand=${encodeURIComponent(brand.name)}'">View Products</button>
+                                <button class="brand-btn" data-i18n="view_products">View Products</button>
                             </div>
                             <span class="brand-name">${brand.name}</span>
                         </div>
@@ -421,17 +286,17 @@
                 <div class="footer-socials">
                     <a href="https://t.me/fyzen_lab" class="footer-social-btn" target="_blank" title="Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></a>
                     <a href="https://www.instagram.com/fyzen_lab?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==" class="footer-social-btn" target="_blank" title="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-                    <a href="https://wa.me/998990342002" class="footer-social-btn" target="_blank" rel="noopener noreferrer" title="WhatsApp" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.83 11.83 0 0 0 12.08 0C5.54 0 .22 5.32.22 11.86c0 2.09.55 4.13 1.59 5.93L.12 24l6.35-1.67a11.86 11.86 0 0 0 5.61 1.43h.01c6.54 0 11.86-5.32 11.86-11.86 0-3.17-1.23-6.15-3.43-8.42ZM12.09 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.77.99 1-3.67-.24-.38a9.84 9.84 0 0 1-1.51-5.29c0-5.47 4.45-9.92 9.92-9.92 2.65 0 5.14 1.03 7.01 2.91a9.86 9.86 0 0 1 2.9 7.02c0 5.47-4.45 9.92-9.91 9.92Zm5.44-7.43c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.91-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35Z"/></svg></a>
+                    <a href="#" class="footer-social-btn" title="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
                 </div>
             </div>
             <div class="footer-col">
                 <h4 data-i18n="footer_quick_links">Tezkor havolalar</h4>
                 <ul class="footer-links">
-                    <li><a href="catalog.html?v=12" data-i18n="katalog">Katalog</a></li>
-                    <li><a href="brands.html?v=12" data-i18n="nav_brands">Brendlar</a></li>
-                    <li><a href="about.html?v=12" data-i18n="nav_about">Biz haqimizda</a></li>
-                    <li><a href="blog.html?v=12" data-i18n="nav_news">Yangiliklar</a></li>
-                    <li><a href="contact.html?v=12" data-i18n="nav_contact">Aloqa</a></li>
+                    <li><a href="catalog.html?v=11" data-i18n="katalog">Katalog</a></li>
+                    <li><a href="brands.html?v=11" data-i18n="nav_brands">Brendlar</a></li>
+                    <li><a href="about.html?v=11" data-i18n="nav_about">Biz haqimizda</a></li>
+                    <li><a href="blog.html?v=11" data-i18n="nav_news">Yangiliklar</a></li>
+                    <li><a href="contact.html?v=11" data-i18n="nav_contact">Aloqa</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -450,7 +315,7 @@
                     <div class="footer-contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
                     <div class="footer-contact-info">
                         <span data-i18n="address">Manzil</span>
-                        <strong data-i18n="footer_address">Xorazm, O‘zbekiston</strong>
+                        <strong data-i18n="footer_address">Toshkent, Yunusobod tumani</strong>
                     </div>
                 </div>
                 <div class="footer-contact-item">
