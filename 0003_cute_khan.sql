@@ -1,0 +1,10 @@
+CREATE TABLE `telegram_admin_sessions` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`chatId` varchar(80) NOT NULL,
+	`step` varchar(40) NOT NULL DEFAULT 'idle',
+	`payloadJson` text NOT NULL DEFAULT ('{}'),
+	`lastUpdateId` int,
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `telegram_admin_sessions_id` PRIMARY KEY(`id`),
+	CONSTRAINT `telegram_admin_sessions_chatId_unique` UNIQUE(`chatId`)
+);

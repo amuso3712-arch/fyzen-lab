@@ -1,0 +1,11 @@
+CREATE TABLE `telegram_admin_audit_logs` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`actorId` varchar(80) NOT NULL,
+	`action` varchar(80) NOT NULL,
+	`targetType` varchar(40) NOT NULL,
+	`targetId` varchar(80) NOT NULL,
+	`beforeJson` text,
+	`afterJson` text,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	CONSTRAINT `telegram_admin_audit_logs_id` PRIMARY KEY(`id`)
+);

@@ -1,0 +1,3 @@
+ALTER TABLE `order_requests` ADD `status` enum('new','processing','completed','cancelled') DEFAULT 'new' NOT NULL;--> statement-breakpoint
+ALTER TABLE `order_requests` ADD `statusNote` varchar(500);--> statement-breakpoint
+ALTER TABLE `order_requests` ADD `updatedAt` timestamp DEFAULT (now()) NOT NULL ON UPDATE CURRENT_TIMESTAMP;
