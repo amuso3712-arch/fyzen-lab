@@ -31,7 +31,7 @@ After deployment, verify `/`, `/catalog.html`, `/contact.html`, `/brands.html`, 
 
 ## Environment and security
 
-Do not commit `.env` files or paste secrets into source files. Telegram, OAuth, database, storage, and built-in API values are injected through project Secrets. Keep the Telegram webhook secret and bot token server-side. Public HTML may reference `/manus-storage/...` assets, but large media must not be copied into `client/public/` or the repository.
+Do not commit `.env` files or paste secrets into source files. Telegram, OAuth, database, storage, and built-in API values are injected through project Secrets. Keep the Telegram webhook secret and bot token server-side. The Render export intentionally bundles the required site images in `client/public/assets/images/` and references them as `/assets/images/...`, so external hosting does not depend on Manus-only `/manus-storage/...` proxy credentials. Keep these bundled assets when uploading the repository to GitHub.
 
 ## Data and admin notes
 

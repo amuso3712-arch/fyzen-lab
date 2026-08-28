@@ -707,21 +707,35 @@
 
 ## Old fyzen-lab.uz replacement planning
 
-- [ ] Audit the existing fyzen-lab.uz public site and identify whether the current hosting is static-only or supports the required backend.
-- [ ] Preserve a backup/archive of the old hosting files before any replacement.
-- [ ] Confirm the safest deployment path for the new Manus-hosted site and custom domain DNS.
-- [ ] Provide exact replacement steps without deleting old files prematurely.
+- [x] Audit the existing fyzen-lab.uz public site and identify whether the current hosting is static-only or supports the required backend.
+- [x] Preserve a public backup/archive of the old fyzen-lab.uz HTML/assets before any replacement; private File Manager-only files still require the owner’s hosting backup.
+- [x] Confirm the safest deployment path for the new Manus-hosted site and custom domain DNS.
+- [x] Provide exact replacement steps without deleting old files prematurely.
 
 ## Render ZIP deployment diagnosis
 
-- [ ] Audit the downloaded Code ZIP structure and Render build/start/static-serving configuration.
-- [ ] Verify that Manus storage assets, legacy client assets, multi-page HTML routes, and server API paths survive the Render build.
-- [ ] Compare required Render environment variables and URL values with the project runtime configuration.
-- [ ] Provide a tested deployment configuration or recommend Manus custom-domain hosting when Render cannot support the full app safely.
+- [x] Audit the downloaded Code ZIP structure and Render build/start/static-serving configuration.
+- [x] Verify that Manus storage assets, legacy client assets, multi-page HTML routes, and server API paths survive the Render build.
+- [x] Compare required Render environment variables and URL values with the project runtime configuration.
+- [x] Provide a tested deployment configuration or recommend Manus custom-domain hosting when Render cannot support the full app safely.
 
 ## GitHub deploy ZIP export
 
-- [ ] Audit package scripts, server entry, Vite multi-page output, assets, lockfile, and secret exclusion for GitHub deployment.
-- [ ] Add or correct deploy-safe start/build configuration and a concise GitHub/Render deployment guide.
-- [ ] Build and test the exported package from a clean temporary copy, including required page/assets and server startup checks.
-- [ ] Deliver the verified ZIP without environment secrets and provide exact deployment variables and commands.
+- [x] Audit package scripts, server entry, Vite multi-page output, assets, lockfile, and secret exclusion for GitHub deployment.
+- [x] Add or correct deploy-safe start/build configuration and a concise GitHub/Render deployment guide.
+- [x] Build and test the exported package from a clean temporary copy, including required page/assets and server startup checks.
+- [x] Deliver the verified ZIP without environment secrets and provide exact deployment variables and commands.
+
+## Render image regression
+
+- [x] Audit all image sources, relative paths, public asset copies, and external Manus storage URLs in the deployed package.
+- [x] Fix image references so hero, brand logos, product/news images, and shared assets work on GitHub/Render.
+- [x] Add image URL/path regression coverage and verify image responses in a clean production build.
+- [x] Rebuild and deliver the corrected ZIP/checkpoint with image deployment instructions.
+
+## Render-safe local image migration
+
+- [x] Inventory every `/manus-storage` image reference and determine which assets must be bundled for Render.
+- [x] Copy available image assets into a deploy-safe public asset directory and replace storage-only references.
+- [x] Verify hero, category, brand, product, news, logo, icon, and empty-state images in the clean ZIP build without Forge credentials.
+- [x] Rebuild and deliver the corrected ZIP/checkpoint after all image smoke tests pass.
